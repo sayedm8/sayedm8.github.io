@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Late Bloom — Doha's late-night dessert studio, Msheireb</title>
+<meta name="description" content="Late Bloom is a nocturnal dessert studio in Msheireb, Doha — plated desserts made to order and served until the city sleeps. Order on WhatsApp.">
+
+<!-- ============================================================
+     Late Bloom is a fictional concept brand built by Kira as a
+     demonstration site. Social/discovery meta below reuses Kira's
+     placeholder OG image.
+     TODO: replace ../assets/og-image.png with a bespoke Late Bloom
+     social card (1200x630) before this concept is ever shown as a
+     real, hosted brand. og:url is a placeholder demo path.
+     ============================================================ -->
+<meta name="theme-color" content="#F5EDDF">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Late Bloom">
+<meta property="og:title" content="Late Bloom — Doha's late-night dessert studio">
+<meta property="og:description" content="A nocturnal dessert studio in Msheireb, Doha. Plated desserts, made to order, served until the city sleeps.">
+<meta property="og:url" content="https://sayedm8.github.io/demos/late-bloom.html">
+<meta property="og:image" content="../assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Late Bloom — Doha's late-night dessert studio.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Late Bloom — Doha's late-night dessert studio">
+<meta name="twitter:description" content="A nocturnal dessert studio in Msheireb, Doha. Plated desserts, made to order, served until the city sleeps.">
+<meta name="twitter:image" content="../assets/og-image.png">
+
+<!-- favicon: inline SVG — the Late Bloom night-flower, brass petals on espresso with an amber core -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2316100F'/%3E%3Cg fill='%23C79A45'%3E%3Cellipse cx='16' cy='8' rx='2.4' ry='6'/%3E%3Cellipse cx='16' cy='8' rx='2.4' ry='6' transform='rotate(60 16 16)'/%3E%3Cellipse cx='16' cy='8' rx='2.4' ry='6' transform='rotate(120 16 16)'/%3E%3Cellipse cx='16' cy='8' rx='2.4' ry='6' transform='rotate(180 16 16)'/%3E%3Cellipse cx='16' cy='8' rx='2.4' ry='6' transform='rotate(240 16 16)'/%3E%3Cellipse cx='16' cy='8' rx='2.4' ry='6' transform='rotate(300 16 16)'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='3.2' fill='%23E3A65C'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<!-- Loader is opt-in: shown only when motion is allowed AND JS boots.
+     If the GSAP CDN fails or JS is off, .preload is removed/never applied,
+     so the page renders fully with all content visible. -->
+<script>
+(function(){
+  try{
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce){ document.documentElement.classList.add('preload'); }
+    window.setTimeout(function(){
+      if(!window.__introDone){
+        document.documentElement.classList.remove('preload');
+        var l=document.getElementById('loader');
+        if(l){ l.setAttribute('hidden',''); }
+      }
+    }, 2600);
+  }catch(e){ document.documentElement.classList.remove('preload'); }
+})();
+</script>
+
+<style>
+  :root{
+    /* ---- LIGHT-FIRST identity: the site opens in daylight ivory and
+       scrolls into night. Day base + espresso ink; night reserved for the
+       back half (gallery → visit → footer). ---- */
+    --paper:#F5EDDF;           /* day base — warm ivory */
+    --paper-2:#EFE5D3;         /* alt light surface (cards, figures) */
+    --ink:#2A1A12;             /* headings/text on light */
+    --ink-body:#4A3626;        /* body copy on light */
+    --ink-dim:#6E5A44;         /* muted labels on light */
+
+    /* night end of the arc (never pure black) */
+    --noir:#1C120E;            /* night base */
+    --noir-2:#241811;          /* night alt (footer, figures) */
+    --cherry:#3B1522;          /* oxblood night band (visit) */
+    --dusk:#3A2418;            /* transition brown */
+
+    /* per-dessert stage tones — saturated but true-to-ingredient */
+    --stage-rose:#E6C9C4;      /* Zahra — rose/raspberry (light) */
+    --stage-cocoa:#2A1A15;     /* Layl — dark chocolate (deep) */
+    --stage-caramel:#E8CFA6;   /* Sahar — date/caramel (light) */
+
+    --cream:#F4EAD6;           /* text/marks on dark */
+    --cream-dim:#D8C6A6;
+
+    /* ONE accent, sampled from the caramel hero photography */
+    --amber:#E3A65C;           /* accent on dark */
+    --amber-bright:#EDBB7C;
+    --brass:#C79A45;           /* metal — rules, marks */
+    --brass-deep:#7A4E18;      /* accent text on light (AA on ivory) */
+
+    --line-dark:rgba(244,234,214,0.14);
+    --line-brass:rgba(199,154,69,0.42);
+    --line-cream:rgba(42,26,18,0.18);
+    --line-ink:rgba(42,26,18,0.12);
+
+    --display:'Fraunces', Georgia, 'Times New Roman', serif;
+    --body:'Hanken Grotesk', system-ui, -apple-system, Arial, sans-serif;
+    --mono:'Space Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+    --side: clamp(20px, 5.2vw, 72px);
+    --maxw: 1320px;
+
+    --fs-h1:   clamp(2.3rem, 1.5rem + 3.4vw, 4.6rem);
+    --fs-h2:   clamp(1.9rem, 1.4rem + 2vw, 3rem);
+    --fs-lead: clamp(1.12rem, 1rem + 0.5vw, 1.38rem);
+    --fs-body: 1.02rem;
+    --fs-label:0.74rem;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{background:var(--paper);-webkit-text-size-adjust:100%;}
+  html.preload{overflow:hidden;}
+  html:not(.preload){scroll-behavior:smooth;}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--body);font-size:var(--fs-body);line-height:1.65;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  }
+  /* ScrollSmoother wrapper — plain divs unless the smoother is created (desktop, motion on) */
+  #smooth-wrapper{position:relative;}
+  img{display:block;max-width:100%;height:auto;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--side);}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}
+
+  ::selection{background:var(--amber);color:var(--noir);}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:4px;border-radius:2px;}
+
+  /* ---------- type primitives ---------- */
+  .label{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:0.24em;text-transform:uppercase;}
+  h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1;letter-spacing:-0.015em;}
+  .kicker{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:0.24em;text-transform:uppercase;color:var(--amber);display:inline-flex;gap:12px;align-items:center;}
+  .kicker::before{content:"";width:26px;height:1px;background:var(--brass);display:inline-block;}
+  .kicker.on-cream{color:var(--brass-deep);}
+  .kicker.on-cream::before{background:var(--brass-deep);}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    position:relative;display:inline-flex;align-items:center;gap:10px;cursor:pointer;
+    font-family:var(--mono);font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;
+    padding:16px 26px;border:1px solid transparent;white-space:nowrap;
+    transition:background-color .35s ease, color .35s ease, border-color .35s ease, transform .2s ease;
+  }
+  .btn svg{width:14px;height:14px;flex-shrink:0;}
+  .btn-amber{background:var(--amber);color:var(--noir);}
+  .btn-amber:hover{background:var(--amber-bright);}
+  .btn-line{border-color:var(--line-brass);color:var(--cream);}
+  .btn-line:hover{border-color:var(--brass);background:rgba(199,154,69,0.09);}
+  .btn-line-cream{border-color:var(--line-cream);color:var(--ink);}
+  .btn-line-cream:hover{border-color:var(--ink);background:rgba(42,20,24,0.04);}
+  .btn:active{transform:translateY(1px);}
+
+  .ul{position:relative;background-image:linear-gradient(var(--brass),var(--brass));background-repeat:no-repeat;background-position:0 100%;background-size:0% 1px;transition:background-size .4s cubic-bezier(.16,1,.3,1);padding-bottom:2px;}
+  .ul:hover,.ul:focus-visible{background-size:100% 1px;}
+
+  /* ---------- custom cursor ---------- */
+  .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:5000;pointer-events:none;border-radius:50%;display:none;}
+  .cursor-dot{width:7px;height:7px;background:var(--amber);margin:-3.5px 0 0 -3.5px;}
+  .cursor-ring{width:38px;height:38px;border:1px solid var(--line-brass);margin:-19px 0 0 -19px;transition:width .25s ease,height .25s ease,border-color .25s ease,background-color .25s ease;}
+  body.cursor-on .cursor-dot,body.cursor-on .cursor-ring{display:block;}
+  body.cursor-on.cursor-hot .cursor-ring{width:56px;height:56px;border-color:var(--amber);background:rgba(227,166,92,0.08);}
+  @media (hover:none),(pointer:coarse){.cursor-dot,.cursor-ring{display:none!important;}}
+
+  /* ---------- progress + bloom indicator ---------- */
+  .progress-line{position:fixed;top:0;left:0;height:2px;width:100%;transform:scaleX(0);transform-origin:0 50%;background:var(--brass);z-index:1200;}
+  .bloom-ind{position:fixed;right:22px;bottom:22px;width:52px;height:52px;z-index:1200;opacity:0;transition:opacity .4s ease;pointer-events:none;}
+  .bloom-ind.show{opacity:1;}
+  .bloom-ind .sp{fill:var(--amber);opacity:0.16;}
+  .bloom-ind .core{fill:var(--brass);}
+  @media (max-width:859px){.bloom-ind{display:none;}}
+
+  /* ---------- loader ---------- */
+  .loader{display:none;}
+  html.preload .loader{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+    position:fixed;inset:0;z-index:3000;background:var(--paper);
+  }
+  .loader[hidden]{display:none!important;}
+  .loader .bloom-mark{width:64px;height:64px;}
+  .loader .petal{fill:var(--brass-deep);}
+  .loader .core{fill:var(--amber);}
+  .loader-word{font-family:var(--display);font-weight:900;font-size:clamp(1.7rem,1rem + 3vw,2.7rem);letter-spacing:0.08em;color:var(--ink);}
+  .loader-bar{position:absolute;left:50%;bottom:15%;transform:translateX(-50%);width:min(200px,54vw);height:2px;background:rgba(42,26,18,0.14);overflow:hidden;}
+  .loader-bar-fill{display:block;height:100%;width:100%;background:var(--brass-deep);transform:scaleX(0);transform-origin:0 50%;}
+  .loader-count{position:absolute;right:7vw;bottom:12%;font-family:var(--mono);font-size:clamp(1.3rem,0.9rem + 2vw,2.2rem);color:var(--ink-dim);letter-spacing:0.06em;font-variant-numeric:tabular-nums;}
+
+  /* ---------- nav ---------- */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:18px var(--side);transition:background-color .4s ease, border-color .4s ease, padding .4s ease;border-bottom:1px solid transparent;}
+  /* day-zone solid: ivory bar, espresso text */
+  header.nav.solid{background:rgba(245,237,223,0.92);border-bottom-color:var(--line-ink);padding-top:12px;padding-bottom:12px;-webkit-backdrop-filter:saturate(1.1);}
+  header.nav.solid .brand{color:var(--ink);}
+  header.nav.solid .brand .petal{fill:var(--brass-deep);}
+  header.nav.solid .nav-links a{color:var(--ink-body);}
+  header.nav.solid .nav-links a:hover{color:var(--brass-deep);}
+  /* night-zone solid: dark bar, cream text (past the crossover) */
+  header.nav.solid.night{background:rgba(28,18,14,0.9);border-bottom-color:var(--line-dark);}
+  header.nav.solid.night .brand{color:var(--cream);}
+  header.nav.solid.night .brand .petal{fill:var(--brass);}
+  header.nav.solid.night .nav-links a{color:var(--cream-dim);}
+  header.nav.solid.night .nav-links a:hover{color:var(--amber);}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;font-size:1.15rem;letter-spacing:0.01em;color:var(--cream);transform-origin:left center;transition:transform .4s ease, color .4s ease;}
+  header.nav.solid .brand{transform:scale(0.93);}
+  .brand svg{width:22px;height:22px;flex-shrink:0;}
+  .brand .petal{fill:var(--brass);}
+  .brand .core{fill:var(--amber);}
+  .nav-links{display:flex;align-items:center;gap:30px;}
+  .nav-links a{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--cream-dim);transition:color .25s ease;}
+  .nav-links a:hover{color:var(--amber);}
+  .nav-cta{display:flex;align-items:center;gap:18px;}
+  .nav-cta .btn{padding:12px 20px;font-size:0.72rem;}
+  @media (max-width:1000px){.nav-links{display:none;}}
+  @media (max-width:600px){.nav-cta .label-full{display:none;}.nav-cta .btn{padding:12px 16px;}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:var(--noir);}
+  .hero-media{position:absolute;inset:0;overflow:hidden;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:60% 45%;transform:scale(1.1);filter:brightness(0.7) contrast(1.07) saturate(0.98);}
+  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(22,16,15,0.35) 0%, rgba(22,16,15,0.04) 28%, rgba(22,16,15,0.5) 60%, rgba(22,16,15,0.97) 100%), linear-gradient(90deg, rgba(22,16,15,0.72) 0%, rgba(22,16,15,0) 58%);}
+  .hero-inner{position:relative;z-index:2;width:100%;padding:0 var(--side) clamp(48px,7vw,92px);max-width:var(--maxw);margin:0 auto;}
+  .hero-eyebrow{color:var(--amber);margin-bottom:26px;display:inline-flex;}
+  .hero-lockup{display:flex;flex-direction:column;line-height:0.88;}
+  .hl-main{font-family:var(--display);font-weight:900;font-size:clamp(3rem,1.1rem + 8.2vw,8rem);letter-spacing:-0.035em;color:var(--cream);text-shadow:0 10px 60px rgba(0,0,0,0.45);}
+  .hl-sub{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(1.2rem,0.85rem + 1.5vw,2.3rem);color:var(--amber);margin-top:10px;margin-left:0.1em;letter-spacing:0.01em;}
+  .hero-sub{margin-top:26px;max-width:42ch;color:var(--cream-dim);font-size:var(--fs-lead);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px;}
+  .hero-scroll{position:absolute;right:var(--side);bottom:clamp(40px,6vw,64px);z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--cream-dim);font-family:var(--mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;}
+  .hero-scroll .line{width:1px;height:46px;background:linear-gradient(var(--brass),transparent);}
+  @media (max-width:640px){.hero-scroll{display:none;}}
+
+  /* ---------- section frame ---------- */
+  section{position:relative;}
+  .band{padding:clamp(72px,11vw,150px) 0;}
+  .sec-head h2{font-size:var(--fs-h1);margin-top:22px;color:inherit;max-width:20ch;}
+  .sec-head .lead{margin-top:22px;font-size:var(--fs-lead);color:var(--cream-dim);max-width:48ch;}
+
+  /* ---------- manifesto ---------- */
+  .manifesto{background:var(--paper);color:var(--ink);overflow:hidden;}
+  .manifesto p{font-family:var(--display);font-weight:400;font-size:clamp(1.8rem,1.1rem + 3.2vw,3.6rem);line-height:1.22;letter-spacing:-0.015em;max-width:20ch;}
+  .manifesto .m-word{display:inline-block;}
+  .manifesto em{font-style:italic;color:var(--brass-deep);}
+  .manifesto .m-tag{margin-top:34px;color:var(--ink-dim);font-family:var(--mono);font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;}
+
+  /* ---------- marquee (light editorial band) ---------- */
+  .marquee{background:var(--paper-2);border-top:1px solid var(--line-ink);border-bottom:1px solid var(--line-ink);overflow:hidden;padding:26px 0;}
+  .marquee-track{display:flex;width:max-content;will-change:transform;animation:marq 32s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  .marquee-track span{font-family:var(--display);font-weight:500;font-style:italic;font-size:clamp(1.6rem,1.1rem + 2.4vw,3rem);letter-spacing:-0.01em;color:var(--ink);white-space:nowrap;display:inline-flex;align-items:center;}
+  .marquee-track .fl{color:var(--brass-deep);font-style:normal;padding:0 clamp(20px,3vw,44px);font-size:0.7em;}
+  .marquee-track .ar{font-family:var(--body);font-weight:500;font-style:normal;}
+  @keyframes marq{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  /* ---------- signatures (pinned crossfade desktop, stacked mobile; per-dessert staging) ---------- */
+  .signatures{background:var(--paper);color:var(--ink);overflow:hidden;}
+  .signatures .kicker{color:var(--brass-deep);}
+  .signatures .kicker::before{background:var(--brass-deep);}
+  .sig-head{padding:clamp(64px,9vw,120px) var(--side) clamp(30px,4vw,48px);max-width:var(--maxw);margin:0 auto;}
+  .sig-head h2{color:var(--ink);}
+  .sig-stage{position:relative;}
+  .sig-slide{position:relative;display:grid;grid-template-columns:1fr;gap:26px;padding:clamp(40px,5vw,60px) var(--side) clamp(56px,8vw,96px);}
+  .sig-inner{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1fr;gap:26px;align-items:center;width:100%;}
+  .sig-figure{position:relative;overflow:hidden;aspect-ratio:4/5;background:var(--paper-2);}
+  .sig-figure img{width:100%;height:100%;object-fit:cover;filter:brightness(1) contrast(1.03);}
+  .sig-figure .idx{position:absolute;top:16px;left:16px;font-family:var(--mono);font-size:0.66rem;letter-spacing:0.18em;color:var(--cream);background:rgba(22,16,15,0.5);padding:6px 10px;}
+  /* light-staged slides (rose, caramel): espresso text */
+  .sig-slide.stage-light .s-ar{color:var(--brass-deep);}
+  .sig-slide.stage-light h3{color:var(--ink);}
+  .sig-slide.stage-light p{color:var(--ink-body);}
+  .sig-slide.stage-light .sig-price{color:var(--brass-deep);}
+  /* dark-staged slide (cocoa): cream text */
+  .sig-slide.stage-dark .s-ar{color:var(--amber);}
+  .sig-slide.stage-dark h3{color:var(--cream);}
+  .sig-slide.stage-dark p{color:var(--cream-dim);}
+  .sig-slide.stage-dark .sig-price{color:var(--amber);}
+  .sig-body .s-ar{font-family:var(--display);font-style:italic;font-size:1.2rem;display:block;margin-bottom:6px;}
+  .sig-body h3{font-size:clamp(2rem,1.4rem + 2.2vw,3.4rem);}
+  .sig-body p{margin-top:16px;font-size:var(--fs-lead);max-width:40ch;}
+  .sig-price{margin-top:20px;font-family:var(--mono);font-size:1.05rem;letter-spacing:0.02em;}
+  .sig-body .btn{margin-top:24px;}
+  @media (min-width:860px){
+    .sig-inner{grid-template-columns:0.92fr 1.08fr;gap:clamp(40px,5vw,80px);}
+    .sig-figure{max-height:74vh;}
+    .sig-stage.is-pinned{height:100vh;}
+    .sig-stage.is-pinned .sig-slide{position:absolute;inset:0;height:100vh;align-content:center;padding-top:96px;}
+  }
+
+  /* ---------- menu (cream printed-card, horizontal strip) ---------- */
+  .menu{background:var(--paper);color:var(--ink);padding-top:clamp(72px,11vw,150px);padding-bottom:clamp(72px,11vw,150px);overflow:hidden;}
+  .menu .sec-head h2,.menu .sec-head{color:var(--ink);}
+  .menu .sec-head .lead{color:var(--ink-body);}
+  .menu-hint{margin-top:clamp(30px,4vw,44px);padding:0 var(--side);font-family:var(--mono);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--brass-deep);display:flex;align-items:center;gap:10px;}
+  .menu-viewport{margin-top:18px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none;}
+  .menu-viewport::-webkit-scrollbar{display:none;}
+  .menu-viewport.is-scrub{overflow:visible;scroll-snap-type:none;}
+  .menu-track{display:flex;gap:2px;width:max-content;padding:0 var(--side);will-change:transform;}
+  .menu-item{scroll-snap-align:start;position:relative;width:clamp(240px,72vw,340px);flex:0 0 auto;background:var(--paper-2);border:1px solid var(--line-cream);display:flex;flex-direction:column;}
+  .menu-figure{position:relative;aspect-ratio:1/1;overflow:hidden;}
+  .menu-figure img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.16,1,.3,1);}
+  .menu-item:hover .menu-figure img{transform:scale(1.06);}
+  .menu-copy{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1;}
+  .menu-copy .m-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px;}
+  .menu-copy h3{font-family:var(--display);font-weight:600;font-size:1.5rem;color:var(--ink);}
+  .menu-copy .m-ar{font-family:var(--display);font-style:italic;font-weight:400;font-size:0.92rem;color:var(--brass-deep);display:block;margin-top:2px;}
+  .menu-copy .price{font-family:var(--mono);font-size:0.92rem;color:var(--brass-deep);white-space:nowrap;letter-spacing:0.01em;}
+  .menu-copy p{margin-top:12px;font-size:0.92rem;color:var(--ink-body);flex:1;}
+  .menu-order{margin-top:18px;font-family:var(--mono);font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);display:inline-flex;align-items:center;gap:8px;align-self:flex-start;}
+  .menu-order svg{width:13px;height:13px;}
+  .menu-order .ul-g{background-image:linear-gradient(var(--brass-deep),var(--brass-deep));background-repeat:no-repeat;background-position:0 100%;background-size:100% 1px;padding-bottom:3px;transition:background-size .35s ease;}
+  .menu-order:hover .ul-g{background-size:0% 1px;}
+
+  /* ---------- gallery — no-gutter asymmetric mosaic with hover tint ---------- */
+  .gallery{background:var(--noir);color:var(--cream);overflow:hidden;}
+  .gal-grid{margin-top:clamp(40px,5vw,64px);display:grid;grid-template-columns:repeat(12,1fr);gap:2px;background:var(--noir);}
+  .gal-tile{position:relative;overflow:hidden;background:var(--noir-2);}
+  .gal-tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.16,1,.3,1);}
+  .gal-tile::after{content:"";position:absolute;inset:0;background:var(--amber);opacity:0;mix-blend-mode:soft-light;transition:opacity .6s cubic-bezier(.16,1,.3,1);pointer-events:none;}
+  .gal-tile:hover img{transform:scale(1.04);}
+  .gal-tile:hover::after{opacity:0.24;}
+  .gal-tile figcaption{position:absolute;left:14px;bottom:14px;z-index:3;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cream);background:rgba(22,16,15,0.5);padding:5px 9px;transition:letter-spacing .5s ease;}
+  .gal-tile:hover figcaption{letter-spacing:0.1em;}
+  .gal-parallax{will-change:transform;}
+  .g1{grid-column:span 7;aspect-ratio:4/3;}
+  .g2{grid-column:span 5;aspect-ratio:3/4;}
+  .g3{grid-column:span 4;aspect-ratio:1/1;}
+  .g4{grid-column:span 4;aspect-ratio:1/1;}
+  .g5{grid-column:span 4;aspect-ratio:1/1;}
+  @media (max-width:760px){
+    .gal-grid{grid-template-columns:repeat(2,1fr);}
+    .g1{grid-column:span 2;aspect-ratio:16/10;}
+    .g2,.g3,.g4,.g5{grid-column:span 1;}
+  }
+
+  /* ---------- transitional pinned bleeding headline ---------- */
+  .statement-pin{position:relative;overflow:hidden;background:var(--noir);min-height:64vh;display:flex;align-items:center;}
+  @media (min-width:860px){.statement-pin{min-height:100vh;}}
+  .sp-media{position:absolute;inset:0;}
+  .sp-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.42) contrast(1.05) saturate(0.9);}
+  .sp-media #spImgB{opacity:0;}
+  .sp-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,16,15,0.55),rgba(22,16,15,0.35) 50%,rgba(22,16,15,0.72));}
+  .sp-headline{position:relative;z-index:2;white-space:nowrap;font-family:var(--display);font-weight:900;letter-spacing:-0.03em;line-height:0.9;color:var(--cream);font-size:clamp(3.4rem,1rem + 15vw,13rem);padding-left:var(--side);will-change:transform;}
+  .sp-headline em{font-style:italic;font-weight:500;color:var(--amber);}
+  @media (max-width:859px){
+    .statement-pin{min-height:46vh;}
+    .sp-headline{font-size:clamp(2.6rem,1rem + 11vw,5rem);white-space:normal;max-width:14ch;}
+  }
+
+  /* ---------- open late ---------- */
+  .late{position:relative;background:var(--cherry);color:var(--cream);overflow:hidden;}
+  .late-media{position:absolute;inset:0;}
+  .late-media img{width:100%;height:100%;object-fit:cover;filter:brightness(0.38) contrast(1.05) saturate(0.9);}
+  .late-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(59,21,34,0.95) 0%,rgba(59,21,34,0.72) 55%,rgba(59,21,34,0.42) 100%);}
+  .late .wrap{position:relative;z-index:2;}
+  .late-grid{display:grid;grid-template-columns:1fr;gap:clamp(34px,5vw,60px);margin-top:clamp(36px,5vw,54px);}
+  .late-hours{border-top:1px solid var(--line-brass);}
+  .late-row{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-brass);}
+  .late-row .day{font-family:var(--mono);font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--cream-dim);}
+  .late-row .time{font-family:var(--mono);font-size:1.05rem;color:var(--amber);letter-spacing:0.02em;}
+  .late-info .li-block{margin-bottom:26px;}
+  .late-info .li-k{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:8px;}
+  .late-info .li-v{font-size:var(--fs-lead);color:var(--cream);}
+  .late-info .btn{margin-top:8px;}
+  @media (min-width:860px){.late-grid{grid-template-columns:1.1fr 0.9fr;align-items:start;}}
+
+  /* ---------- order band ---------- */
+  .order-band{background:var(--noir);color:var(--cream);text-align:center;}
+  .order-band .wrap{max-width:760px;}
+  .order-band .kicker{justify-content:center;}
+  .order-band h2{font-size:var(--fs-h1);margin-top:22px;max-width:18ch;margin-inline:auto;color:var(--cream);}
+  .order-band h2 em{font-style:italic;color:var(--amber);font-weight:500;}
+  .order-band p{margin-top:20px;color:var(--cream-dim);font-size:var(--fs-lead);max-width:46ch;margin-inline:auto;}
+  .order-band .actions{display:flex;justify-content:center;gap:14px;margin-top:34px;flex-wrap:wrap;}
+
+  /* ---------- footer — Kira sales hook ---------- */
+  footer{background:var(--noir-2);color:var(--cream);border-top:1px solid var(--line-dark);}
+  .kira-hook{padding:clamp(56px,8vw,96px) 0 clamp(30px,4vw,44px);}
+  .kira-hook .inner{display:grid;grid-template-columns:1fr;gap:30px;align-items:center;}
+  .kira-hook .k-kicker{color:var(--brass);}
+  .kira-hook h2{font-size:var(--fs-h2);margin-top:20px;max-width:22ch;color:var(--cream);}
+  .kira-hook h2 em{font-style:italic;color:var(--amber);font-weight:500;}
+  .kira-hook p{margin-top:18px;color:var(--cream-dim);max-width:52ch;font-size:var(--fs-lead);}
+  .kira-hook .k-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;}
+  @media (min-width:900px){.kira-hook .inner{grid-template-columns:1.3fr 0.7fr;gap:60px;}.kira-hook .k-actions{flex-direction:column;align-items:flex-start;}}
+  .foot-scramble{display:block;padding:0 0 6px;font-family:var(--mono);font-size:clamp(1.1rem,0.9rem + 1.2vw,1.7rem);letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);}
+  .foot-bottom{border-top:1px solid var(--line-dark);padding:24px 0 40px;margin-top:26px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:0.7rem;letter-spacing:0.08em;color:var(--cream-dim);}
+  .foot-bottom a{color:var(--cream-dim);}
+  .foot-bottom a:hover{color:var(--amber);}
+  @media (min-width:860px){.foot-bottom{padding-right:88px;}}
+
+  /* ---------- sticky mobile order bar ---------- */
+  .order-bar{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;padding:10px var(--side);padding-bottom:calc(10px + env(safe-area-inset-bottom));background:rgba(22,16,15,0.94);border-top:1px solid var(--line-dark);transform:translateY(120%);transition:transform .35s cubic-bezier(.16,1,.3,1);}
+  .order-bar .btn{width:100%;justify-content:center;}
+  body.bar-on .order-bar{transform:translateY(0);}
+  @media (max-width:859px){.order-bar{display:block;}body{padding-bottom:calc(70px + env(safe-area-inset-bottom));}}
+
+  /* ---------- skip link ---------- */
+  .skip{position:fixed;top:12px;left:12px;z-index:6000;transform:translateY(-160%);background:var(--noir);color:var(--cream);border:1px solid var(--amber);font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;padding:12px 18px;transition:transform .2s ease;}
+  .skip:focus{transform:translateY(0);}
+
+  /* ---------- reduced motion: fully static ---------- */
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+    .hero-media img{transform:none!important;filter:brightness(0.7) contrast(1.07);}
+    .marquee-track{animation:none!important;transform:none!important;}
+    .cursor-dot,.cursor-ring,.bloom-ind{display:none!important;}
+    .sp-media #spImgB{opacity:1;}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#menu">Skip to the menu</a>
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<div class="progress-line" id="progressLine" aria-hidden="true"></div>
+<svg class="bloom-ind" id="bloomInd" viewBox="0 0 40 40" aria-hidden="true">
+  <g>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(0 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(45 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(90 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(135 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(180 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(225 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(270 20 20)"/>
+    <ellipse class="sp" cx="20" cy="8.5" rx="3" ry="7.5" transform="rotate(315 20 20)"/>
+  </g>
+  <circle class="core" cx="20" cy="20" r="4"/>
+</svg>
+
+<!-- loader: flower bloom + scramble wordmark + progress bar + 2-digit counter, clip-wipe (< 1.5s) -->
+<div class="loader" id="loader" aria-hidden="true">
+  <span class="vh">Late Bloom — loading</span>
+  <svg class="bloom-mark" viewBox="0 0 64 64" aria-hidden="true">
+    <g>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(0 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(45 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(90 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(135 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(180 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(225 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(270 32 32)"/>
+      <ellipse class="petal" cx="32" cy="15" rx="6.4" ry="15" transform="rotate(315 32 32)"/>
+    </g>
+    <circle class="core" cx="32" cy="32" r="6.4"/>
+  </svg>
+  <div class="loader-word" id="loaderWord">LATE BLOOM</div>
+  <div class="loader-bar"><span class="loader-bar-fill" id="loaderBar"></span></div>
+  <div class="loader-count" id="loaderCount" aria-hidden="true">00</div>
+</div>
+
+<!-- nav -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Late Bloom — home">
+    <svg viewBox="0 0 32 32" aria-hidden="true">
+      <g>
+        <ellipse class="petal" cx="16" cy="8" rx="2.6" ry="6.4" transform="rotate(0 16 16)"/>
+        <ellipse class="petal" cx="16" cy="8" rx="2.6" ry="6.4" transform="rotate(60 16 16)"/>
+        <ellipse class="petal" cx="16" cy="8" rx="2.6" ry="6.4" transform="rotate(120 16 16)"/>
+        <ellipse class="petal" cx="16" cy="8" rx="2.6" ry="6.4" transform="rotate(180 16 16)"/>
+        <ellipse class="petal" cx="16" cy="8" rx="2.6" ry="6.4" transform="rotate(240 16 16)"/>
+        <ellipse class="petal" cx="16" cy="8" rx="2.6" ry="6.4" transform="rotate(300 16 16)"/>
+      </g>
+      <circle class="core" cx="16" cy="16" r="3.2"/>
+    </svg>
+    Late Bloom
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#signatures">Signatures</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#visit">Visit</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="btn btn-amber magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+      <span class="label-full">Order on WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<!-- ScrollSmoother wrapper: only the scrolling content lives here; all fixed UI
+     (skip, cursor, progress, loader, nav, order-bar) sits OUTSIDE it. -->
+<div id="smooth-wrapper">
+<div id="smooth-content">
+
+<div id="top"></div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" aria-label="Late Bloom">
+  <div class="hero-media">
+    <!-- PHOTO SLOT [TAREQ]: HERO — the signature Late Bloom frame. A dramatic, dark, glossy macro dessert shot with deep negative space at the left for the wordmark lockup (e.g. caramel or chocolate poured over a plated dessert, lit against near-black). Landscape 16:9 desktop; crop holds up as a portrait on mobile. Eager-loaded. -->
+    <img
+      src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=1920&h=1080&fit=crop&crop=entropy&auto=format"
+      srcset="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=70&w=768&h=432&fit=crop&crop=entropy&auto=format 768w, https://images.unsplash.com/photo-1551024506-0bccd828d307?q=72&w=1280&h=720&fit=crop&crop=entropy&auto=format 1280w, https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=1920&h=1080&fit=crop&crop=entropy&auto=format 1920w"
+      sizes="100vw" width="1920" height="1080" fetchpriority="high" decoding="async"
+      alt="Warm caramel poured over a scoop of ice cream on a dark chocolate brownie, lit against black">
+  </div>
+  <div class="hero-inner" id="heroInner">
+    <span class="label kicker hero-eyebrow">Nocturnal Patisserie · Msheireb, Doha</span>
+    <h1 class="hero-lockup">
+      <span class="hl-main" id="heroTitle">Late Bloom</span>
+      <span class="hl-sub">Doha</span>
+    </h1>
+    <p class="hero-sub">Plated desserts, made to order — served until the city finally sleeps.</p>
+    <div class="hero-actions">
+      <a class="btn btn-amber magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a class="btn btn-line magnetic" href="#menu">See the menu</a>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">Scroll<span class="line"></span></div>
+</section>
+
+<!-- ===================== MANIFESTO ===================== -->
+<section class="manifesto band" aria-label="About Late Bloom">
+  <div class="wrap">
+    <p id="manifesto">The best things in this city keep late hours. <em>So do we</em> — dessert, plated properly, long after the kitchens have gone quiet.</p>
+    <p class="m-tag" data-reveal>Late Bloom · a Kira concept</p>
+  </div>
+</section>
+
+<!-- ===================== MARQUEE ===================== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Open till late<span class="fl">✿</span>Made to order<span class="fl">✿</span><span class="ar">مفتوح حتى وقت متأخر</span><span class="fl">✿</span>Msheireb · Doha<span class="fl">✿</span>Late Bloom<span class="fl">✿</span>Open till late<span class="fl">✿</span>Made to order<span class="fl">✿</span><span class="ar">مفتوح حتى وقت متأخر</span><span class="fl">✿</span>Msheireb · Doha<span class="fl">✿</span>Late Bloom<span class="fl">✿</span></span>
+  </div>
+</div>
+
+<!-- ===================== SIGNATURES (pinned, color-staged) ===================== -->
+<section class="signatures" id="signatures" aria-label="Signature desserts">
+  <div class="sig-head" data-reveal>
+    <span class="label kicker">The Signatures</span>
+    <h2 class="sec-head" style="margin-top:22px;font-size:var(--fs-h1)">Three that made us stay open late.</h2>
+  </div>
+  <div class="sig-stage" id="sigStage">
+
+    <article class="sig-slide stage-light" data-slide="0" style="background:var(--stage-rose)">
+      <div class="sig-inner">
+        <figure class="sig-figure">
+          <!-- PHOTO SLOT [TAREQ]: SIGNATURE 01 "Zahra" — rosewater-raspberry entremet on a dark plate, soft side light, portrait 4:5. -->
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=75&w=1000&h=1250&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=72&w=600&h=750&fit=crop&crop=entropy&auto=format 600w, https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=75&w=1000&h=1250&fit=crop&crop=entropy&auto=format 1000w" sizes="(max-width:860px) 92vw, 46vw" width="1000" height="1250" loading="lazy" decoding="async" alt="A slice of raspberry cream layer cake on a dark plate, topped with fresh raspberries">
+          <span class="idx">01 / 03</span>
+        </figure>
+        <div class="sig-body">
+          <span class="s-ar">زهرة · Zahra</span>
+          <h3>Zahra</h3>
+          <p>A rosewater and raspberry entremet layered to open like a petal — tart fruit, a whisper of orange blossom, cream that barely holds.</p>
+          <div class="sig-price">QAR 52</div>
+          <a class="btn btn-line-cream magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Zahra%20rosewater%20entremet." target="_blank" rel="noopener">Order Zahra</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="sig-slide stage-dark" data-slide="1" style="background:var(--stage-cocoa)">
+      <div class="sig-inner">
+        <figure class="sig-figure">
+          <!-- PHOTO SLOT [TAREQ]: SIGNATURE 02 "Layl" — dark chocolate slice with glossy sauce, moody near-black surface, portrait 4:5. -->
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=75&w=1000&h=1250&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=72&w=600&h=750&fit=crop&crop=entropy&auto=format 600w, https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=75&w=1000&h=1250&fit=crop&crop=entropy&auto=format 1000w" sizes="(max-width:860px) 92vw, 46vw" width="1000" height="1250" loading="lazy" decoding="async" alt="A dark chocolate cake slice with glossy chocolate sauce on a moody dark surface">
+          <span class="idx">02 / 03</span>
+        </figure>
+        <div class="sig-body">
+          <span class="s-ar">ليل · Layl</span>
+          <h3>Layl</h3>
+          <p>Our darkest chocolate, a burnt-honey cremeux, and cocoa soil. Bitter, deep, and unmistakably a night dessert — named for the hour it belongs to.</p>
+          <div class="sig-price">QAR 46</div>
+          <a class="btn btn-line magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Layl%20dark%20chocolate%20cremeux." target="_blank" rel="noopener">Order Layl</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="sig-slide stage-light" data-slide="2" style="background:var(--stage-caramel)">
+      <div class="sig-inner">
+        <figure class="sig-figure">
+          <!-- PHOTO SLOT [TAREQ]: SIGNATURE 03 "Sahar" — layered date-and-tahini gateau, warm side light on wood, portrait 4:5. -->
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=75&w=1000&h=1250&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=72&w=600&h=750&fit=crop&crop=entropy&auto=format 600w, https://images.unsplash.com/photo-1571115177098-24ec42ed204d?q=75&w=1000&h=1250&fit=crop&crop=entropy&auto=format 1000w" sizes="(max-width:860px) 92vw, 46vw" width="1000" height="1250" loading="lazy" decoding="async" alt="Slices of layered coffee cake stacked on a wooden board with chocolate wafer rolls">
+          <span class="idx">03 / 03</span>
+        </figure>
+        <div class="sig-body">
+          <span class="s-ar">سحر · Sahar</span>
+          <h3>Sahar</h3>
+          <p>A layered date and tahini gateau under dark caramel — built for the last order of the night, the one that comes just before dawn.</p>
+          <div class="sig-price">QAR 44</div>
+          <a class="btn btn-line-cream magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Sahar%20date%20and%20tahini%20gateau." target="_blank" rel="noopener">Order Sahar</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== MENU (horizontal strip) ===================== -->
+<section class="menu" id="menu" aria-label="Full menu">
+  <div class="wrap sec-head" data-reveal>
+    <span class="label kicker on-cream">The Menu</span>
+    <h2>Order the night in.</h2>
+    <p class="lead">Eight from the counter, priced in riyals. Every one leaves the pass made to order — tap a dessert to send it straight to our WhatsApp.</p>
+  </div>
+
+  <div class="menu-hint" aria-hidden="true"><span>→</span> Drag / scroll the row</div>
+
+  <div class="menu-viewport" id="menuViewport">
+    <div class="menu-track" id="menuTrack">
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Yasmine" — jasmine panna cotta in a jar with strawberries, square. -->
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="Individual jars of panna cotta topped with fresh strawberries">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Yasmine</h3><span class="m-ar">ياسمين</span></div><span class="price">QAR 32</span></div>
+          <p>Jasmine-steeped panna cotta, macerated strawberry, a spoon of night-blossom syrup.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Yasmine%20jasmine%20panna%20cotta." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Midnight Drip" — tall dark chocolate drip cake, square. -->
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="A tall chocolate drip cake with chocolate cream rosettes on a cake stand">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Midnight Drip</h3><span class="m-ar">قطرة الليل</span></div><span class="price">QAR 48</span></div>
+          <p>Dark chocolate gateau, salted ganache drip, cocoa nib crunch. A slice built for two.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Midnight%20Drip%20chocolate%20gateau." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Laymoon" — torched lemon meringue tart, square. -->
+          <img src="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1519915028121-7d3463d20b13?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="A torched meringue tart with golden peaks, one slice cut">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Laymoon</h3><span class="m-ar">ليمون</span></div><span class="price">QAR 36</span></div>
+          <p>Burnt-lemon curd tart under torched meringue peaks — sharp, sweet, and a little bit smoke.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Laymoon%20burnt-lemon%20meringue%20tart." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Fustuq" — pistachio & rose macarons dusted with crushed pistachio, square. -->
+          <img src="https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="A bowl of pastel macarons dusted with crushed pistachio">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Fustuq</h3><span class="m-ar">فستق</span></div><span class="price">QAR 42</span></div>
+          <p>Six pistachio and rosewater macarons, shells crushed with green Aleppo pistachio.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Fustuq%20pistachio%20and%20rose%20macarons." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Qeshta" — folded crêpes with cream and berries, square. -->
+          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1587314168485-3236d6710814?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1587314168485-3236d6710814?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="Folded crêpes with whipped cream and fresh raspberries and strawberries on a white plate">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Qeshta</h3><span class="m-ar">قشطة</span></div><span class="price">QAR 39</span></div>
+          <p>Warm folded crêpes, thick qeshta cream, and berries dressed in rose. Comfort at 1am.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Qeshta%20cr%C3%AApes." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Noir Velvet" — dark cocoa cups with white cloud frosting on marble, square. -->
+          <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1612203985729-70726954388c?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1612203985729-70726954388c?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="Dark cocoa cupcakes with white frosting and a cookie, on marble">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Noir Velvet</h3><span class="m-ar">مخمل أسود</span></div><span class="price">QAR 34</span></div>
+          <p>Black cocoa cups, vanilla cloud, a shard of dark cookie. Two to a box.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Noir%20Velvet%20cocoa%20cups." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Cocoa Bloom" — chocolate cupcake with swirled espresso frosting, square. -->
+          <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="Chocolate cupcakes with swirled espresso frosting">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Cocoa Bloom</h3><span class="m-ar">زهرة الكاكاو</span></div><span class="price">QAR 30</span></div>
+          <p>Espresso-mascarpone cupcake, cocoa bloom on top. The one that keeps you up on purpose.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Cocoa%20Bloom%20espresso%20cupcake." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+      <article class="menu-item">
+        <div class="menu-figure">
+          <!-- PHOTO SLOT [TAREQ]: MENU "Ward" — rose and lemon cooler in a tall glass with mint, square. -->
+          <img src="https://images.unsplash.com/photo-1502741224143-90386d7f8c82?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1502741224143-90386d7f8c82?q=72&w=400&h=400&fit=crop&crop=entropy&auto=format 400w, https://images.unsplash.com/photo-1502741224143-90386d7f8c82?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:860px) 72vw, 300px" width="800" height="800" loading="lazy" decoding="async" alt="A pink strawberry cooler in a tall glass with mint and a strawberry">
+        </div>
+        <div class="menu-copy">
+          <div class="m-top"><div><h3>Ward</h3><span class="m-ar">ورد</span></div><span class="price">QAR 28</span></div>
+          <p>Rose and lemon cooler over crushed ice, mint, a float of strawberry. The house pour.</p>
+          <a class="menu-order" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20order%20the%20Ward%20rose%20and%20lemon%20cooler." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg><span class="ul-g">Order on WhatsApp</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRANSITIONAL PINNED HEADLINE ===================== -->
+<section class="statement-pin" id="nightblooms" aria-label="Night blooms late">
+  <div class="sp-media" aria-hidden="true">
+    <!-- PHOTO SLOT [TAREQ]: TRANSITION A — a dark, textural dessert shot (e.g. sugar-dusted rolls on a dark surface), landscape 16:9. -->
+    <img id="spImgA" src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=75&w=1600&h=900&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=70&w=800&h=450&fit=crop&crop=entropy&auto=format 800w, https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=75&w=1600&h=900&fit=crop&crop=entropy&auto=format 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="">
+    <!-- PHOTO SLOT [TAREQ]: TRANSITION B — the swap-in dark dessert (e.g. glossy chocolate slice), landscape 16:9. -->
+    <img id="spImgB" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=75&w=1600&h=900&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=70&w=800&h=450&fit=crop&crop=entropy&auto=format 800w, https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=75&w=1600&h=900&fit=crop&crop=entropy&auto=format 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="">
+  </div>
+  <h2 class="sp-headline" id="spHeadline">Night <em>blooms</em> late.</h2>
+</section>
+
+<!-- ===================== GALLERY (no-gutter mosaic, hover tint, parallax) ===================== -->
+<section class="gallery band" id="gallery" aria-label="Gallery">
+  <div class="wrap sec-head" data-reveal>
+    <span class="label kicker">From the pass</span>
+    <h2>Plated after dark.</h2>
+    <p class="lead">Every frame here is shot in-house — the same lens that builds the site plates the dessert.</p>
+  </div>
+  <div class="wrap">
+    <div class="gal-grid">
+      <figure class="gal-tile g1">
+        <!-- PHOTO SLOT [TAREQ]: GALLERY 1 — overhead spread of decorated mini tarts (the "tart wall"), landscape 4:3. -->
+        <img class="gal-parallax" src="https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=75&w=1100&h=825&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=72&w=600&h=450&fit=crop&crop=entropy&auto=format 600w, https://images.unsplash.com/photo-1495147466023-ac5c588e2e94?q=75&w=1100&h=825&fit=crop&crop=entropy&auto=format 1100w" sizes="(max-width:760px) 100vw, 55vw" width="1100" height="825" loading="lazy" decoding="async" alt="An overhead spread of mini fruit tarts topped with berries and edible flowers">
+        <figcaption>The tart wall</figcaption>
+      </figure>
+      <figure class="gal-tile g2">
+        <!-- PHOTO SLOT [TAREQ]: GALLERY 2 — Zahra plated, alternate frame from the signature shoot, portrait 3:4. -->
+        <img class="gal-parallax" src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=75&w=800&h=1067&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=72&w=500&h=667&fit=crop&crop=entropy&auto=format 500w, https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=75&w=800&h=1067&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:760px) 50vw, 30vw" width="800" height="1067" loading="lazy" decoding="async" alt="A raspberry cream layer cake slice on a dark plate">
+        <figcaption>Zahra, plated</figcaption>
+      </figure>
+      <figure class="gal-tile g3">
+        <!-- PHOTO SLOT [TAREQ]: GALLERY 3 — open box of chocolate truffles from above, square. -->
+        <img class="gal-parallax" src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1481391319762-47dff72954d9?q=72&w=450&h=450&fit=crop&crop=entropy&auto=format 450w, https://images.unsplash.com/photo-1481391319762-47dff72954d9?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:760px) 50vw, 25vw" width="800" height="800" loading="lazy" decoding="async" alt="An open box of assorted chocolate truffles seen from above">
+        <figcaption>Truffle box</figcaption>
+      </figure>
+      <figure class="gal-tile g4">
+        <!-- PHOTO SLOT [TAREQ]: GALLERY 4 — cinnamon rolls dusted with sugar on a dark floured surface, square. -->
+        <img class="gal-parallax" src="https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=72&w=450&h=450&fit=crop&crop=entropy&auto=format 450w, https://images.unsplash.com/photo-1509365465985-25d11c17e812?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:760px) 50vw, 25vw" width="800" height="800" loading="lazy" decoding="async" alt="Cinnamon rolls dusted with icing sugar on a dark floured surface">
+        <figcaption>Rolls, 11pm</figcaption>
+      </figure>
+      <figure class="gal-tile g5">
+        <!-- PHOTO SLOT [TAREQ]: GALLERY 5 — Layl close-up, glossy dark chocolate slice, square. -->
+        <img class="gal-parallax" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=72&w=450&h=450&fit=crop&crop=entropy&auto=format 450w, https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=75&w=800&h=800&fit=crop&crop=entropy&auto=format 800w" sizes="(max-width:760px) 50vw, 25vw" width="800" height="800" loading="lazy" decoding="async" alt="A dark chocolate cake slice with glossy chocolate sauce">
+        <figcaption>Layl, close</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OPEN LATE / VISIT ===================== -->
+<section class="late band" id="visit" aria-label="Hours and location">
+  <div class="late-media" aria-hidden="true">
+    <!-- PHOTO SLOT [TAREQ]: VISIT — a warm, candlelit late-night interior/table scene for atmosphere behind the hours block, landscape 3:2. -->
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=75&w=1400&h=933&fit=crop&crop=entropy&auto=format" srcset="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=70&w=700&h=467&fit=crop&crop=entropy&auto=format 700w, https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=75&w=1400&h=933&fit=crop&crop=entropy&auto=format 1400w" sizes="100vw" width="1400" height="933" loading="lazy" decoding="async" alt="A candlelit table set for a late dinner, glasses catching warm light">
+  </div>
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="label kicker">Open Late</span>
+      <h2>Find us when the city quiets.</h2>
+    </div>
+    <div class="late-grid">
+      <div class="late-hours" data-reveal>
+        <div class="late-row"><span class="day">Sunday — Thursday</span><span class="time" data-scramble data-final="6PM — 2AM">6PM — 2AM</span></div>
+        <div class="late-row"><span class="day">Friday — Saturday</span><span class="time" data-scramble data-final="6PM — 3AM">6PM — 3AM</span></div>
+        <div class="late-row"><span class="day">Last order</span><span class="time" data-scramble data-final="30 min before">30 min before</span></div>
+      </div>
+      <div class="late-info" data-reveal>
+        <div class="li-block"><span class="li-k">Where</span><span class="li-v">Barahat Msheireb, Building 12<br>Msheireb Downtown, Doha</span></div>
+        <div class="li-block"><span class="li-k">Order ahead</span><span class="li-v">Pickup and Doha delivery, both on WhatsApp.</span></div>
+        <a class="btn btn-amber magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20place%20an%20order%20for%20tonight." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+          Order for tonight
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ORDER BAND ===================== -->
+<section class="order-band band" aria-label="Order call to action">
+  <div class="wrap">
+    <span class="label kicker">Still awake?</span>
+    <h2>Good. The <em>good things</em> keep late hours.</h2>
+    <p>Send your order straight to the pass. We plate it, message you back, and you eat it before the night's over.</p>
+    <div class="actions">
+      <a class="btn btn-amber magnetic" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+        Order on WhatsApp
+      </a>
+      <a class="btn btn-line magnetic" href="#menu">Back to the menu</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER — KIRA SALES HOOK ===================== -->
+<footer aria-label="About this concept">
+  <div class="wrap kira-hook">
+    <div class="inner">
+      <div>
+        <span class="foot-scramble" data-scramble data-final="OPEN UNTIL MIDNIGHT">OPEN UNTIL MIDNIGHT</span>
+        <span class="label kicker k-kicker">The real pitch</span>
+        <h2>Late Bloom is a concept build by <em>Kira</em> — one team that designs, builds, and photographs.</h2>
+        <p>The brand, the site, the desserts, and every photo on this page were made by one studio in Doha. Want this for your business?</p>
+      </div>
+      <div class="k-actions">
+        <a class="btn btn-amber magnetic" href="https://wa.me/97470196996?text=Hi%20Kira%20%E2%80%94%20I%20saw%20the%20Late%20Bloom%20concept%20and%20want%20something%20like%20it%20for%20my%20business." target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+          Talk to Kira on WhatsApp
+        </a>
+        <a class="btn btn-line magnetic" href="../index.html">View Kira →</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>Late Bloom — a fictional concept brand. Photography placeholders.</span>
+    <span>Built by <a class="ul" href="../index.html">Kira</a> · Doha, Qatar</span>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- sticky mobile order bar -->
+<div class="order-bar">
+  <a class="btn btn-amber" href="https://wa.me/97470196996?text=Hi%20Late%20Bloom%20%E2%80%94%20I%27d%20like%20to%20place%20an%20order." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1-.4-.1-.9-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.5.7 1.8.8 1.9.1.1.1.3 0 .5-.1.2-.2.4-.3.5l-.4.5c-.1.1-.3.3-.1.6.1.3.7 1.1 1.4 1.8.9.8 1.7 1.1 2 1.2.2.1.4.1.5-.1.1-.2.6-.7.8-.9.2-.3.3-.2.6-.1.2.1 1.5.7 1.7.9.3.1.4.2.5.3.1.2.1.6-.1 1.1Z"/></svg>
+    Order on WhatsApp
+  </a>
+</div>
+
+<!-- ===================== GSAP (pinned 3.13.0, jsDelivr) ===================== -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" onerror="document.documentElement.classList.remove('preload');window.__gsapFail=1;var l=document.getElementById('loader');if(l)l.setAttribute('hidden','');"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrambleTextPlugin.min.js"></script>
+
+<script>
+(function(){
+  "use strict";
+  var doc = document, root = doc.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var loader = doc.getElementById('loader');
+
+  // nav theme + mobile order bar: rect-based so it's correct with or without
+  // ScrollSmoother, and works under reduced-motion / a missing CDN.
+  //   over hero        → transparent (cream)
+  //   day zone solid   → ivory bar, espresso text
+  //   night zone solid → dark bar, cream text (past the "Night blooms late" crossover)
+  var navEl = doc.getElementById('nav');
+  var heroEl = doc.querySelector('.hero');
+  var NAVH = 72;
+  var onScrollState = function(){
+    if(!navEl) return;
+    var heroTop = heroEl ? heroEl.getBoundingClientRect().top : -999;
+    var heroBottom = heroEl ? heroEl.getBoundingClientRect().bottom : 0;
+    navEl.classList.toggle('solid', heroTop < -80);
+    var nb = doc.getElementById('nightblooms');
+    navEl.classList.toggle('night', !!(nb && nb.getBoundingClientRect().top <= NAVH));
+    doc.body.classList.toggle('bar-on', heroBottom < 0);
+  };
+  window.addEventListener('scroll', onScrollState, {passive:true});
+  window.addEventListener('resize', onScrollState, {passive:true});
+  onScrollState();
+
+  function dropLoader(){
+    window.__introDone = true;
+    root.classList.remove('preload');
+    if(loader){ loader.setAttribute('hidden',''); }
+  }
+
+  if(reduce || !window.gsap || window.__gsapFail){ dropLoader(); return; }
+
+  var gsap = window.gsap;
+  var plugins = [];
+  if(window.ScrollTrigger) plugins.push(window.ScrollTrigger);
+  if(window.ScrollSmoother) plugins.push(window.ScrollSmoother);
+  if(window.SplitText)    plugins.push(window.SplitText);
+  if(window.CustomEase)   plugins.push(window.CustomEase);
+  if(window.ScrambleTextPlugin) plugins.push(window.ScrambleTextPlugin);
+  if(plugins.length) gsap.registerPlugin.apply(gsap, plugins);
+  var ST = window.ScrollTrigger;
+
+  // ---------- smooth scrolling (desktop, fine pointer only) ----------
+  // Native touch scroll on mobile; no smoother under reduced-motion or a
+  // missing CDN — the page stays fully scrollable in every fallback.
+  var smoother = null;
+  if(window.ScrollSmoother && window.matchMedia('(min-width: 860px)').matches
+       && window.matchMedia('(pointer:fine)').matches){
+    try{
+      smoother = window.ScrollSmoother.create({
+        wrapper:'#smooth-wrapper', content:'#smooth-content',
+        smooth:1.1, effects:false
+      });
+    }catch(e){ smoother = null; }
+  }
+
+  // in-page anchors: route through the smoother when it's active
+  doc.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if(id.length < 2) return;
+      var t = doc.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      if(smoother){ smoother.scrollTo(t, true, 'top 64px'); }
+      else { t.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    });
+  });
+
+  if(window.CustomEase){
+    window.CustomEase.create('bloom', '0.16, 1, 0.3, 1');
+    window.CustomEase.create('curtain', '0.76, 0, 0.24, 1');
+  }
+  var EASE = window.CustomEase ? 'bloom' : 'power3.out';
+
+  // ---------- hero intro ----------
+  function buildHeroIntro(){
+    var tl = gsap.timeline({ defaults:{ ease: EASE } });
+    var title = doc.getElementById('heroTitle');
+    var img = doc.querySelector('.hero-media img');
+    if(img){ tl.fromTo(img, { scale:1.14 }, { scale:1.05, duration:6, ease:'none' }, 0); }
+    if(window.SplitText && title){
+      try{
+        var split = new window.SplitText(title, { type:'chars' });
+        tl.from(split.chars, { yPercent:120, opacity:0, duration:0.8, stagger:0.03, ease:EASE }, 0.05);
+      }catch(e){ tl.from(title, { yPercent:20, opacity:0, duration:0.7 }, 0.05); }
+    } else if(title){ tl.from(title, { yPercent:20, opacity:0, duration:0.7 }, 0.05); }
+    tl.from('.hero-eyebrow', { y:20, opacity:0, duration:0.5 }, 0.1)
+      .from('.hl-sub',       { y:16, opacity:0, duration:0.5 }, 0.5)
+      .from('.hero-sub',     { y:20, opacity:0, duration:0.6 }, 0.55)
+      .from('.hero-actions', { y:20, opacity:0, duration:0.6 }, 0.68)
+      .from('.hero-scroll',  { opacity:0, duration:0.6 }, 0.85);
+    return tl;
+  }
+
+  // ---------- loader: bloom + scramble wordmark + counter + bar + clip-wipe ----------
+  function runLoader(after){
+    if(!root.classList.contains('preload') || !loader){ dropLoader(); after(); return; }
+    var counter = { v:0 };
+    var countEl = doc.getElementById('loaderCount');
+    var barEl = doc.getElementById('loaderBar');
+    var wordEl = doc.getElementById('loaderWord');
+    var tl = gsap.timeline({ onComplete: function(){ dropLoader(); after(); } });
+    tl.from('#loader .petal', { scale:0, svgOrigin:'32 32', stagger:0.04, duration:0.4, ease:'back.out(2.2)' }, 0)
+      .from('#loader .core',  { scale:0, svgOrigin:'32 32', duration:0.28, ease:'back.out(2)' }, 0.14);
+    if(window.ScrambleTextPlugin && wordEl){
+      tl.to(wordEl, { duration:0.7, scrambleText:{ text:'LATE BLOOM', chars:'upperCase', speed:0.55, revealDelay:0.1 } }, 0.12);
+    }
+    tl.to(counter, { v:100, duration:0.9, ease:'power1.inOut', onUpdate:function(){
+        var n = Math.round(counter.v);
+        if(countEl) countEl.textContent = (n < 10 ? '0' : '') + n;
+        if(barEl) barEl.style.transform = 'scaleX(' + (n/100) + ')';
+      } }, 0.12)
+      .to('#loader', { clipPath:'inset(0 0 100% 0)', duration:0.5, ease: (window.CustomEase?'curtain':'power3.inOut') }, '>-0.02');
+    return tl;
+  }
+
+  // ---------- main choreography ----------
+  var mm = gsap.matchMedia();
+  mm.add({ isDesktop:'(min-width: 860px)', isMobile:'(max-width: 859px)' }, function(ctx){
+    var isDesktop = ctx.conditions.isDesktop;
+
+    // reveals
+    var revealEls = gsap.utils.toArray('[data-reveal]');
+    if(ST && ST.batch){
+      gsap.set(revealEls, { y: isDesktop ? 26 : 16, opacity:0 });
+      ST.batch(revealEls, { start:'top 88%', onEnter:function(b){ gsap.to(b, { y:0, opacity:1, duration:0.7, ease:EASE, stagger:0.09, overwrite:true }); } });
+    }
+
+    // section header word reveals
+    gsap.utils.toArray('.sec-head h2, .sig-head h2').forEach(function(h){
+      if(!window.SplitText) return;
+      try{
+        var s = new window.SplitText(h, { type:'words' });
+        gsap.from(s.words, { yPercent:110, opacity:0, duration:0.7, ease:EASE, stagger:0.06, scrollTrigger:{ trigger:h, start:'top 85%' } });
+      }catch(e){}
+    });
+
+    // manifesto scroll-linked word reveal
+    var man = doc.getElementById('manifesto');
+    if(man && window.SplitText){
+      try{
+        var msObj = new window.SplitText(man, { type:'words' });
+        gsap.set(msObj.words, { opacity:0.22 });
+        gsap.to(msObj.words, { opacity:1, ease:'none', stagger:0.2, scrollTrigger:{ trigger:man, start:'top 78%', end:'bottom 55%', scrub:true } });
+      }catch(e){}
+    }
+
+    // hero reverse-on-scroll (symmetric fade)
+    if(ST){
+      gsap.to('#heroInner', { opacity:0, y:-40, ease:'none', scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true } });
+    }
+
+    // marquee scrub drift
+    if(ST){
+      gsap.to('.marquee-track', { xPercent: isDesktop ? -8 : -5, ease:'none', scrollTrigger:{ trigger:'.marquee', start:'top bottom', end:'bottom top', scrub:true } });
+    }
+
+    // DAY -> NIGHT: the page background darkens continuously across the
+    // "Night blooms late" crossover. Section backgrounds stay solid for
+    // legibility, so this reads as connective tissue, not the sole cue.
+    if(ST){
+      gsap.fromTo('body', { backgroundColor:'#F5EDDF' }, { backgroundColor:'#1C120E', ease:'none', scrollTrigger:{ trigger:'#nightblooms', start:'top 85%', end:'top 12%', scrub:true } });
+    }
+
+    // signatures crossfade (color-staged)
+    var stage = doc.getElementById('sigStage');
+    var slides = gsap.utils.toArray('.sig-slide');
+    if(isDesktop && stage && slides.length > 1 && ST){
+      stage.classList.add('is-pinned');
+      gsap.set(slides, { autoAlpha:0 });
+      gsap.set(slides[0], { autoAlpha:1 });
+      var sigTl = gsap.timeline({ scrollTrigger:{ trigger:'#signatures', start:'top top', end:'+=' + (slides.length * 90) + '%', pin:true, scrub:0.6, anticipatePin:1, invalidateOnRefresh:true } });
+      slides.forEach(function(s, i){
+        if(i === 0) return;
+        sigTl.to(slides[i-1], { autoAlpha:0, scale:1.04, duration:0.5, ease:'none' })
+             .fromTo(s, { autoAlpha:0, scale:0.98 }, { autoAlpha:1, scale:1, duration:0.5, ease:'none' }, '<')
+             .from(s.querySelectorAll('.s-ar,h3,p,.sig-price,.btn'), { y:26, opacity:0, duration:0.4, stagger:0.05, ease:EASE }, '<0.1');
+      });
+    } else {
+      slides.forEach(function(s){
+        gsap.from(s.querySelectorAll('.sig-figure, .s-ar, h3, p, .sig-price, .btn'), { y:24, opacity:0, duration:0.6, ease:EASE, stagger:0.06, scrollTrigger:{ trigger:s, start:'top 82%' } });
+      });
+    }
+
+    // image mask/clip reveals
+    gsap.utils.toArray('.sig-figure, .gal-tile, .menu-figure').forEach(function(fig){
+      gsap.from(fig, { clipPath:'inset(0% 0% 100% 0%)', duration:0.9, ease:EASE, scrollTrigger:{ trigger:fig, start:'top 90%' } });
+    });
+
+    // gallery multi-layer parallax (desktop)
+    if(isDesktop && ST){
+      gsap.utils.toArray('.gal-parallax').forEach(function(el, i){
+        var depth = (i % 3) - 1;
+        gsap.fromTo(el, { yPercent: -6 * depth }, { yPercent: 6 * depth, ease:'none', scrollTrigger:{ trigger: el.closest('.gal-tile'), start:'top bottom', end:'bottom top', scrub:true } });
+      });
+      gsap.fromTo('.late-media img', { yPercent:-8 }, { yPercent:8, ease:'none', scrollTrigger:{ trigger:'.late', start:'top bottom', end:'bottom top', scrub:true } });
+    }
+
+    // transitional pinned bleeding headline + photo swap
+    var headline = doc.getElementById('spHeadline');
+    if(headline && ST){
+      if(isDesktop){
+        var spTl = gsap.timeline({ scrollTrigger:{ trigger:'#nightblooms', start:'top top', end:'+=120%', pin:true, scrub:0.6, anticipatePin:1, invalidateOnRefresh:true } });
+        spTl.fromTo(headline, { xPercent:6 }, { xPercent:-42, ease:'none' }, 0)
+            .to('#spImgB', { opacity:1, ease:'none' }, 0)
+            .fromTo('.sp-media', { scale:1.08 }, { scale:1, ease:'none' }, 0);
+      } else {
+        gsap.to('#spImgB', { opacity:1, ease:'none', scrollTrigger:{ trigger:'#nightblooms', start:'top 60%', end:'bottom top', scrub:true } });
+        gsap.from(headline, { opacity:0, y:24, duration:0.6, ease:EASE, scrollTrigger:{ trigger:'#nightblooms', start:'top 80%' } });
+      }
+    }
+
+    // horizontal menu: pinned scrub desktop / native swipe mobile
+    var viewport = doc.getElementById('menuViewport');
+    var track = doc.getElementById('menuTrack');
+    if(isDesktop && viewport && track && ST){
+      viewport.classList.add('is-scrub');
+      var getDistance = function(){ return Math.max(0, track.scrollWidth - window.innerWidth + 40); };
+      /* pin the strip itself (centered) so tall cards never clip inside the viewport */
+      gsap.to(track, { x:function(){ return -getDistance(); }, ease:'none', scrollTrigger:{ trigger:viewport, start:'center center', end:function(){ return '+=' + getDistance(); }, pin:true, scrub:0.6, anticipatePin:1, invalidateOnRefresh:true } });
+    }
+
+    // desktop micro-interactions
+    if(isDesktop){
+      var dot = doc.querySelector('.cursor-dot'), ring = doc.querySelector('.cursor-ring');
+      if(dot && ring && window.matchMedia('(pointer:fine)').matches){
+        doc.body.classList.add('cursor-on');
+        var xTo = gsap.quickTo(dot,'x',{duration:0.15,ease:'power3'}), yTo = gsap.quickTo(dot,'y',{duration:0.15,ease:'power3'});
+        var xR = gsap.quickTo(ring,'x',{duration:0.4,ease:'power3'}), yR = gsap.quickTo(ring,'y',{duration:0.4,ease:'power3'});
+        window.addEventListener('mousemove', function(e){ xTo(e.clientX); yTo(e.clientY); xR(e.clientX); yR(e.clientY); });
+        gsap.utils.toArray('a, button, .menu-item').forEach(function(el){
+          el.addEventListener('mouseenter', function(){ doc.body.classList.add('cursor-hot'); });
+          el.addEventListener('mouseleave', function(){ doc.body.classList.remove('cursor-hot'); });
+        });
+      }
+      gsap.utils.toArray('.magnetic').forEach(function(el){
+        el.addEventListener('mousemove', function(e){
+          var r = el.getBoundingClientRect();
+          gsap.to(el, { x:(e.clientX-(r.left+r.width/2))*0.28, y:(e.clientY-(r.top+r.height/2))*0.32, duration:0.4, ease:'power3' });
+        });
+        el.addEventListener('mouseleave', function(){ gsap.to(el, { x:0, y:0, duration:0.5, ease:'elastic.out(1,0.4)' }); });
+      });
+    }
+
+    // nav solidify + mobile order bar are handled by the plain scroll listener
+    // at the top of this script (works in every mode) — no ScrollTrigger needed.
+
+    // scroll indicator: blooming flower + top line
+    var petals = gsap.utils.toArray('#bloomInd .sp');
+    var line = doc.getElementById('progressLine');
+    var ind = doc.getElementById('bloomInd');
+    if(ST){
+      ST.create({ start:0, end:'max', onUpdate:function(self){
+        var p = self.progress;
+        if(line) gsap.set(line, { scaleX:p });
+        if(ind) ind.classList.toggle('show', p > 0.02);
+        for(var i=0;i<petals.length;i++){
+          petals[i].style.opacity = (p >= (i+1)/petals.length) ? '1' : (p > i/petals.length ? '0.55' : '0.16');
+        }
+        onScrollState();  // keep nav theme in sync with ScrollSmoother's virtual scroll
+      } });
+    }
+
+    return function(){
+      if(stage) stage.classList.remove('is-pinned');
+      if(viewport) viewport.classList.remove('is-scrub');
+      doc.body.classList.remove('cursor-on','cursor-hot','bar-on');
+      if(track) gsap.set(track, { clearProps:'transform' });
+      gsap.set(slides, { clearProps:'all' });
+    };
+  });
+
+  // ---------- boot ----------
+  function boot(){
+    if(window.__booted) return; window.__booted = true;
+    var heroTl = buildHeroIntro(); heroTl.pause();
+    runLoader(function(){ heroTl.play(0); if(ST) ST.refresh(); });
+  }
+  if(doc.fonts && doc.fonts.ready){ doc.fonts.ready.then(function(){ if(ST) ST.refresh(); }); }
+  if(doc.readyState === 'complete'){ boot(); }
+  else { window.addEventListener('load', boot, { once:true }); }
+  window.setTimeout(function(){ if(!window.__introDone && !window.__booted){ boot(); } }, 1200);
+
+  // ---------- scramble hours + footer book-end ----------
+  if(window.ScrambleTextPlugin && ST){
+    gsap.utils.toArray('[data-scramble]').forEach(function(el){
+      var finalTxt = el.getAttribute('data-final') || el.textContent;
+      ST.create({ trigger:el, start:'top 88%', once:true, onEnter:function(){
+        gsap.to(el, { duration:1.1, ease:'none', scrambleText:{ text:finalTxt, chars:(el.getAttribute('data-chars')||'upperCase'), speed:0.4, revealDelay:0.15 } });
+      } });
+    });
+  }
+})();
+</script>
+</body>
+</html>
