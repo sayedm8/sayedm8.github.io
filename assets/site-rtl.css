@@ -1,0 +1,13 @@
+/* Arabic / RTL overrides — loaded after site.css */
+body{font-family:'IBM Plex Sans Arabic','Geist','Segoe UI',Tahoma,sans-serif;}
+.hero h1,h2.head,h3,.statement p.big,.case-name,.wp-name,.closing h2,.pkg-name,
+.faq-q,.pi-word,.menu-row__name{letter-spacing:0;}
+.label,.kicker,.tag,.micro,.btn,.nav-links a,.ticker-track,.foot-links a,
+.case-idx,.case-formula,.case-meta .mk,.loader__meta,.film-cap,.wp-tag{letter-spacing:0;}
+.foot-lockup .fw,.wordmark,.lt-word{letter-spacing:-0.03em;} /* Latin lockups keep tracking */
+.hero h1{line-height:1.08;}
+h2.head{line-height:1.15;}
+.statement p.big{line-height:1.5;}
+.case-formula{line-height:1.7;}
+.wp-name::after{content:" ↖";}
+.hero-scroll{letter-spacing:0;}

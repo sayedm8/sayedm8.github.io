@@ -1,0 +1,32 @@
+{
+  "source": {
+    "filename": "the-detail.mp4",
+    "duration": 8.06,
+    "resolution": "1920x1080",
+    "fps": 24.0,
+    "codec": "h264",
+    "total_source_frames": 193
+  },
+  "frames": {
+    "target_count": 120,
+    "format": "webp",
+    "quality": 66,
+    "naming_pattern": "frame-{NNNN}.webp"
+  },
+  "recommended_scroll_height": "400vh",
+  "created": "2026-07-27T12:53:06",
+  "desktop": {
+    "resolution": "1920x1080",
+    "actual_count": 120,
+    "total_bytes": 4550686,
+    "avg_frame_bytes": 37922,
+    "total_mb": 4.34
+  },
+  "mobile": {
+    "resolution": "960x540",
+    "actual_count": 120,
+    "total_bytes": 2045030,
+    "avg_frame_bytes": 17041,
+    "total_mb": 1.95
+  }
+}

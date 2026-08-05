@@ -1,0 +1,295 @@
+<!doctype html>
+<!-- VORTEX COFFEE — concept tier 2 (premium). Demo by Kira, Doha. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="color-scheme" content="only dark">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vortex Coffee — Specialty coffee in Tornado Tower, Doha</title>
+<meta name="description" content="Skip the quotes... start with coffee. Specialty coffee, filmed at the bar — Tornado Tower, West Bay, Doha.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23f3ead9'/%3E%3Cpath d='M16 7c4 3 4 7 0 9s-4 6 0 9c-5-1-8-4.5-8-9s3-8 8-9z' fill='%23181008'/%3E%3Cpath d='M16 7c5 1 8 4.5 8 9s-3 8-8 9c2.5-3 2.5-6.5 0-9s-2.5-6 0-9z' fill='%23e8a04c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14100c; --bg2:#1d1712; --ink:#f2ead9; --muted:#a89a86; --line:rgba(242,234,217,.14); --amber:#e8a04c;
+    --ease:cubic-bezier(.22,1,.36,1);
+  }
+  *{box-sizing:border-box;margin:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Manrope',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65}
+  img,video{display:block;max-width:100%}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .k{font-size:.74rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--amber)}
+  h2{font-family:'Fraunces',serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:500;line-height:1.12;margin:14px 0 18px}
+  .lead{max-width:56ch;color:var(--muted)}
+
+  /* reveals */
+  .r{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s var(--ease)}
+  .r.in{opacity:1;transform:none}
+
+  header{position:fixed;inset:0 0 auto;z-index:90;transition:background .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
+  header.solid{background:rgba(20,16,12,.88);backdrop-filter:blur(10px);border-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:.16em;text-decoration:none;font-size:1.02rem}
+  .brand svg{width:32px;height:32px}
+  .nav-links{display:flex;gap:30px;font-size:.86rem;font-weight:600;letter-spacing:.04em}
+  .nav-links a{text-decoration:none;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--ink)}
+  .order{border:1px solid rgba(242,234,217,.35);padding:11px 20px;border-radius:999px;font-size:.85rem;font-weight:700;text-decoration:none;transition:all .25s}
+  .order:hover{background:var(--amber);border-color:var(--amber);color:#181008}
+
+  .hero{position:relative;height:100svh;min-height:600px;overflow:hidden;display:grid;align-items:end}
+  .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(14,10,7,.85),rgba(14,10,7,.15) 55%,rgba(14,10,7,.35))}
+  .hero-copy{position:relative;z-index:2;padding-bottom:9vh}
+  .hero-copy h1{font-family:'Fraunces',serif;font-weight:500;font-size:clamp(2.6rem,6.5vw,5rem);line-height:1.05;max-width:15ch;margin:16px 0 18px}
+  .hero-copy .lead{color:#d9cbb4}
+  .hero-btns{display:flex;gap:14px;margin-top:28px;flex-wrap:wrap}
+  .btn{padding:14px 28px;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none;transition:all .25s}
+  .btn.solid{background:var(--ink);color:#181008}
+  .btn.solid:hover{background:var(--amber)}
+  .btn.ghost{border:1px solid rgba(242,234,217,.4)}
+  .btn.ghost:hover{border-color:var(--ink)}
+  .hero-scroll{position:absolute;right:26px;bottom:26px;z-index:2;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#cbbca6}
+
+  section{padding:96px 0}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split img{border-radius:4px}
+  .fact-row{display:flex;gap:34px;margin-top:26px;flex-wrap:wrap}
+  .fact b{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--amber)}
+  .fact span{font-size:.8rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+
+  .menu{background:var(--bg2);border-block:1px solid var(--line)}
+  .tabs{display:flex;gap:10px;margin:26px 0 8px;flex-wrap:wrap}
+  .tab{border:1px solid var(--line);background:none;color:var(--muted);padding:10px 20px;border-radius:999px;font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s}
+  .tab.on,.tab:hover{background:var(--ink);border-color:var(--ink);color:#181008}
+  .mpanel{display:none;grid-template-columns:1fr 1fr;gap:6px 60px;padding-top:18px}
+  .mpanel.on{display:grid}
+  .mi{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line)}
+  .mi b{font-weight:600;font-size:1.02rem}
+  .mi small{display:block;color:var(--muted);font-weight:400;margin-top:2px}
+  .mi span{font-weight:700;color:var(--amber);white-space:nowrap}
+  .menu-note{margin-top:22px;font-size:.82rem;color:var(--muted)}
+
+  .strip{padding:0}
+  .rail{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 24px 18px;scrollbar-width:thin}
+  .rail img{height:340px;width:auto;border-radius:4px;scroll-snap-align:center;flex:none}
+
+  .quote{max-width:760px;margin:0 auto;text-align:center}
+  .quote p{font-family:'Fraunces',serif;font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.35}
+  .quote figcaption{margin-top:16px;color:var(--muted);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase}
+
+  .visit{background:var(--bg2);border-top:1px solid var(--line)}
+  .vgrid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+  .vlist{display:grid;gap:18px;margin-top:24px}
+  .vrow{display:grid;grid-template-columns:110px 1fr;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line);font-size:.95rem}
+  .vrow b{color:var(--muted);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;padding-top:3px}
+  .vrow a{color:var(--amber);text-decoration:none;font-weight:600}
+
+  footer{padding:38px 0;font-size:.83rem;color:var(--muted)}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  .wa{position:fixed;right:22px;bottom:22px;z-index:80;width:56px;height:56px;border-radius:50%;background:#22c15e;display:grid;place-items:center;box-shadow:0 12px 30px -8px rgba(0,0,0,.5);transition:transform .25s var(--ease)}
+  .wa:hover{transform:translateY(-3px)}
+  .wa svg{width:28px;height:28px;fill:#fff}
+
+  @media (max-width:860px){
+    .nav-links{display:none}
+    .split,.vgrid{grid-template-columns:1fr;gap:30px}
+    .mpanel{grid-template-columns:1fr}
+    .rail img{height:240px}
+    section{padding:70px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .r{opacity:1!important;transform:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap nav">
+    <a class="brand" href="#top">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#f3ead9"/><path d="M16 7c4 3 4 7 0 9s-4 6 0 9c-5-1-8-4.5-8-9s3-8 8-9z" fill="#181008"/><path d="M16 7c5 1 8 4.5 8 9s-3 8-8 9c2.5-3 2.5-6.5 0-9s-2.5-6 0-9z" fill="#e8a04c"/></svg>
+      VORTEX
+    </a>
+    <nav class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#space">The Space</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="order" href="tel:+97471716420">Order ahead</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="padding:0">
+    <video src="img/vortex-film.mp4" poster="img/vortex-poster.jpg" autoplay muted loop playsinline aria-label="Film of the Vortex Coffee bar in motion"></video>
+    <div class="wrap hero-copy">
+      <span class="k r in">Tornado Tower · West Bay · Doha</span>
+      <h1 class="r in">Skip the quotes.<br>Start with coffee.</h1>
+      <p class="lead r in">Specialty coffee at the foot of the tower — filmed at our bar, poured for your morning.</p>
+      <div class="hero-btns r in">
+        <a class="btn solid" href="#menu">See the menu</a>
+        <a class="btn ghost" href="https://maps.app.goo.gl/dU9bFiMUY1WeTuMZ6" target="_blank" rel="noopener">Find us</a>
+      </div>
+    </div>
+    <span class="hero-scroll" aria-hidden="true">Scroll ↓</span>
+  </section>
+
+  <section id="story">
+    <div class="wrap split">
+      <div class="r">
+        <span class="k">The Story</span>
+        <h2>A calm eye in Doha's fastest tower.</h2>
+        <p class="lead">Vortex opened with one idea: the busiest people in West Bay deserve the least rushed cup in the city. Beans roasted for us, dialled in every morning on the La Marzocco, poured by baristas who know your order by day three.</p>
+        <div class="fact-row">
+          <div class="fact"><b>7:00</b><span>First pour</span></div>
+          <div class="fact"><b>18 g</b><span>Every dose</span></div>
+          <div class="fact"><b>3 s</b><span>From smile to order</span></div>
+        </div>
+      </div>
+      <img class="r" src="img/still-extraction.jpg" alt="Espresso extracting into a black Vortex cup" loading="lazy">
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <span class="k r">The Menu</span>
+      <h2 class="r">Order like a regular.</h2>
+      <div class="tabs r" role="tablist" aria-label="Menu categories">
+        <button class="tab on" data-p="espresso" role="tab" aria-selected="true">Espresso</button>
+        <button class="tab" data-p="brew" role="tab" aria-selected="false">Slow Brew</button>
+        <button class="tab" data-p="not" role="tab" aria-selected="false">Not Coffee</button>
+        <button class="tab" data-p="bites" role="tab" aria-selected="false">Bites</button>
+      </div>
+
+      <div class="mpanel on" id="p-espresso" role="tabpanel">
+        <div class="mi"><div><b>Espresso</b><small>Double shot, single origin</small></div><span>QR 12</span></div>
+        <div class="mi"><div><b>Cortado</b><small>Equal parts, served short</small></div><span>QR 16</span></div>
+        <div class="mi"><div><b>Flat White</b><small>Tight microfoam, no fuss</small></div><span>QR 20</span></div>
+        <div class="mi"><div><b>Caffè Latte</b><small>Silky, generous</small></div><span>QR 22</span></div>
+        <div class="mi"><div><b>Spanish Latte</b><small>The West Bay favourite</small></div><span>QR 24</span></div>
+        <div class="mi"><div><b>Iced Vortex</b><small>House signature over cold foam</small></div><span>QR 26</span></div>
+      </div>
+      <div class="mpanel" id="p-brew" role="tabpanel">
+        <div class="mi"><div><b>V60 Pour-Over</b><small>Rotating single origins</small></div><span>QR 26</span></div>
+        <div class="mi"><div><b>Chemex for Two</b><small>Share the ritual</small></div><span>QR 38</span></div>
+        <div class="mi"><div><b>Cold Brew</b><small>Steeped 18 hours</small></div><span>QR 24</span></div>
+        <div class="mi"><div><b>Cold Brew Tonic</b><small>Bright, sparkling</small></div><span>QR 28</span></div>
+      </div>
+      <div class="mpanel" id="p-not" role="tabpanel">
+        <div class="mi"><div><b>Matcha Latte</b><small>Ceremonial grade</small></div><span>QR 26</span></div>
+        <div class="mi"><div><b>Hot Chocolate</b><small>70% single estate</small></div><span>QR 24</span></div>
+        <div class="mi"><div><b>Karak</b><small>Because Doha</small></div><span>QR 8</span></div>
+        <div class="mi"><div><b>Fresh Orange</b><small>Squeezed to order</small></div><span>QR 18</span></div>
+      </div>
+      <div class="mpanel" id="p-bites" role="tabpanel">
+        <div class="mi"><div><b>Butter Croissant</b><small>Baked daily</small></div><span>QR 14</span></div>
+        <div class="mi"><div><b>Pain au Chocolat</b><small>Two batons, always</small></div><span>QR 16</span></div>
+        <div class="mi"><div><b>San Sebastian</b><small>By the slice</small></div><span>QR 28</span></div>
+        <div class="mi"><div><b>Brown Butter Cookie</b><small>Sea salt finish</small></div><span>QR 15</span></div>
+      </div>
+      <p class="menu-note">Sample menu for this concept — items and prices to be confirmed by Vortex.</p>
+    </div>
+  </section>
+
+  <section class="strip" style="padding-top:96px">
+    <div class="wrap" style="margin-bottom:26px">
+      <span class="k r">At the bar</span>
+      <h2 class="r">Shot on site, by our lens.</h2>
+    </div>
+    <div class="rail" tabindex="0" aria-label="Photo gallery, scrolls horizontally">
+      <img src="img/still-counter.jpg" alt="The Vortex bar and back counter" loading="lazy">
+      <img src="img/still-barista.jpg" alt="A barista working the espresso machine" loading="lazy">
+      <img src="img/still-pour.jpg" alt="Latte art mid-pour" loading="lazy">
+      <img src="img/still-cup.jpg" alt="A finished rosetta in a black cup" loading="lazy">
+      <img src="img/still-tray.jpg" alt="A latte served on the signature tray" loading="lazy">
+      <img src="img/still-machine.jpg" alt="The La Marzocco machine" loading="lazy">
+    </div>
+  </section>
+
+  <section id="space">
+    <div class="wrap split">
+      <img class="r" src="img/still-art.jpg" alt="The art wall inside Vortex Coffee" loading="lazy">
+      <div class="r">
+        <span class="k">The Space</span>
+        <h2>Part coffee bar, part gallery.</h2>
+        <p class="lead">The wall changes with Doha's artists; the coffee stays constant. Meet a client, hide from your inbox, or watch the tower wake up through the glass.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <figure class="quote r">
+        <p>"The only meeting in West Bay nobody tries to reschedule."</p>
+        <figcaption>— a regular, floor 34</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap vgrid">
+      <div class="r">
+        <span class="k">Visit</span>
+        <h2>Ground floor, Tornado Tower.</h2>
+        <div class="vlist">
+          <div class="vrow"><b>Where</b><span>Tornado Tower, West Bay, Doha — <a href="https://maps.app.goo.gl/dU9bFiMUY1WeTuMZ6" target="_blank" rel="noopener">open in Maps</a></span></div>
+          <div class="vrow"><b>Hours</b><span>Sun – Thu 7:00 – 22:00 · Fri – Sat 8:00 – 23:00</span></div>
+          <div class="vrow"><b>Call</b><span><a href="tel:+97471716420">+974 7171 6420</a></span></div>
+          <div class="vrow"><b>Follow</b><span><a href="https://www.instagram.com/vortexcoffee.qa/" target="_blank" rel="noopener">@vortexcoffee.qa</a></span></div>
+        </div>
+      </div>
+      <img class="r" src="img/still-portafilter.jpg" alt="Portafilter detail in warm light" loading="lazy">
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Vortex Coffee · Tornado Tower, West Bay, Doha</span>
+    <span>Concept design by <a href="https://wa.me/97470196996" style="color:var(--amber);text-decoration:none">Kira — Doha</a> · Film &amp; photography by Tareq</span>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/97471716420" target="_blank" rel="noopener" aria-label="Message Vortex on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.7.2.3.8 1.3 1.7 2.1 1.2 1.1 2.2 1.4 2.5 1.5.3.1.5.1.7-.1l.9-1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .8-.2 1.3z"/></svg>
+</a>
+
+<script>
+(function(){
+  var hd = document.getElementById('hd');
+  addEventListener('scroll', function(){ hd.classList.toggle('solid', scrollY > 40); }, {passive:true});
+
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(o){ o.classList.remove('on'); o.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.mpanel').forEach(function(p){ p.classList.remove('on'); });
+      t.classList.add('on'); t.setAttribute('aria-selected','true');
+      document.getElementById('p-' + t.dataset.p).classList.add('on');
+    });
+  });
+
+  var els = document.querySelectorAll('.r');
+  if ('IntersectionObserver' in window) {
+    var fired = false;
+    var io = new IntersectionObserver(function(es){
+      fired = true;
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:.15});
+    els.forEach(function(el){ io.observe(el); });
+    setTimeout(function(){ if(!fired) els.forEach(function(el){ el.classList.add('in'); }); }, 2000);
+  } else { els.forEach(function(el){ el.classList.add('in'); }); }
+})();
+</script>
+
+</body>
+</html>

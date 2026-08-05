@@ -1,0 +1,865 @@
+<!doctype html>
+<!--
+  VORTEX COFFEE — scroll-driven film site (concept tier 3, all-out)
+  Footage: Tareq (@lens.through.tareq) at Vortex, Tornado Tower + one generated finale.
+  Concept & build: Kira, Doha. Engine: dwell-remap frame sequence.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+  <meta name="color-scheme" content="only dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120d09">
+  <meta name="description" content="A morning at the Vortex Coffee bar — 41 seconds of film you scroll. Tornado Tower, West Bay, Doha.">
+  <title>Vortex Coffee — a morning at the bar, in one scroll</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23f2ead9'/%3E%3Cpath d='M16 7c4 3 4 7 0 9s-4 6 0 9c-5-1-8-4.5-8-9s3-8 8-9z' fill='%23120d09'/%3E%3Cpath d='M16 7c5 1 8 4.5 8 9s-3 8-8 9c2.5-3 2.5-6.5 0-9s-2.5-6 0-9z' fill='%23e8a04c'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --espresso: #120d09;
+      --soft: #1d1610;
+      --cream: #f2ead9;
+      --oat: #a3907c;
+      --amber: #e8a04c;
+      --display: "Space Grotesk", system-ui, sans-serif;
+      --data: "IBM Plex Mono", ui-monospace, monospace;
+      --gutter: clamp(20px, 4.2vw, 72px);
+      --ease-out: cubic-bezier(.22, 1, .36, 1);
+      --line: rgba(242, 234, 217, .16);
+      --frame-progress: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { background: var(--espresso); color: var(--cream); font-family: var(--display); scroll-behavior: auto; }
+    body { margin: 0; min-width: 320px; background: var(--espresso); color: var(--cream); overflow-x: clip; }
+    body.is-loading, body.menu-open { overflow: hidden; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 5px; }
+
+    .loader {
+      position: fixed; inset: 0; z-index: 1000; display: grid; grid-template-rows: 1fr auto;
+      padding: max(24px, env(safe-area-inset-top)) var(--gutter) max(24px, env(safe-area-inset-bottom));
+      background: var(--espresso);
+      transition: clip-path 900ms var(--ease-out), visibility 900ms; clip-path: inset(0 0 0 0);
+    }
+    .loader.is-done { clip-path: inset(0 0 100% 0); visibility: hidden; }
+    .loader__mark {
+      align-self: center; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px;
+      border-bottom: 1px solid var(--line); padding-bottom: 18px;
+    }
+    .loader__number { margin: 0; font-size: clamp(100px, 23vw, 360px); font-weight: 700; letter-spacing: -.04em; line-height: .78; text-transform: uppercase; }
+    .loader__meta, .micro {
+      font-family: var(--data); font-size: 10px; font-weight: 500; line-height: 1.5; letter-spacing: .08em; text-transform: uppercase;
+    }
+    .loader__meta { text-align: right; color: var(--oat); }
+    .loader__foot { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px; padding-top: 22px; }
+    .loader__track, .telemetry__track { position: relative; height: 1px; overflow: hidden; background: rgba(242, 234, 217, .22); }
+    .loader__fill, .telemetry__fill { position: absolute; inset: 0; background: var(--amber); transform: scaleX(0); transform-origin: left; }
+
+    .site-header {
+      position: fixed; inset: 0 0 auto; z-index: 90; display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; gap: 20px; min-height: 70px;
+      padding: max(16px, env(safe-area-inset-top)) var(--gutter) 12px;
+      mix-blend-mode: difference; pointer-events: none;
+    }
+    .site-header__brand { justify-self: start; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .site-header__brand svg { width: 22px; height: 22px; }
+    .site-header__center { color: rgba(242, 234, 217, .72); }
+    .site-header__end { justify-self: end; display: flex; align-items: center; gap: 20px; text-align: right; color: rgba(242, 234, 217, .72); }
+
+    .menu-toggle {
+      pointer-events: auto; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px;
+      border: 1px solid rgba(242, 234, 217, .44); background: transparent; color: var(--cream);
+      font-family: var(--data); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+      transition: background 250ms ease, color 250ms ease, border-color 250ms ease;
+    }
+    .menu-toggle::before { content: ""; width: 7px; height: 7px; background: var(--amber); border-radius: 50%; transition: transform 400ms var(--ease-out); }
+    .menu-toggle:hover { background: var(--cream); border-color: var(--cream); color: var(--espresso); }
+    .menu-toggle[aria-expanded="true"]::before { transform: scale(1.4); }
+
+    .menu {
+      position: fixed; inset: 0; z-index: 150; display: grid; grid-template-rows: auto 1fr auto; row-gap: 24px;
+      padding: max(16px, env(safe-area-inset-top)) var(--gutter) max(24px, env(safe-area-inset-bottom));
+      background: var(--espresso); overflow-y: auto;
+      clip-path: inset(0 0 100% 0); visibility: hidden;
+      transition: clip-path 700ms var(--ease-out), visibility 0s 700ms;
+    }
+    .menu.is-open { clip-path: inset(0 0 0% 0); visibility: visible; transition: clip-path 700ms var(--ease-out), visibility 0s 0s; }
+    .menu__head { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; min-height: 54px; }
+    .menu__label { display: flex; align-items: center; gap: 12px; margin: 0; color: var(--oat); }
+    .menu__label::before { content: ""; width: 26px; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 650ms 250ms var(--ease-out); }
+    .menu.is-open .menu__label::before { transform: scaleX(1); }
+    .menu__close {
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
+      border: 1px solid rgba(242, 234, 217, .44); background: transparent; color: var(--cream);
+      font-family: var(--data); font-size: 10px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; cursor: pointer;
+      transition: background 250ms ease, color 250ms ease, border-color 250ms ease;
+    }
+    .menu__close:hover { background: var(--cream); border-color: var(--cream); color: var(--espresso); }
+    .menu__list { align-self: center; width: 100%; max-width: 1180px; margin: 0 auto; padding: 0; list-style: none; }
+    .menu-row {
+      display: grid; grid-template-columns: 3ch minmax(0, 1fr) auto; column-gap: clamp(16px, 3vw, 44px); align-items: baseline;
+      padding: clamp(16px, 2.6vh, 26px) 0; border-top: 1px solid var(--line);
+      transform: translateY(22px); opacity: 0;
+    }
+    .menu-row:last-child { border-bottom: 1px solid var(--line); }
+    .menu.is-open .menu-row { transform: translateY(0); opacity: 1; transition: transform 620ms var(--ease-out), opacity 500ms ease; }
+    .menu.is-open .menu-row:nth-child(1) { transition-delay: 180ms; }
+    .menu.is-open .menu-row:nth-child(2) { transition-delay: 250ms; }
+    .menu.is-open .menu-row:nth-child(3) { transition-delay: 320ms; }
+    .menu.is-open .menu-row:nth-child(4) { transition-delay: 390ms; }
+    .menu.is-open .menu-row:nth-child(5) { transition-delay: 460ms; }
+    .menu-row__index { color: var(--oat); }
+    .menu-row__name { margin: 0; font-size: clamp(30px, 4.6vw, 62px); font-weight: 700; letter-spacing: -.02em; line-height: .98; text-transform: uppercase; transition: color 250ms ease, letter-spacing 550ms var(--ease-out); }
+    .menu-row:hover .menu-row__name { color: var(--amber); letter-spacing: .01em; }
+    .menu-row__name .as-filmed { display: inline-block; width: 9px; height: 9px; margin-left: 14px; background: var(--amber); border-radius: 50%; vertical-align: .3em; }
+    .menu-row__note { margin: 8px 0 0; color: var(--oat); }
+    .menu-row__price { color: var(--amber); font-family: var(--data); font-size: 12px; font-weight: 500; letter-spacing: .08em; white-space: nowrap; }
+    .menu__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 28px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--oat); }
+    .menu__foot .dot { display: inline-block; width: 7px; height: 7px; margin-right: 8px; background: var(--amber); border-radius: 50%; vertical-align: baseline; }
+
+    .sequence { position: relative; height: 950vh; background: var(--espresso); }
+    .stage { position: sticky; top: 0; width: 100%; height: 100svh; overflow: hidden; background: var(--espresso); isolation: isolate; }
+    #film-canvas { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; }
+
+    .stage__scrim {
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        linear-gradient(90deg, rgba(18, 13, 9, .6) 0%, rgba(18, 13, 9, .12) 35%, transparent 61%),
+        linear-gradient(0deg, rgba(18, 13, 9, .74) 0%, transparent 36%);
+      opacity: var(--scrim-opacity, .78); transition: opacity 500ms ease; pointer-events: none;
+    }
+    .stage__grid {
+      position: absolute; inset: 0 var(--gutter); z-index: 2;
+      background-image: repeating-linear-gradient(90deg, transparent 0, transparent calc(8.333% - 1px), rgba(242, 234, 217, .05) calc(8.333% - 1px), rgba(242, 234, 217, .05) 8.333%);
+      mask-image: linear-gradient(180deg, transparent, black 14%, black 82%, transparent);
+      opacity: .5; pointer-events: none;
+    }
+    .mobile-aperture { display: none; }
+
+    .chapters { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+    .chapter {
+      position: absolute; inset: 0; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-content: center; column-gap: clamp(10px, 1.2vw, 20px);
+      padding: 96px var(--gutter) 104px; visibility: hidden;
+    }
+    .chapter.is-visible { visibility: visible; }
+    .chapter__copy { position: relative; align-self: center; }
+    .chapter__eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 22px; color: var(--cream); }
+    .chapter__eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 650ms 100ms var(--ease-out); }
+    .chapter.is-visible .chapter__eyebrow::before { transform: scaleX(1); }
+
+    .reveal { overflow: hidden; padding-bottom: .08em; }
+    .reveal > span { display: block; transform: translateY(112%); transition: transform 760ms var(--ease-out); }
+    .reveal:nth-child(3) > span { transition-delay: 90ms; }
+    .reveal:nth-child(4) > span { transition-delay: 160ms; }
+    .chapter.is-visible .reveal > span { transform: translateY(0); }
+
+    .chapter__title { margin: 0; font-size: clamp(56px, 8.6vw, 138px); font-weight: 700; letter-spacing: -.03em; line-height: .92; text-transform: uppercase; text-wrap: balance; }
+    .chapter__deck { max-width: 32rem; margin: 26px 0 0; font-size: clamp(16px, 1.45vw, 22px); font-weight: 500; line-height: 1.35; letter-spacing: -.01em; text-wrap: balance; }
+    .chapter__fact {
+      display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: baseline;
+      margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--oat); max-width: 30rem;
+    }
+
+    .chapter--hero { align-content: end; }
+    .chapter--hero .chapter__copy { grid-column: 1 / 10; padding-bottom: 4vh; }
+    .chapter--hero .chapter__title { font-size: clamp(100px, 18.5vw, 300px); line-height: .82; letter-spacing: -.02em; }
+    .chapter--hero .chapter__deck { max-width: 27rem; }
+    .chapter--right .chapter__copy { grid-column: 8 / 13; }
+    .chapter--left .chapter__copy { grid-column: 1 / 6; }
+    .chapter--index { align-content: center; }
+    .chapter--index .chapter__copy { grid-column: 8 / 13; z-index: 2; }
+    .chapter__giant-index {
+      position: absolute; z-index: -1; left: var(--gutter); top: 50%;
+      color: transparent; font-size: clamp(300px, 50vw, 760px); font-weight: 700; letter-spacing: -.02em; line-height: .78;
+      -webkit-text-stroke: 1px rgba(242, 234, 217, .28);
+      transform: translateY(-48%); opacity: 0; transition: opacity 600ms ease, letter-spacing 1000ms var(--ease-out);
+    }
+    .chapter.is-visible .chapter__giant-index { opacity: 1; letter-spacing: .02em; }
+
+    .chapter--final { align-content: end; background: linear-gradient(0deg, rgba(18, 13, 9, .88), rgba(18, 13, 9, 0) 64%); }
+    .chapter--final .chapter__copy {
+      grid-column: 1 / 13; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 32px; padding-bottom: 3vh;
+    }
+    .chapter--final .chapter__title { max-width: 11ch; }
+
+    .cta {
+      pointer-events: auto; display: inline-flex; align-items: center; justify-content: space-between; gap: 40px;
+      min-width: min(100%, 300px); min-height: 54px; padding: 0 18px;
+      border: 1px solid rgba(242, 234, 217, .56); background: rgba(18, 13, 9, .18); color: var(--cream);
+      font-family: var(--data); font-size: 11px; letter-spacing: .08em; text-decoration: none; text-transform: uppercase;
+      transition: color 250ms ease, background 250ms ease, border-color 250ms ease;
+    }
+    .cta::after { content: "↗"; font-size: 16px; }
+    .cta:hover { background: var(--cream); border-color: var(--cream); color: var(--espresso); }
+
+    .telemetry {
+      position: absolute; inset: auto var(--gutter) max(18px, env(safe-area-inset-bottom)); z-index: 8;
+      display: grid; grid-template-columns: auto auto minmax(100px, 1fr) auto auto auto; align-items: center; gap: 18px; pointer-events: none;
+    }
+    .dial { width: 30px; height: 30px; }
+    .dial g { transform-origin: 16px 16px; transform: rotate(var(--dial-rot, 0deg)); }
+    .telemetry__fill { transform: scaleX(var(--frame-progress)); will-change: transform; }
+    .telemetry__chapter { min-width: 12ch; }
+    .telemetry__clock { color: var(--amber); }
+    .telemetry__frame { color: var(--oat); }
+    .scroll-cue { display: inline-grid; grid-template-columns: auto 18px; align-items: center; gap: 9px; color: var(--cream); }
+    .scroll-cue::after {
+      content: ""; width: 18px; height: 18px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+      transform: rotate(45deg) translate(-3px, 3px); animation: cue 1.8s ease-in-out infinite;
+    }
+    @keyframes cue {
+      0%, 100% { transform: rotate(45deg) translate(-3px, 3px); opacity: .35; }
+      50% { transform: rotate(45deg) translate(1px, 7px); opacity: 1; }
+    }
+
+    .editorial { position: relative; z-index: 10; padding: clamp(100px, 13vw, 190px) var(--gutter); background: var(--cream); color: var(--espresso); }
+    .editorial__head { display: grid; grid-template-columns: 2fr 1fr; align-items: end; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid rgba(18, 13, 9, .26); }
+    .editorial__title { max-width: 11ch; margin: 0; font-size: clamp(56px, 9.6vw, 150px); font-weight: 700; letter-spacing: -.03em; line-height: .92; text-transform: uppercase; }
+    .editorial__aside { justify-self: end; max-width: 30rem; margin: 0; font-size: clamp(16px, 1.4vw, 21px); line-height: 1.45; letter-spacing: -.01em; }
+    .contact-sheet { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(10px, 1.2vw, 20px); margin-top: clamp(48px, 7vw, 104px); }
+    .shot { position: relative; margin: 0; overflow: hidden; background: var(--soft); }
+    .shot--lead { grid-column: 1 / 9; }
+    .shot--top { grid-column: 9 / 13; align-self: start; margin-top: 10vw; }
+    .shot--low { grid-column: 3 / 7; margin-top: 2vw; }
+    .shot--end { grid-column: 7 / 13; margin-top: 8vw; }
+    .shot img { display: block; width: 100%; height: auto; filter: saturate(.92) contrast(1.03); transition: transform 900ms var(--ease-out), filter 500ms ease; }
+    .shot:hover img { transform: scale(1.018); filter: saturate(1); }
+    .shot figcaption { position: absolute; inset: auto 0 0; display: flex; justify-content: space-between; padding: 10px 12px; background: rgba(18, 13, 9, .78); color: var(--cream); }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: clamp(80px, 12vw, 170px); padding-top: 24px; border-top: 1px solid rgba(18, 13, 9, .26); }
+    .visit strong { max-width: 12ch; font-size: clamp(36px, 5.2vw, 78px); font-weight: 700; letter-spacing: -.025em; line-height: .95; text-transform: uppercase; }
+    .visit-rows { justify-self: end; width: 100%; max-width: 34rem; display: grid; gap: 0; }
+    .vrow { display: grid; grid-template-columns: 92px 1fr; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(18, 13, 9, .18); font-size: 16px; }
+    .vrow b { font-family: var(--data); font-weight: 500; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: rgba(18, 13, 9, .55); }
+    .vrow a { color: inherit; font-weight: 500; text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+    .site-footer {
+      display: grid; grid-template-columns: 1fr auto; gap: 28px;
+      padding: 44px var(--gutter) max(44px, env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(242, 234, 217, .14); background: var(--espresso); color: var(--oat);
+    }
+    .site-footer p { margin: 0; max-width: 50rem; }
+    .site-footer a { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
+
+    @media (max-width: 780px) {
+      :root { --gutter: 20px; }
+      .site-header { grid-template-columns: 1fr auto; min-height: 58px; }
+      .site-header__center { display: none; }
+      .site-header__meta { display: none; }
+      .sequence { height: 880vh; }
+      .stage__scrim {
+        background:
+          linear-gradient(180deg, rgba(18, 13, 9, .52), transparent 21%),
+          linear-gradient(0deg, rgba(18, 13, 9, .88), transparent 29%);
+      }
+      .stage__grid { opacity: .3; }
+      .mobile-aperture {
+        position: absolute; z-index: 3; top: calc(45% - 28.125vw); left: 0; display: block; width: 100%; height: 56.25vw;
+        border-top: 1px solid rgba(242, 234, 217, .22); border-bottom: 1px solid rgba(242, 234, 217, .22); pointer-events: none;
+      }
+      .chapter { grid-template-columns: repeat(6, minmax(0, 1fr)); align-content: end; padding: 76px var(--gutter) 100px; }
+      .chapter__copy, .chapter--hero .chapter__copy, .chapter--right .chapter__copy,
+      .chapter--left .chapter__copy, .chapter--index .chapter__copy, .chapter--final .chapter__copy { grid-column: 1 / 7; }
+      .chapter__eyebrow { margin-bottom: 14px; }
+      .chapter__title { font-size: clamp(52px, 15.5vw, 86px); line-height: .94; }
+      .chapter__deck { max-width: 24rem; margin-top: 14px; font-size: 16px; }
+      .chapter__fact { margin-top: 16px; }
+      .chapter--hero { align-content: start; padding-top: 16vh; }
+      .chapter--hero .chapter__copy { padding-bottom: 0; }
+      .chapter--hero .chapter__title { font-size: clamp(88px, 30vw, 140px); }
+      .chapter--hero .chapter__deck { max-width: 17rem; }
+      .chapter__giant-index { left: auto; right: -5vw; top: 12vh; font-size: 64vw; transform: none; }
+      .chapter--final { align-content: end; }
+      .chapter--final .chapter__copy { display: block; }
+      .chapter--final .chapter__title { max-width: 9ch; }
+      .chapter--final .cta { margin-top: 22px; }
+      .telemetry { grid-template-columns: auto auto 1fr auto; gap: 12px; }
+      .telemetry__chapter { min-width: 8ch; }
+      .telemetry__frame { display: none; }
+      .scroll-cue { display: none; }
+      .loader__mark { display: block; }
+      .loader__number { font-size: 46vw; }
+      .loader__meta { margin-top: 22px; text-align: left; }
+      .menu-row__name { font-size: clamp(26px, 7.6vw, 42px); }
+      .menu__head { min-height: 44px; }
+      .editorial { padding-top: 100px; padding-bottom: 100px; }
+      .editorial__head { grid-template-columns: 1fr; }
+      .editorial__title { font-size: 17vw; }
+      .editorial__aside { justify-self: start; }
+      .contact-sheet { grid-template-columns: repeat(6, 1fr); gap: 10px; }
+      .shot--lead { grid-column: 1 / 7; }
+      .shot--top { grid-column: 3 / 7; margin-top: 12vw; }
+      .shot--low { grid-column: 1 / 5; margin-top: 0; }
+      .shot--end { grid-column: 1 / 7; margin-top: 12vw; }
+      .visit { grid-template-columns: 1fr; gap: 32px; }
+      .visit-rows { justify-self: start; }
+      .site-footer { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+      .sequence { height: 100svh; }
+      .chapter:not(.chapter--hero) { display: none; }
+      .chapter--hero { visibility: visible; }
+      .chapter--hero .reveal > span { transform: translateY(0); }
+      .chapter--hero .chapter__eyebrow::before { transform: scaleX(1); }
+      .telemetry { display: none; }
+    }
+  </style>
+</head>
+<body class="is-loading">
+  <div class="loader" id="loader" aria-label="Loading the film frames">
+    <div class="loader__mark">
+      <p class="loader__number" aria-hidden="true">Vortex</p>
+      <div class="loader__meta">Tornado Tower, West Bay<br>One continuous morning<br>41.03 seconds</div>
+    </div>
+    <div class="loader__foot">
+      <span class="micro" id="loader-label">Dialling in</span>
+      <div class="loader__track" aria-hidden="true"><span class="loader__fill" id="loader-fill"></span></div>
+      <span class="micro" id="loader-count">000%</span>
+    </div>
+  </div>
+
+  <header class="site-header" aria-label="Film information">
+    <div class="site-header__brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 7c4 3 4 7 0 9s-4 6 0 9c-5-1-8-4.5-8-9s3-8 8-9z" fill="currentColor"/></svg>
+      Vortex
+    </div>
+    <div class="site-header__center micro">A morning at the bar, in one scroll</div>
+    <div class="site-header__end">
+      <span class="site-header__meta micro">41.03 sec · 24 fps<br>190 frames</span>
+      <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="house-menu">Menu</button>
+    </div>
+  </header>
+
+  <div class="menu" id="house-menu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+    <div class="menu__head">
+      <p class="menu__label micro">Vortex Coffee / Tornado Tower, GF</p>
+      <button class="menu__close" id="menu-close">Close</button>
+    </div>
+    <ul class="menu__list">
+      <li class="menu-row">
+        <span class="menu-row__index micro">01</span>
+        <div><h3 class="menu-row__name">Espresso</h3><p class="menu-row__note micro">Double shot · single origin</p></div>
+        <span class="menu-row__price">QR 12</span>
+      </li>
+      <li class="menu-row">
+        <span class="menu-row__index micro">02</span>
+        <div><h3 class="menu-row__name">Flat White</h3><p class="menu-row__note micro">Tight microfoam · no fuss</p></div>
+        <span class="menu-row__price">QR 20</span>
+      </li>
+      <li class="menu-row">
+        <span class="menu-row__index micro">03</span>
+        <div><h3 class="menu-row__name">Caffè Latte<span class="as-filmed" aria-hidden="true"></span></h3><p class="menu-row__note micro">The rosetta in the film</p></div>
+        <span class="menu-row__price">QR 22</span>
+      </li>
+      <li class="menu-row">
+        <span class="menu-row__index micro">04</span>
+        <div><h3 class="menu-row__name">Spanish Latte</h3><p class="menu-row__note micro">The West Bay favourite</p></div>
+        <span class="menu-row__price">QR 24</span>
+      </li>
+      <li class="menu-row">
+        <span class="menu-row__index micro">05</span>
+        <div><h3 class="menu-row__name">V60 Pour-Over</h3><p class="menu-row__note micro">Rotating single origins</p></div>
+        <span class="menu-row__price">QR 26</span>
+      </li>
+    </ul>
+    <p class="menu__foot micro"><span><span class="dot" aria-hidden="true"></span>As filmed</span><span>Sample menu — to be confirmed by Vortex</span></p>
+  </div>
+
+  <main>
+    <section class="sequence" id="sequence" aria-label="Scroll-controlled café film">
+      <div class="stage" id="stage">
+        <canvas id="film-canvas" role="img" aria-label="A morning at the Vortex Coffee bar plays as the page scrolls"></canvas>
+        <div class="stage__scrim" aria-hidden="true"></div>
+        <div class="stage__grid" aria-hidden="true"></div>
+        <div class="mobile-aperture" aria-hidden="true"></div>
+
+        <div class="chapters" aria-live="off">
+          <article class="chapter chapter--hero" data-center="0.05" data-window="0.08" data-label="The bar">
+            <div class="chapter__copy">
+              <p class="chapter__eyebrow micro">Tornado Tower, West Bay — Ground floor</p>
+              <h1 class="chapter__title reveal"><span>Vortex</span></h1>
+              <p class="chapter__deck reveal"><span>Skip the quotes... start with coffee. Scroll to brew.</span></p>
+            </div>
+          </article>
+
+          <article class="chapter chapter--right" data-center="0.27" data-window="0.06" data-label="Dial-in">
+            <div class="chapter__copy">
+              <p class="chapter__eyebrow micro">05:52 / Dial-in</p>
+              <h2 class="chapter__title reveal"><span>Dialled in</span></h2>
+              <p class="chapter__deck reveal"><span>Eighteen grams, tamped level, before the tower wakes.</span></p>
+              <div class="chapter__fact micro"><span>Dose</span><span>18 g — adjusted every single morning</span></div>
+            </div>
+          </article>
+
+          <article class="chapter chapter--left" data-center="0.40" data-window="0.055" data-label="The pull">
+            <div class="chapter__copy">
+              <p class="chapter__eyebrow micro">Step 02 / Extract</p>
+              <h2 class="chapter__title reveal"><span>Slow is fast</span></h2>
+              <p class="chapter__deck reveal"><span>Twenty-seven seconds of patience in a city that has none.</span></p>
+              <div class="chapter__fact micro"><span>Machine</span><span>La Marzocco — twin boiler, always hot</span></div>
+            </div>
+          </article>
+
+          <article class="chapter chapter--right" data-center="0.53" data-window="0.055" data-label="The pour">
+            <div class="chapter__copy">
+              <p class="chapter__eyebrow micro">Step 03 / Pour</p>
+              <h2 class="chapter__title reveal"><span>Milk, folded</span></h2>
+              <p class="chapter__deck reveal"><span>Stretched to silk, poured into a rosetta — no stencils here.</span></p>
+              <div class="chapter__fact micro"><span>Milk</span><span>65°C — silk, never scalded</span></div>
+            </div>
+          </article>
+
+          <article class="chapter chapter--index" data-center="0.67" data-window="0.055" data-label="Served">
+            <div class="chapter__giant-index" aria-hidden="true">V</div>
+            <div class="chapter__copy">
+              <p class="chapter__eyebrow micro">Step 04 / Serve</p>
+              <h2 class="chapter__title reveal"><span>On the black tray</span></h2>
+              <p class="chapter__deck reveal"><span>Your name, your order — three seconds after you smile.</span></p>
+              <div class="chapter__fact micro"><span>Ritual</span><span>A date on the saucer, the Doha way</span></div>
+            </div>
+          </article>
+
+          <article class="chapter chapter--final" data-center="0.93" data-window="0.07" data-label="Golden hour">
+            <div class="chapter__copy">
+              <div>
+                <p class="chapter__eyebrow micro">The room / Golden hour</p>
+                <h2 class="chapter__title reveal"><span>Your table's waiting</span></h2>
+              </div>
+              <a class="cta" href="https://maps.app.goo.gl/dU9bFiMUY1WeTuMZ6" target="_blank" rel="noopener">Find us in Tornado Tower</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="telemetry" aria-hidden="true">
+          <svg class="dial" viewBox="0 0 32 32">
+            <g>
+              <circle cx="16" cy="16" r="13" fill="none" stroke="rgba(242,234,217,.35)" stroke-width="1.4" stroke-dasharray="2.5 4.3"/>
+              <path d="M16 9c2.8 2.1 2.8 4.9 0 6.3s-2.8 4.2 0 6.3c-3.5-.7-5.6-3.1-5.6-6.3s2.1-5.6 5.6-6.3z" fill="#e8a04c"/>
+            </g>
+          </svg>
+          <span class="telemetry__chapter micro" id="telemetry-chapter">The bar</span>
+          <div class="telemetry__track"><span class="telemetry__fill"></span></div>
+          <span class="telemetry__clock micro" id="telemetry-clock">00:00.0</span>
+          <span class="telemetry__frame micro" id="telemetry-frame">F 0001 / 0190</span>
+          <span class="scroll-cue micro">Scroll to brew</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="editorial" aria-labelledby="contact-title">
+      <div class="editorial__head">
+        <h2 class="editorial__title" id="contact-title">One morning, indexed.</h2>
+        <p class="editorial__aside">Forty-one seconds become 190 stills. Four belong on the wall — next to the art.</p>
+      </div>
+
+      <div class="contact-sheet">
+        <figure class="shot shot--lead">
+          <img src="frames/desktop/frame-0012.webp" alt="The Vortex bar and back counter, first light" loading="lazy">
+          <figcaption class="micro"><span>The bar</span><span>F 0012</span></figcaption>
+        </figure>
+        <figure class="shot shot--top">
+          <img src="frames/desktop/frame-0074.webp" alt="Espresso extracting into a black cup" loading="lazy">
+          <figcaption class="micro"><span>The pull</span><span>F 0074</span></figcaption>
+        </figure>
+        <figure class="shot shot--low">
+          <img src="frames/desktop/frame-0100.webp" alt="The rosetta forming mid-pour" loading="lazy">
+          <figcaption class="micro"><span>The pour</span><span>F 0100</span></figcaption>
+        </figure>
+        <figure class="shot shot--end">
+          <img src="frames/desktop/frame-0126.webp" alt="The finished latte on the signature tray" loading="lazy">
+          <figcaption class="micro"><span>Served</span><span>F 0126</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="visit">
+        <strong>The bar is the brand.</strong>
+        <div class="visit-rows">
+          <div class="vrow"><b>Where</b><span><a href="https://maps.app.goo.gl/dU9bFiMUY1WeTuMZ6" target="_blank" rel="noopener">Tornado Tower, West Bay, Doha</a></span></div>
+          <div class="vrow"><b>Hours</b><span>Sun – Thu 7:00 – 22:00 · Fri – Sat 8:00 – 23:00</span></div>
+          <div class="vrow"><b>Call</b><span><a href="tel:+97471716420">+974 7171 6420</a></span></div>
+          <div class="vrow"><b>Follow</b><span><a href="https://www.instagram.com/vortexcoffee.qa/" target="_blank" rel="noopener">@vortexcoffee.qa</a></span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer micro">
+    <p>Concept site for Vortex Coffee — filmed at the bar by Tareq, finished with one generated shot. Menu &amp; hours illustrative.</p>
+    <a href="https://wa.me/97470196996">Concept by Kira — Doha ↗</a>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const FRAME_COUNT = 190;
+      const FRAME_PAD = 4;
+      const FILM_SECONDS = 41.03;
+      const LERP_FACTOR = 0.115;
+      const DWELL_WIDTH = 0.038;
+      const DWELL_PEAK = 2.75;
+      const LUT_SIZE = 2400;
+      const MOBILE_QUERY = "(max-width: 780px)";
+      const REDUCED_QUERY = "(prefers-reduced-motion: reduce)";
+      const DWELL_CENTERS = [0.05, 0.27, 0.40, 0.53, 0.67, 0.93];
+
+      const sequence = document.getElementById("sequence");
+      const stage = document.getElementById("stage");
+      const canvas = document.getElementById("film-canvas");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const loader = document.getElementById("loader");
+      const loaderFill = document.getElementById("loader-fill");
+      const loaderCount = document.getElementById("loader-count");
+      const loaderLabel = document.getElementById("loader-label");
+      const telemetryChapter = document.getElementById("telemetry-chapter");
+      const telemetryClock = document.getElementById("telemetry-clock");
+      const telemetryFrame = document.getElementById("telemetry-frame");
+      const chapters = Array.from(document.querySelectorAll(".chapter"));
+      const reducedMotion = window.matchMedia(REDUCED_QUERY).matches;
+      const mobileMedia = window.matchMedia(MOBILE_QUERY);
+      const frameStores = {
+        desktop: createFrameStore("frames/desktop"),
+        mobile: createFrameStore("frames/mobile")
+      };
+      const chapterVisibility = new WeakMap();
+      let useMobileFrames = mobileMedia.matches;
+      let activeStore = useMobileFrames ? frameStores.mobile : frameStores.desktop;
+      let currentFrame = 0;
+      let targetFrame = 0;
+      let lastDrawn = -1;
+      let pageVisible = true;
+      let rafId = 0;
+      let sequenceTop = 0;
+      let sequenceDistance = 1;
+
+      function createFrameStore(directory) {
+        return {
+          directory,
+          images: new Array(FRAME_COUNT),
+          loaded: new Uint8Array(FRAME_COUNT),
+          promises: new Array(FRAME_COUNT)
+        };
+      }
+
+      function frameUrl(index, store = activeStore) {
+        return `${store.directory}/frame-${String(index + 1).padStart(FRAME_PAD, "0")}.webp`;
+      }
+
+      function setLoaderProgress(ratio) {
+        const safeRatio = Math.max(0, Math.min(1, ratio));
+        loaderFill.style.transform = `scaleX(${safeRatio})`;
+        loaderCount.textContent = `${String(Math.round(safeRatio * 100)).padStart(3, "0")}%`;
+      }
+
+      function loadFrame(index, store = activeStore, retries = 1) {
+        if (store.loaded[index]) return Promise.resolve(store.images[index]);
+        if (store.promises[index]) return store.promises[index];
+        store.promises[index] = new Promise((resolve) => {
+          const attempt = (remaining) => {
+            const image = new Image();
+            store.images[index] = image;
+            image.decoding = "async";
+            image.onload = () => { store.loaded[index] = 1; resolve(image); };
+            image.onerror = () => {
+              if (remaining > 0) { window.setTimeout(() => attempt(remaining - 1), 140); }
+              else { store.images[index] = null; store.promises[index] = null; resolve(null); }
+            };
+            image.src = frameUrl(index, store);
+          };
+          attempt(retries);
+        });
+        return store.promises[index];
+      }
+
+      async function loadInBatches(indices, size = 8, store = activeStore) {
+        for (let start = 0; start < indices.length; start += size) {
+          const batch = indices.slice(start, start + size);
+          await Promise.all(batch.map((index) => loadFrame(index, store)));
+        }
+      }
+
+      function nearestLoaded(index, store = activeStore) {
+        if (store.loaded[index]) return index;
+        for (let distance = 1; distance < FRAME_COUNT; distance += 1) {
+          const before = index - distance;
+          const after = index + distance;
+          if (before >= 0 && store.loaded[before]) return before;
+          if (after < FRAME_COUNT && store.loaded[after]) return after;
+        }
+        return -1;
+      }
+
+      function resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const width = Math.round(stage.clientWidth * dpr);
+        const height = Math.round(stage.clientHeight * dpr);
+        if (canvas.width !== width || canvas.height !== height) {
+          canvas.width = width;
+          canvas.height = height;
+          lastDrawn = -1;
+        }
+      }
+
+      function updateSequenceMetrics() {
+        const rect = sequence.getBoundingClientRect();
+        sequenceTop = window.scrollY + rect.top;
+        sequenceDistance = Math.max(1, rect.height - window.innerHeight);
+      }
+
+      function drawFrame(index) {
+        const resolved = nearestLoaded(Math.max(0, Math.min(FRAME_COUNT - 1, index)));
+        if (resolved < 0 || resolved === lastDrawn) return;
+        const image = activeStore.images[resolved];
+        if (!image || !image.naturalWidth) return;
+        const width = canvas.width;
+        const height = canvas.height;
+        ctx.fillStyle = "#120d09";
+        ctx.fillRect(0, 0, width, height);
+        let scale, drawWidth, drawHeight, x, y;
+        if (useMobileFrames) {
+          scale = width / image.naturalWidth;
+          drawWidth = width;
+          drawHeight = image.naturalHeight * scale;
+          x = 0;
+          y = height * 0.45 - drawHeight / 2;
+        } else {
+          scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+          drawWidth = image.naturalWidth * scale;
+          drawHeight = image.naturalHeight * scale;
+          x = (width - drawWidth) / 2;
+          y = (height - drawHeight) / 2;
+        }
+        ctx.drawImage(image, x, y, drawWidth, drawHeight);
+        lastDrawn = resolved;
+      }
+
+      const rawAtEffective = new Float64Array(LUT_SIZE + 1);
+
+      function buildDwellLut() {
+        let total = 0;
+        const density = new Float64Array(LUT_SIZE + 1);
+        for (let i = 0; i <= LUT_SIZE; i += 1) {
+          const effective = i / LUT_SIZE;
+          let value = 1;
+          for (const center of DWELL_CENTERS) {
+            const delta = (effective - center) / DWELL_WIDTH;
+            value += DWELL_PEAK * Math.exp(-0.5 * delta * delta);
+          }
+          density[i] = value;
+          if (i > 0) total += (density[i - 1] + value) * 0.5;
+          rawAtEffective[i] = total;
+        }
+        for (let i = 0; i <= LUT_SIZE; i += 1) rawAtEffective[i] /= total;
+      }
+
+      function remapProgress(raw) {
+        let low = 0;
+        let high = LUT_SIZE;
+        while (low < high) {
+          const mid = (low + high) >> 1;
+          if (rawAtEffective[mid] < raw) low = mid + 1;
+          else high = mid;
+        }
+        const index = Math.max(1, low);
+        const leftRaw = rawAtEffective[index - 1];
+        const rightRaw = rawAtEffective[index];
+        const span = rightRaw - leftRaw || 1;
+        const mix = (raw - leftRaw) / span;
+        return Math.max(0, Math.min(1, (index - 1 + mix) / LUT_SIZE));
+      }
+
+      function rawScrollProgress() {
+        return Math.max(0, Math.min(1, (window.scrollY - sequenceTop) / sequenceDistance));
+      }
+
+      function updateChapters(effective) {
+        let active = chapters[0];
+        let nearest = Infinity;
+        for (const chapter of chapters) {
+          const center = Number(chapter.dataset.center);
+          const windowSize = Number(chapter.dataset.window);
+          const distance = Math.abs(effective - center);
+          const visible = distance <= windowSize;
+          if (chapterVisibility.get(chapter) !== visible) {
+            chapterVisibility.set(chapter, visible);
+            chapter.classList.toggle("is-visible", visible);
+            chapter.setAttribute("aria-hidden", String(!visible));
+          }
+          if (distance < nearest) { nearest = distance; active = chapter; }
+        }
+        if (telemetryChapter.textContent !== active.dataset.label) {
+          telemetryChapter.textContent = active.dataset.label;
+        }
+      }
+
+      function updateInterface(raw, effective, frame) {
+        document.documentElement.style.setProperty("--frame-progress", raw.toFixed(4));
+        document.documentElement.style.setProperty("--dial-rot", (effective * 720).toFixed(1) + "deg");
+        telemetryFrame.textContent = `F ${String(frame + 1).padStart(4, "0")} / ${String(FRAME_COUNT).padStart(4, "0")}`;
+        telemetryClock.textContent = `00:${(effective * FILM_SECONDS).toFixed(1).padStart(4, "0")}`;
+        const edge = Math.min(effective, 1 - effective) / 0.08;
+        stage.style.setProperty("--scrim-opacity", String(Math.min(0.82, 0.5 + edge * 0.23)));
+      }
+
+      function dismissLoader() {
+        setLoaderProgress(1);
+        loader.classList.add("is-done");
+        document.body.classList.remove("is-loading");
+        window.setTimeout(() => loader.remove(), 1000);
+      }
+
+      function showLoadError() {
+        loaderLabel.textContent = "Frames unavailable — reload the page";
+        loaderCount.textContent = "ERROR";
+        loaderCount.style.color = "var(--amber)";
+        loader.setAttribute("aria-label", "The film frames could not be loaded. Reload the page to try again.");
+      }
+
+      function renderReducedPoster(frame) {
+        currentFrame = frame;
+        targetFrame = frame;
+        drawFrame(frame);
+        chapters.forEach((chapter, index) => {
+          const visible = index === 0;
+          chapterVisibility.set(chapter, visible);
+          chapter.classList.toggle("is-visible", visible);
+          chapter.setAttribute("aria-hidden", String(!visible));
+        });
+      }
+
+      function tick() {
+        if (!pageVisible || reducedMotion) return;
+        const raw = rawScrollProgress();
+        const effective = remapProgress(raw);
+        targetFrame = Math.round(effective * (FRAME_COUNT - 1));
+        currentFrame += (targetFrame - currentFrame) * LERP_FACTOR;
+        const frame = Math.round(currentFrame);
+        drawFrame(frame);
+        updateChapters(effective);
+        updateInterface(raw, effective, frame);
+        rafId = requestAnimationFrame(tick);
+      }
+
+      async function init() {
+        buildDwellLut();
+        resizeCanvas();
+        updateSequenceMetrics();
+        setLoaderProgress(0.06);
+
+        if (reducedMotion) {
+          const posterFrame = Math.round(0.5 * (FRAME_COUNT - 1));
+          const poster = await loadFrame(posterFrame);
+          if (!poster) { showLoadError(); return; }
+          renderReducedPoster(posterFrame);
+          dismissLoader();
+          return;
+        }
+
+        const critical = Array.from(new Set([
+          0,
+          ...DWELL_CENTERS.map((center) => Math.round(center * (FRAME_COUNT - 1))),
+          FRAME_COUNT - 1
+        ])).sort((a, b) => a - b);
+
+        const firstFrame = await loadFrame(0);
+        if (firstFrame) { drawFrame(0); setLoaderProgress(0.28); }
+
+        const criticalTail = critical.filter((index) => index !== 0);
+        let prepared = 0;
+        await Promise.all(criticalTail.map(async (index) => {
+          const image = await loadFrame(index);
+          prepared += 1;
+          setLoaderProgress(0.28 + 0.68 * (prepared / criticalTail.length));
+          return image;
+        }));
+
+        const readyFrame = nearestLoaded(0);
+        if (readyFrame < 0) { showLoadError(); return; }
+        drawFrame(readyFrame);
+        dismissLoader();
+        tick();
+
+        const remaining = Array.from({ length: FRAME_COUNT }, (_, index) => index)
+          .filter((index) => !critical.includes(index));
+        loadInBatches(remaining);
+      }
+
+      async function swapFrameSet(event) {
+        useMobileFrames = event.matches;
+        activeStore = useMobileFrames ? frameStores.mobile : frameStores.desktop;
+        lastDrawn = -1;
+        resizeCanvas();
+        updateSequenceMetrics();
+        const frame = Math.max(0, Math.min(FRAME_COUNT - 1, Math.round(currentFrame)));
+        const image = await loadFrame(frame, activeStore);
+        if (!image) return;
+        drawFrame(frame);
+        const byDistance = Array.from({ length: FRAME_COUNT }, (_, index) => index)
+          .sort((a, b) => Math.abs(a - frame) - Math.abs(b - frame));
+        loadInBatches(byDistance, 8, activeStore);
+      }
+
+      window.addEventListener("resize", () => { resizeCanvas(); updateSequenceMetrics(); }, { passive: true });
+      mobileMedia.addEventListener("change", swapFrameSet);
+      document.addEventListener("visibilitychange", () => {
+        pageVisible = !document.hidden;
+        if (pageVisible && !reducedMotion) { cancelAnimationFrame(rafId); tick(); }
+      });
+
+      init();
+    })();
+  </script>
+  <script>
+    (() => {
+      "use strict";
+      const toggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("house-menu");
+      const closeButton = document.getElementById("menu-close");
+      let lastFocus = null;
+
+      function setOpen(open) {
+        menu.classList.toggle("is-open", open);
+        menu.setAttribute("aria-hidden", String(!open));
+        toggle.setAttribute("aria-expanded", String(open));
+        document.body.classList.toggle("menu-open", open);
+        if (open) {
+          lastFocus = document.activeElement;
+          requestAnimationFrame(() => closeButton.focus());
+        } else if (lastFocus && lastFocus !== document.body && document.contains(lastFocus)) {
+          lastFocus.focus();
+        } else {
+          toggle.focus();
+        }
+      }
+
+      toggle.addEventListener("click", () => setOpen(true));
+      closeButton.addEventListener("click", () => setOpen(false));
+      document.addEventListener("keydown", (event) => {
+        if (!menu.classList.contains("is-open")) return;
+        if (event.key === "Escape") { event.preventDefault(); setOpen(false); return; }
+        if (event.key === "Tab") {
+          const focusables = menu.querySelectorAll("button, a[href]");
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+          else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

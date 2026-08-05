@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="robots" content="noindex,nofollow">
+
 <meta charset="UTF-8">
+<meta name="color-scheme" content="only light">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script>
 /* auto-detect language on first visit; respects explicit toggle choice */
@@ -14,731 +17,52 @@
       var wants=/^ar\b/i.test(pref)?'ar':'en';
       if(wants!==thisLang){
         localStorage.setItem(KEY,wants);
-        location.replace('kira-ar.html');
+        location.replace('index-ar.html');
         return;
       }
     }
   }catch(e){}
 })();
 </script>
-<title>Kira — Web design for Qatar's food scene, Doha</title>
-<meta name="description" content="Kira designs, builds, and photographs websites for Doha's cafés, dessert makers, and home bakeries — the site that comes after the Instagram page.">
-
-<!-- ============================================================
-     Social / discovery meta.
-     TODO: replace the placeholder domain https://sayedm8.github.io/ with the
-     real domain once purchased — og:url, og:image, canonical, and every
-     hreflang below all use it. og:image cannot resolve until the site is
-     hosted at that domain (documented limitation). Mirror the same change
-     in kira-ar.html.
-     ============================================================ -->
+<title>Kira — Web design, photography & film, Doha</title>
+<meta name="description" content="Kira is a Doha studio that designs and builds websites — and shoots the photography and film that fill them — for cafés, restaurants, interior studios, and ambitious local brands.">
 <link rel="canonical" href="https://sayedm8.github.io/">
 <meta name="theme-color" content="#f2efe6">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kira">
-<meta property="og:title" content="Kira — Web design for Qatar's food scene, Doha">
-<meta property="og:description" content="Kira designs, builds, and photographs websites for Doha's cafés, dessert makers, and home bakeries — the site that comes after the Instagram page.">
-<meta property="og:url" content="https://sayedm8.github.io/">
+<meta property="og:title" content="Kira — Web design, photography & film, Doha">
+<meta property="og:description" content="Kira is a Doha studio that designs and builds websites — and shoots the photography and film that fill them — for cafés, restaurants, interior studios, and ambitious local brands.">
 <meta property="og:image" content="https://sayedm8.github.io/assets/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="KIRA — web design for Qatar's food scene, Doha.">
-<meta property="og:locale" content="en_US">
-<meta property="og:locale:alternate" content="ar_QA">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kira — Web design for Qatar's food scene, Doha">
-<meta name="twitter:description" content="Kira designs, builds, and photographs websites for Doha's cafés, dessert makers, and home bakeries — the site that comes after the Instagram page.">
-<meta name="twitter:image" content="https://sayedm8.github.io/assets/og-image.png">
-
-<link rel="alternate" hreflang="en" href="https://sayedm8.github.io/">
-<link rel="alternate" hreflang="ar" href="https://sayedm8.github.io/kira-ar.html">
-<link rel="alternate" hreflang="x-default" href="https://sayedm8.github.io/">
-
-<!-- favicon: inline SVG crop-mark K on ink (legible at 16px), PNG + apple-touch fallbacks -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231c1c17'/%3E%3Cg fill='none' stroke='%23f0432a' stroke-width='2.4' stroke-linecap='square'%3E%3Cpath d='M5 11V5h6'/%3E%3Cpath d='M21 5h6v6'/%3E%3Cpath d='M27 21v6h-6'/%3E%3Cpath d='M11 27H5v-6'/%3E%3C/g%3E%3Ctext x='16' y='22' fill='%23f2efe6' font-family='Arial,sans-serif' font-size='15' font-weight='700' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#1c1c17;
-    --ink-line:#302f27;
-    --ink-text:#edece9;
-    --ink-muted:#948f80;
-
-    --paper:#f2efe6;
-    --paper-line:#dad6c8;
-    --paper-text:#1c1c17;
-    --paper-muted:#615a49;
-
-    --pop:#f0432a;
-    --pop-text:#b23013;
-    --pop-dim:#8a2818;
-
-    --face: 'Geist', Arial, sans-serif;
-    --mono: 'Geist Mono', 'SF Mono', Menlo, monospace;
-
-    --side: clamp(20px, 5vw, 64px);
-    --maxw: 1360px;
-
-    --fs-hero: clamp(2.6rem, 1.55rem + 4.6vw, 6.2rem);
-    --fs-h1:   clamp(2.1rem, 1.5rem + 2.6vw, 3.6rem);
-    --fs-h2:   clamp(1.6rem, 1.35rem + 1.1vw, 2.25rem);
-    --fs-lg:   clamp(1.05rem, 0.98rem + 0.3vw, 1.2rem);
-    --fs-body: 1rem;
-    --fs-sm:   0.9rem;
-    --fs-label:0.76rem;
-  }
-
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;background:#100f0c;}
-  #smoke-bg{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;display:block;}
-  body{
-    background:transparent;
-    color:var(--paper-text);
-    font-family:var(--face);
-    font-size:var(--fs-body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-  }
-  img{display:block;max-width:100%;height:auto;}
-  a{color:inherit;text-decoration:none;}
-  ul{list-style:none;}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--side);}
-
-  ::selection{background:var(--pop);color:var(--paper);}
-
-  :focus-visible{outline:2px solid var(--pop);outline-offset:3px;}
-
-  .label{
-    font-family:var(--mono);
-    font-size:var(--fs-label);
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-  }
-
-  /* ---------- buttons ---------- */
-  .btn{
-    display:inline-flex;align-items:center;gap:9px;
-    font-family:var(--mono);font-size:0.82rem;letter-spacing:0.04em;text-transform:uppercase;
-    padding:14px 26px;border-radius:100vh;white-space:nowrap;
-    transition:background-color .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
-  }
-  .btn:active{transform:translateY(1px);}
-  .btn-pop{background:var(--pop);color:var(--ink);}
-  .btn-pop:hover{background:#f2503a;}
-  .btn-ink{background:var(--ink);color:var(--ink-text);}
-  .btn-ink:hover{background:#000;}
-  .btn-line{border:1px solid var(--paper-line);color:var(--paper-text);}
-  .btn-line:hover{border-color:var(--paper-text);}
-  .btn-line-dark{border:1px solid var(--ink-line);color:var(--ink-text);}
-  .btn-line-dark:hover{border-color:var(--ink-muted);}
-  .btn svg{width:13px;height:13px;flex-shrink:0;}
-
-  /* ---------- crop-mark signature ---------- */
-  .crop{position:relative;}
-  .crop::before,.crop::after,
-  .crop .cm-tr,.crop .cm-bl{
-    content:"";position:absolute;width:18px;height:18px;pointer-events:none;
-  }
-  .crop::before{top:0;left:0;border-top:1px solid currentColor;border-left:1px solid currentColor;}
-  .crop::after{bottom:0;right:0;border-bottom:1px solid currentColor;border-right:1px solid currentColor;}
-  .crop .cm-tr{top:0;right:0;border-top:1px solid currentColor;border-right:1px solid currentColor;}
-  .crop .cm-bl{bottom:0;left:0;border-bottom:1px solid currentColor;border-left:1px solid currentColor;}
-
-  /* ---------- nav ---------- */
-  header.site-nav{
-    position:sticky;top:0;z-index:100;
-    background:var(--ink);color:var(--ink-text);
-    border-bottom:1px solid var(--ink-line);
-  }
-  .nav-row{display:flex;align-items:center;justify-content:space-between;padding:18px var(--side);}
-  .wordmark{
-    display:flex;align-items:center;gap:9px;
-    font-family:var(--mono);font-weight:600;font-size:0.95rem;letter-spacing:0.06em;
-  }
-  .wordmark svg{width:16px;height:16px;color:var(--pop);}
-  .nav-links{display:flex;align-items:center;gap:30px;}
-  .nav-links a{
-    font-family:var(--mono);font-size:0.76rem;letter-spacing:0.09em;text-transform:uppercase;
-    color:var(--ink-muted);transition:color .15s ease;
-  }
-  .nav-links a:hover{color:var(--ink-text);}
-  .nav-links a.active{color:var(--pop);}
-
-  /* ---------- scroll progress ---------- */
-  .scroll-progress{
-    position:absolute;left:0;bottom:-1px;height:2px;width:0;
-    background:var(--pop);z-index:101;transition:width .1s linear;
-  }
-
-  /* ---------- ticker ---------- */
-  .ticker{
-    background:var(--ink);color:var(--ink-text);
-    border-bottom:1px solid var(--ink-line);
-    overflow:hidden;padding:0;
-  }
-  .ticker-track{
-    display:flex;width:max-content;
-    animation:ticker-scroll 38s linear infinite;
-  }
-  .ticker:hover .ticker-track{animation-play-state:paused;}
-  .ticker-track > span{
-    font-family:var(--mono);font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;
-    color:var(--ink-muted);padding:16px 0;white-space:nowrap;display:inline-flex;align-items:center;
-  }
-  .ticker-track > span b{color:var(--ink-text);font-weight:500;}
-  .ticker-track .dot{color:var(--pop);padding:0 26px;font-size:0.7rem;}
-  @keyframes ticker-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-
-  /* ---------- scroll reveal ---------- */
-  body.reveal-on .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);}
-  body.reveal-on .reveal.in{opacity:1;transform:none;}
-
-  /* ---------- language transition ---------- */
-  #lang-transition{--lt-dur:.52s;position:fixed;inset:0;z-index:9999;background:var(--ink);color:var(--ink-text);display:none;align-items:center;justify-content:center;will-change:transform;}
-  #lang-transition .lt-inner{display:flex;flex-direction:column;align-items:center;gap:14px;}
-  #lang-transition .lt-star{width:34px;height:34px;color:var(--pop);}
-  #lang-transition .lt-word{font-family:var(--mono);font-weight:600;font-size:2rem;letter-spacing:0.1em;}
-  #lang-transition .lt-label{font-family:var(--mono);font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-muted);}
-  #lang-transition.show{display:flex;transform:translateX(100%);}
-  #lang-transition.show.in{transform:translateX(0);transition:transform var(--lt-dur) cubic-bezier(.76,0,.24,1);}
-  #lang-transition.cover{display:flex;transform:translateX(0);}
-  #lang-transition.cover.out{transform:translateX(-100%);transition:transform var(--lt-dur) cubic-bezier(.76,0,.24,1);}
-  .nav-right{display:flex;align-items:center;gap:22px;}
-  .nav-burger{
-    display:none;width:44px;height:44px;border:1px solid var(--ink-line);border-radius:100vh;
-    align-items:center;justify-content:center;background:none;color:var(--ink-text);cursor:pointer;
-  }
-  .nav-burger span{display:block;width:14px;height:1px;background:currentColor;position:relative;}
-  .nav-burger span::before,.nav-burger span::after{content:"";position:absolute;left:0;width:14px;height:1px;background:currentColor;}
-  .nav-burger span::before{top:-4px;}
-  .nav-burger span::after{top:4px;}
-
-  .mobile-panel{
-    display:none;background:var(--ink);border-bottom:1px solid var(--ink-line);
-    padding:8px var(--side) 26px;
-  }
-  .mobile-panel a{
-    display:block;padding:12px 0;border-bottom:1px solid var(--ink-line);
-    font-family:var(--mono);font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-text);
-  }
-  .mobile-panel .btn{margin-top:18px;width:100%;justify-content:center;}
-  body.nav-open .mobile-panel{display:block;}
-
-  @media (max-width:860px){
-    .nav-links{display:none;}
-    .nav-burger{display:inline-flex;}
-    .nav-right .btn-pop{display:none;}
-  }
-
-  /* ---------- hero ---------- */
-  .hero{position:relative;background:var(--ink);color:var(--ink-text);overflow:hidden;}
-  .hero-media{position:relative;height:min(92vh,920px);min-height:560px;}
-  .hero-media img{
-    width:100%;height:100%;object-fit:cover;object-position:50% 90%;
-    filter:contrast(1.12) saturate(0.9) brightness(0.75);
-  }
-  .hero-media::after{
-    content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-    background:
-      linear-gradient(180deg, rgba(18,17,13,0.55) 0%, rgba(18,17,13,0.1) 20%, rgba(18,17,13,0.4) 48%, rgba(18,17,13,0.88) 72%, rgba(18,17,13,0.97) 100%),
-      linear-gradient(90deg, rgba(18,17,13,0.55) 0%, rgba(18,17,13,0.1) 40%);
-  }
-  .hero-copy{
-    position:absolute;left:0;right:0;bottom:0;z-index:2;
-    padding:0 var(--side) clamp(34px,5vw,56px);
-  }
-  .hero-eyebrow{color:var(--pop);margin-bottom:18px;display:block;text-shadow:0 2px 16px rgba(0,0,0,0.7);}
-  .hero h1{
-    font-size:var(--fs-hero);font-weight:600;line-height:1;letter-spacing:-0.03em;
-    max-width:13ch;text-shadow:0 4px 30px rgba(0,0,0,0.5);
-  }
-  @media (min-width:761px){
-    .hero-copy{padding-right:min(360px, 30vw);}
-  }
-  .hero-card{
-    position:absolute;right:var(--side);bottom:clamp(34px,5vw,56px);z-index:2;
-    width:min(320px,80vw);background:var(--paper);color:var(--paper-text);
-    padding:22px 22px 24px;
-  }
-  .hero-card p{font-size:0.92rem;color:var(--paper-muted);line-height:1.55;}
-  .hero-card .btn-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
-  .hero-card .btn{padding:12px 16px;font-size:0.72rem;}
-
-  @media (max-width:760px){
-    .hero-media{height:auto;min-height:0;border-bottom:1px solid var(--ink-line);}
-    .hero-media img{aspect-ratio:1/1;height:auto;}
-    .hero-card{position:static;width:auto;margin-top:0;}
-    .hero-copy{position:static;background:var(--ink);padding:28px var(--side) 0;}
-    .hero-media::after{display:none;}
-  }
-
-  /* ---------- sections generic ---------- */
-  section{padding:clamp(64px,9vw,120px) 0;}
-  .kicker{color:var(--pop-text);margin-bottom:14px;display:block;}
-  /* kickers on dark sections keep the brighter ember (passes AA on ink) */
-  .big-panel .kicker,.process .kicker,.cases .kicker,.closing .kicker,.contact-form .kicker{color:var(--pop);}
-  h2.head{font-size:var(--fs-h1);font-weight:600;letter-spacing:-0.025em;line-height:1.06;}
-
-  /* ---------- statement ---------- */
-  .statement{background:rgba(242,239,230,0.92);text-align:center;}
-  .statement-inner{max-width:900px;margin:0 auto;}
-  .statement .kicker{text-align:center;}
-  .statement p.big{
-    font-size:clamp(1.6rem,1.2rem+2vw,2.9rem);font-weight:500;letter-spacing:-0.02em;
-    line-height:1.3;max-width:24ch;margin:0 auto;
-  }
-  .statement .btn-row{display:flex;gap:14px;justify-content:center;margin-top:38px;flex-wrap:wrap;}
-
-  /* ---------- mosaic (asymmetric, labels on photo) ---------- */
-  .mosaic{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .mosaic-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2px;background:var(--paper-line);margin-top:56px;}
-  .mosaic-tile{position:relative;overflow:hidden;background:var(--ink);}
-  .mosaic-media{position:relative;aspect-ratio:3/4;}
-  .mosaic-media img{width:100%;height:100%;object-fit:cover;filter:saturate(0.94) contrast(1.05) brightness(0.82);transition:transform .5s ease;}
-  .mosaic-tile:hover .mosaic-media img{transform:scale(1.04);}
-  .mosaic-tile::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(18,17,13,0) 42%,rgba(18,17,13,0.86) 100%);}
-  .mosaic-cap{position:absolute;inset-inline-start:0;inset-block-end:0;z-index:1;padding:22px 22px 24px;color:var(--ink-text);}
-  .mosaic-cap .tag{font-family:var(--mono);color:var(--pop);font-size:0.8rem;letter-spacing:0.04em;text-transform:uppercase;display:block;margin-bottom:8px;}
-  .mosaic-cap h3{font-size:1.1rem;font-weight:600;margin-bottom:6px;letter-spacing:-0.01em;}
-  .mosaic-cap p{font-size:0.86rem;color:var(--ink-muted);max-width:30ch;}
-  @media (max-width:860px){
-    .mosaic-grid{grid-template-columns:1fr;}
-    .mosaic-tile:nth-child(1) .mosaic-media{aspect-ratio:4/3;}
-    .mosaic-tile:nth-child(2) .mosaic-media{aspect-ratio:3/4;}
-    .mosaic-tile:nth-child(3) .mosaic-media{aspect-ratio:1/1;}
-  }
-
-  /* ---------- opportunity ---------- */
-  .opportunity{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .opp-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:clamp(32px,6vw,90px);margin-top:56px;}
-  .opp-copy p{font-size:var(--fs-lg);color:var(--paper-muted);max-width:46ch;}
-  .opp-copy p + p{margin-top:20px;}
-  .opp-copy .btn{margin-top:28px;}
-
-  .shift-list{border-top:1px solid var(--paper-line);}
-  .shift-row{
-    display:grid;grid-template-columns:44px 1fr;gap:20px;align-items:start;
-    padding:26px 0;border-bottom:1px solid var(--paper-line);
-    transition:opacity .45s ease;
-  }
-  /* pin-sequence hooks (Agent C toggles .is-dim / .is-active; default = all visible) */
-  .shift-row.is-dim{opacity:0.32;}
-  .shift-row.is-active .shift-after{color:var(--pop-text);}
-  .shift-row .num{font-family:var(--mono);color:var(--pop-text);font-size:0.82rem;padding-top:4px;}
-  .shift-pair{display:flex;flex-direction:column;gap:6px;}
-  .shift-before{color:var(--paper-muted);font-size:0.92rem;text-decoration:line-through;text-decoration-color:var(--paper-line);}
-  .shift-after{font-size:var(--fs-lg);font-weight:500;}
-  .shift-arrow{color:var(--pop-text);font-family:var(--mono);margin-inline-end:8px;}
-
-  @media (max-width:860px){
-    .opp-grid{grid-template-columns:1fr;}
-  }
-
-  /* ---------- big panel (dark, full-bleed) ---------- */
-  .big-panel{position:relative;background:var(--ink);color:var(--ink-text);overflow:hidden;}
-  .big-panel-media{position:absolute;inset:0;}
-  .big-panel-media img{width:100%;height:100%;object-fit:cover;filter:saturate(0.85) brightness(0.55) contrast(1.05);}
-  .big-panel-media::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(18,17,13,0.78),rgba(18,17,13,0.6) 45%,rgba(18,17,13,0.92));
-  }
-  .big-panel .wrap{position:relative;z-index:1;}
-  .big-panel-head{max-width:640px;}
-  .big-panel-head p{margin-top:18px;color:var(--ink-muted);font-size:var(--fs-lg);max-width:52ch;}
-  .trio{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink-line);margin-top:56px;}
-  .trio-item{padding:26px clamp(0px,3vw,28px) 4px 0;border-right:1px solid var(--ink-line);}
-  .trio-item:last-child{border-right:none;}
-  .trio-item .tag{font-family:var(--mono);color:var(--pop);font-size:0.85rem;letter-spacing:0.02em;display:block;margin-bottom:10px;}
-  .trio-item p{font-size:0.9rem;color:var(--ink-muted);max-width:34ch;}
-  @media (max-width:860px){
-    .trio{grid-template-columns:1fr;}
-    .trio-item{border-right:none;border-bottom:1px solid var(--ink-line);padding:22px 0;}
-    .trio-item:last-child{border-bottom:none;}
-  }
-
-  /* ---------- split ---------- */
-  .split{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .split-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--paper-line);margin-top:56px;}
-  .split-panel{background:var(--paper);padding:clamp(28px,4vw,44px) clamp(24px,4vw,44px) clamp(36px,5vw,52px);}
-  .split-media{aspect-ratio:16/10;overflow:hidden;margin-bottom:24px;}
-  .split-media img{width:100%;height:100%;object-fit:cover;filter:saturate(0.95);}
-  .split-panel .tag{font-family:var(--mono);color:var(--pop-text);font-size:0.82rem;letter-spacing:0.02em;display:block;margin-bottom:12px;}
-  .split-panel h3{font-size:1.35rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:12px;}
-  .split-panel p{color:var(--paper-muted);max-width:40ch;margin-bottom:22px;font-size:0.95rem;}
-  @media (max-width:860px){.split-grid{grid-template-columns:1fr;}}
-
-  /* ---------- packages (pricing cards) ---------- */
-  .services{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.2vw,24px);margin-top:56px;align-items:stretch;}
-  .pkg-card{position:relative;display:flex;flex-direction:column;border:1px solid var(--paper-line);background:var(--paper);padding:28px 26px 30px;}
-  .pkg-card.featured{border-color:var(--paper-text);}
-  .pkg-num{font-family:var(--mono);color:var(--pop-text);font-size:0.82rem;letter-spacing:0.06em;display:block;margin-bottom:16px;}
-  .pkg-name{font-size:1.2rem;font-weight:600;letter-spacing:-0.01em;}
-  .pkg-flag{font-family:var(--mono);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--pop-text);display:inline-block;margin-top:9px;}
-  .pkg-price{font-family:var(--mono);font-size:1.15rem;font-weight:500;font-variant-numeric:tabular-nums;margin-top:16px;letter-spacing:0.01em;}
-  .pkg-price .from{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--paper-muted);display:block;margin-bottom:4px;}
-  .pkg-who{color:var(--paper-muted);font-size:0.9rem;margin-top:14px;}
-  .pkg-list{margin-top:20px;border-top:1px solid var(--paper-line);}
-  .pkg-list li{font-size:0.9rem;line-height:1.45;padding:11px 0;border-bottom:1px solid var(--paper-line);color:var(--paper-text);}
-  .pkg-cta{margin-top:auto;padding-top:24px;}
-  .pkg-cta .btn{width:100%;justify-content:center;}
-  .pkg-foot{margin-top:clamp(28px,4vw,40px);font-family:var(--mono);font-size:0.8rem;letter-spacing:0.02em;line-height:1.6;color:var(--paper-muted);max-width:64ch;}
-  @media (max-width:860px){
-    .pkg-grid{grid-template-columns:1fr;}
-  }
-
-  /* ---------- process (dark) ---------- */
-  .process{background:rgba(18,17,13,0.60);color:var(--ink-text);}
-  .proc-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(30px,6vw,80px);margin-top:56px;align-items:stretch;}
-  .proc-media{position:relative;min-height:420px;}
-  .proc-media img{width:100%;height:100%;object-fit:cover;filter:saturate(0.95) contrast(1.05);}
-  .proc-media .fig{
-    position:absolute;top:16px;left:16px;font-family:var(--mono);font-size:0.7rem;
-    letter-spacing:0.1em;color:var(--ink-text);background:rgba(28,28,23,0.55);padding:5px 9px;
-  }
-  .proc-media .rot{
-    position:absolute;bottom:22px;right:-14px;transform:rotate(90deg);transform-origin:right bottom;
-    font-family:var(--mono);font-size:0.72rem;letter-spacing:0.16em;color:var(--ink-text);
-    background:rgba(28,28,23,0.55);padding:4px 10px;
-  }
-  .proc-copy p.lead{font-size:var(--fs-lg);color:var(--ink-muted);max-width:52ch;margin-bottom:34px;}
-  .proc-steps{border-top:1px solid var(--ink-line);}
-  .proc-step{
-    display:grid;grid-template-columns:52px 1fr;gap:18px;
-    padding:22px 0;border-bottom:1px solid var(--ink-line);
-  }
-  .proc-step .num{font-family:var(--mono);color:var(--pop);font-size:0.95rem;}
-  .proc-step h3{font-size:1.05rem;font-weight:600;margin-bottom:5px;}
-  .proc-step p{font-size:0.9rem;color:var(--ink-muted);max-width:48ch;}
-
-  @media (max-width:860px){
-    .proc-grid{grid-template-columns:1fr;}
-    .proc-media{min-height:280px;}
-    .proc-media .rot{display:none;}
-  }
-
-  /* ---------- the promise (trust row) ---------- */
-  .promise-title{color:var(--pop);display:block;margin-top:clamp(46px,7vw,72px);margin-bottom:20px;}
-  .promise{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink-line);}
-  .promise-item{padding:26px clamp(0px,2vw,24px) 4px 0;border-right:1px solid var(--ink-line);}
-  .promise-item:last-child{border-right:none;}
-  .promise-item .pk{font-family:var(--mono);color:var(--pop);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:10px;}
-  .promise-item p{font-size:0.98rem;color:var(--ink-text);max-width:30ch;}
-  @media (max-width:860px){
-    .promise{grid-template-columns:1fr;}
-    .promise-item{border-right:none;border-bottom:1px solid var(--ink-line);padding:20px 0;}
-    .promise-item:last-child{border-bottom:none;}
-  }
-
-  /* ---------- meet panel (single full-bleed statement) ---------- */
-  .meet{position:relative;background:var(--ink);color:var(--ink-text);overflow:hidden;}
-  .meet-media{position:relative;min-height:min(72vh,680px);display:flex;align-items:flex-end;}
-  .meet-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.1) saturate(0.85) brightness(0.62);}
-  .meet-media::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(18,17,13,0.5) 0%, rgba(18,17,13,0.15) 30%, rgba(18,17,13,0.55) 62%, rgba(18,17,13,0.95) 100%);
-  }
-  .meet-copy{position:relative;z-index:1;padding:0 var(--side) clamp(40px,6vw,64px);width:100%;}
-  .meet-copy .label{color:var(--pop);margin-bottom:16px;display:block;text-shadow:0 2px 16px rgba(0,0,0,0.6);}
-  .meet-copy h2{
-    font-size:var(--fs-hero);font-weight:600;line-height:0.98;letter-spacing:-0.03em;
-    max-width:14ch;text-shadow:0 4px 30px rgba(0,0,0,0.5);
-  }
-  .meet-copy p{margin-top:20px;color:var(--ink-muted);max-width:48ch;font-size:var(--fs-lg);}
-  .meet-copy .btn{margin-top:28px;}
-
-  @media (max-width:760px){
-    .meet-media{min-height:0;flex-direction:column;align-items:stretch;}
-    .meet-media img{position:relative;aspect-ratio:3/4;height:auto;}
-    .meet-copy{position:static;padding:28px var(--side) 0;background:var(--ink);}
-  }
-
-  /* ---------- partners (two large photo panels) ---------- */
-  .partners{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .partner-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;background:var(--ink-line);}
-  .partner-tile{position:relative;aspect-ratio:4/5;overflow:hidden;}
-  .partner-tile img{width:100%;height:100%;object-fit:cover;filter:saturate(0.92) contrast(1.03);transition:transform .5s ease;}
-  .partner-tile:hover img{transform:scale(1.035);}
-  .partner-tile::after{
-    content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(18,17,13,0) 45%, rgba(18,17,13,0.85) 100%);
-  }
-  .partner-cap{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:26px 24px;color:var(--ink-text);}
-  .partner-cap .tag{font-family:var(--mono);color:var(--pop);font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;display:block;margin-bottom:10px;}
-  .partner-cap h3{font-size:1.2rem;font-weight:600;margin-bottom:8px;letter-spacing:-0.01em;}
-  .partner-cap p{font-size:0.88rem;color:var(--ink-muted);max-width:34ch;}
-  @media (max-width:860px){.partner-grid{grid-template-columns:1fr;}}
-
-  /* ---------- case studies ---------- */
-  .cases{background:rgba(10,9,7,0.55);color:var(--ink-text);}
-  .case-intro{color:var(--ink-muted);max-width:62ch;font-size:var(--fs-lg);margin-top:18px;}
-  .case-list{margin-top:clamp(48px,7vw,80px);display:flex;flex-direction:column;gap:clamp(48px,7vw,88px);}
-  .case-row{display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(28px,5vw,64px);align-items:center;}
-  .case-row:nth-child(even) .case-figure{order:2;}
-  .case-figure{margin:0;}
-  .case-media{
-    display:block;width:100%;padding:0;margin:0;border:1px solid var(--ink-line);background:#000;
-    cursor:zoom-in;overflow:hidden;position:relative;appearance:none;-webkit-appearance:none;text-align:inherit;color:inherit;
-  }
-  .case-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;filter:saturate(0.96) contrast(1.03);transition:transform .5s ease;}
-  .case-media:hover img{transform:scale(1.03);}
-  .case-media .zoom{position:absolute;inset-block-end:12px;inset-inline-end:12px;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-text);background:rgba(18,17,13,0.62);padding:5px 9px;}
-  .case-idx{font-family:var(--mono);color:var(--pop);font-size:0.82rem;letter-spacing:0.06em;display:block;margin-bottom:12px;}
-  .case-name{font-size:clamp(1.5rem,1.2rem+1vw,2rem);font-weight:600;letter-spacing:-0.02em;line-height:1.05;}
-  .case-formula{font-family:var(--mono);color:var(--ink-muted);font-size:0.82rem;letter-spacing:0.01em;line-height:1.5;margin-top:12px;max-width:46ch;}
-  .case-meta{margin-top:22px;border-top:1px solid var(--ink-line);}
-  .case-meta .m{display:grid;grid-template-columns:92px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--ink-line);}
-  .case-meta .mk{font-family:var(--mono);color:var(--pop);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;padding-top:2px;}
-  .case-meta .mv{font-size:0.92rem;color:var(--ink-text);max-width:46ch;}
-
-  /* before/after schematic (pure CSS, no images) */
-  .ba{display:flex;align-items:flex-start;gap:16px;margin-top:24px;}
-  .ba-side{display:flex;flex-direction:column;}
-  .ba-side-after{flex:1;max-width:240px;}
-  .ba-label{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);margin-top:12px;display:block;}
-  .ba-phone,.ba-browser{border:1px solid var(--ink-muted);position:relative;}
-  .ba-phone{width:74px;min-width:74px;height:128px;border-radius:12px;padding:9px 8px;display:flex;flex-direction:column;gap:7px;}
-  .ba-ava{width:18px;height:18px;border-radius:50%;border:1px solid var(--ink-muted);}
-  .ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;}
-  .ba-grid i{aspect-ratio:1;background:var(--ink-line);display:block;}
-  .ba-dm{font-family:var(--mono);font-size:0.46rem;letter-spacing:0.03em;color:var(--ink-muted);text-transform:uppercase;margin-top:auto;}
-  .ba-arrow{color:var(--pop);font-family:var(--mono);font-size:1.15rem;flex-shrink:0;align-self:center;}
-  .ba-browser{width:100%;height:128px;border-radius:6px;display:flex;flex-direction:column;overflow:hidden;}
-  .ba-bar{display:flex;gap:4px;padding:7px 9px;border-bottom:1px solid var(--ink-line);}
-  .ba-bar i{width:6px;height:6px;border-radius:50%;background:var(--ink-muted);display:block;}
-  .ba-heroblock{height:32px;background:var(--ink-line);margin:9px;}
-  .ba-rows{display:flex;flex-direction:column;gap:5px;padding:0 9px;}
-  .ba-rows i{height:5px;background:var(--ink-line);display:block;}
-  .ba-rows i:nth-child(2){width:82%;}
-  .ba-rows i:nth-child(3){width:62%;}
-  .ba-wa{font-family:var(--mono);font-size:0.46rem;color:var(--pop);text-transform:uppercase;letter-spacing:0.04em;margin:8px 9px 9px;border:1px solid var(--pop-dim);padding:3px 6px;align-self:flex-start;}
-
-  /* lightbox dialog */
-  .lightbox{border:none;padding:0;background:transparent;max-width:min(92vw,1080px);width:auto;overflow:visible;}
-  .lightbox::backdrop{background:rgba(18,17,13,0.85);}
-  .lightbox img{width:100%;height:auto;display:block;border:1px solid var(--ink-line);}
-  .lb-close{
-    position:relative;margin-inline-start:auto;margin-bottom:10px;display:flex;align-items:center;gap:8px;
-    font-family:var(--mono);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;
-    color:var(--ink-text);background:none;border:none;cursor:pointer;padding:14px 16px;min-height:44px;
-  }
-  .lb-close::before,.lb-close::after{content:"";position:absolute;width:12px;height:12px;pointer-events:none;}
-  .lb-close::before{top:0;left:0;border-top:1px solid currentColor;border-left:1px solid currentColor;}
-  .lb-close::after{bottom:0;right:0;border-bottom:1px solid currentColor;border-right:1px solid currentColor;}
-  .lb-close:hover{color:var(--pop);}
-
-  /* next-slot card — scarcity closes the sequence */
-  .next-slot{border:1px solid var(--ink-line);padding:clamp(28px,4vw,40px);margin-top:clamp(48px,7vw,88px);display:flex;flex-direction:column;align-items:flex-start;}
-  .next-slot .label{color:var(--pop);margin-bottom:14px;}
-  .next-slot h3{font-size:clamp(1.4rem,1.15rem+1vw,1.9rem);font-weight:600;letter-spacing:-0.02em;line-height:1.1;margin-bottom:14px;max-width:20ch;}
-  .next-slot p{color:var(--ink-muted);font-size:0.95rem;max-width:54ch;margin-bottom:22px;}
-
-  @media (max-width:900px){
-    .case-row{grid-template-columns:1fr;gap:24px;}
-    .case-row:nth-child(even) .case-figure{order:0;}
-    .ba-browser{max-width:none;}
-  }
-
-  /* ---------- closing (full-bleed photo) ---------- */
-  .closing{position:relative;background:var(--ink);color:var(--ink-text);overflow:hidden;padding:0;}
-  .closing-media{position:relative;min-height:min(70vh,640px);display:flex;align-items:center;justify-content:center;}
-  .closing-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:contrast(1.1) saturate(0.8) brightness(0.5);}
-  .closing-media::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 30%, rgba(18,17,13,0.55) 0%, rgba(18,17,13,0.88) 100%);}
-  .closing-inner{
-    position:relative;z-index:1;max-width:720px;margin:0 auto;padding:clamp(56px,8vw,90px) clamp(24px,6vw,56px);
-    text-align:center;color:var(--ink-text);
-  }
-  .closing-inner .kicker{justify-content:center;text-align:center;}
-  .closing h2{font-size:var(--fs-h1);font-weight:600;letter-spacing:-0.025em;line-height:1.08;max-width:20ch;margin:0 auto;text-shadow:0 4px 24px rgba(0,0,0,0.5);}
-  .closing p{margin:22px auto 0;max-width:52ch;color:var(--ink-muted);font-size:var(--fs-lg);}
-  .closing .btn-row{display:flex;justify-content:center;gap:14px;margin-top:34px;flex-wrap:wrap;}
-
-  @media (max-width:760px){
-    .closing-media{min-height:0;padding:clamp(64px,12vw,90px) 0;}
-  }
-
-  /* ---------- about (vertical-hairline split) ---------- */
-  .about{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .about-split{display:grid;grid-template-columns:0.82fr 1.18fr;margin-top:clamp(28px,4vw,48px);align-items:start;}
-  .about-lead-col{padding-inline-end:clamp(28px,5vw,64px);}
-  .about-lead-col .head{margin-bottom:clamp(24px,3vw,34px);}
-  .about-note{padding-inline-start:clamp(28px,5vw,64px);border-inline-start:1px solid var(--paper-line);}
-  .about-portrait .about-media{aspect-ratio:4/5;overflow:hidden;border:1px solid var(--paper-line);}
-  .about-portrait img{width:100%;height:100%;object-fit:cover;filter:saturate(0.95) contrast(1.03);}
-  .about-meta{margin-top:16px;}
-  .about-meta .nm{font-family:var(--mono);font-size:0.9rem;font-weight:600;display:block;}
-  .about-meta .rl{font-family:var(--mono);color:var(--paper-muted);font-size:0.78rem;letter-spacing:0.02em;display:block;margin-top:3px;}
-  .about-note .lead{font-size:clamp(1.3rem,1.05rem+1vw,1.7rem);font-weight:500;letter-spacing:-0.015em;line-height:1.3;max-width:24ch;margin-bottom:24px;}
-  .about-note p{color:var(--paper-muted);max-width:56ch;font-size:var(--fs-lg);}
-  .about-note p + p{margin-top:18px;}
-  .about-sign{margin-top:26px;font-family:var(--mono);font-size:0.85rem;color:var(--paper-text);}
-  .about-facts{display:flex;flex-wrap:wrap;gap:8px 0;margin-top:26px;border-top:1px solid var(--paper-line);padding-top:14px;}
-  .about-facts span{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--paper-muted);}
-  .about-facts span:not(:last-child)::after{content:"·";margin-inline:12px;color:var(--pop-text);}
-  @media (max-width:860px){
-    .about-split{grid-template-columns:1fr;}
-    .about-lead-col{padding-inline-end:0;margin-bottom:32px;}
-    .about-note{padding-inline-start:0;border-inline-start:none;border-top:1px solid var(--paper-line);padding-top:32px;}
-  }
-
-  /* ---------- FAQ ---------- */
-  .faq{background:rgba(242,239,230,0.92);border-top:1px solid var(--paper-line);}
-  .faq-list{margin-top:clamp(40px,5vw,56px);border-top:1px solid var(--paper-line);}
-  .faq-item{border-bottom:1px solid var(--paper-line);}
-  .faq-item summary{
-    list-style:none;cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;
-    padding:24px 0;font-size:var(--fs-lg);font-weight:500;letter-spacing:-0.01em;color:var(--paper-text);
-  }
-  .faq-item summary::-webkit-details-marker{display:none;}
-  .faq-q{max-width:54ch;}
-  .faq-mk{font-family:var(--mono);font-size:1.25rem;line-height:1;color:var(--paper-muted);flex-shrink:0;transition:color .18s ease;padding-top:1px;}
-  .faq-mk::before{content:"+";}
-  .faq-item[open] .faq-mk{color:var(--pop-text);}
-  .faq-item[open] .faq-mk::before{content:"\2212";}
-  .faq-ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;}
-  .faq-item[open] .faq-ans{grid-template-rows:1fr;}
-  .faq-ans-inner{overflow:hidden;min-height:0;}
-  .faq-ans p{color:var(--paper-muted);max-width:64ch;padding-bottom:24px;font-size:0.98rem;}
-  .faq-ans a{color:var(--paper-text);border-bottom:1px solid var(--paper-line);padding-bottom:1px;}
-  .faq-ans a:hover{border-bottom-color:var(--paper-text);}
-
-  /* ---------- contact form ---------- */
-  .contact-form{background:rgba(18,17,13,0.62);color:var(--ink-text);border-top:1px solid var(--ink-line);}
-  .cf-grid{display:grid;grid-template-columns:0.82fr 1.18fr;gap:clamp(32px,6vw,80px);margin-top:56px;align-items:start;}
-  .cf-intro p{color:var(--ink-muted);font-size:var(--fs-lg);max-width:38ch;margin-top:18px;}
-  .cf-direct{margin-top:32px;border-top:1px solid var(--ink-line);padding-top:24px;display:flex;flex-direction:column;gap:16px;}
-  .cf-direct a{display:flex;flex-direction:column;gap:4px;font-family:var(--mono);font-size:0.95rem;color:var(--ink-text);transition:color .15s ease;}
-  .cf-direct a:hover{color:var(--pop);}
-  .cf-direct a .lb{color:var(--ink-muted);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;}
-  form.cf-form{display:grid;gap:26px;}
-  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
-  .cf-field{display:flex;flex-direction:column;gap:9px;}
-  .cf-field label{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.09em;text-transform:uppercase;color:var(--ink-muted);}
-  .cf-field label .req{color:var(--pop);}
-  .cf-field input,.cf-field select,.cf-field textarea{
-    background:transparent;border:none;border-bottom:1px solid var(--ink-line);
-    color:var(--ink-text);font-family:var(--face);font-size:1rem;padding:13px 0;width:100%;
-    transition:border-color .18s ease;
-  }
-  .cf-field input::placeholder,.cf-field textarea::placeholder{color:#948f80;}
-  .cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{outline:none;border-bottom-color:var(--pop);}
-  .cf-field textarea{resize:vertical;min-height:92px;line-height:1.6;}
-  .cf-field select{
-    cursor:pointer;appearance:none;-webkit-appearance:none;padding-right:26px;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23948f80' stroke-width='1.5'/%3E%3C/svg%3E");
-    background-repeat:no-repeat;background-position:right 2px center;
-  }
-  .cf-field select option{background:#232219;color:var(--ink-text);}
-  .cf-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:4px;}
-  .cf-note{font-size:0.84rem;color:var(--ink-muted);}
-  .cf-note a{color:var(--ink-text);border-bottom:1px solid var(--ink-line);padding-bottom:1px;}
-  .cf-note a:hover{border-bottom-color:var(--ink-muted);}
-  @media (max-width:860px){.cf-grid{grid-template-columns:1fr;}.cf-row{grid-template-columns:1fr;}}
-
-  /* ---------- footer ---------- */
-  footer{background:rgba(18,17,13,0.62);color:var(--ink-text);border-top:1px solid var(--ink-line);}
-  .foot-top{display:flex;justify-content:space-between;gap:40px;padding:56px 0 40px;flex-wrap:wrap;}
-  .foot-links{display:flex;flex-wrap:wrap;align-items:flex-start;align-self:flex-start;gap:10px;}
-  .foot-links a{
-    font-family:var(--mono);font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
-    border:1px solid var(--ink-line);border-radius:100vh;padding:12px 16px;color:var(--ink-muted);
-    transition:color .15s ease, border-color .15s ease;
-  }
-  .foot-links a:hover{color:var(--ink-text);border-color:var(--ink-muted);}
-  .foot-contact{font-size:0.9rem;color:var(--ink-muted);}
-  .foot-contact a{color:var(--ink-text);display:inline-block;padding-block:13px;margin-block:-13px;}
-  .foot-contact div + div{margin-top:8px;}
-  .foot-bottom{
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-    border-top:1px solid var(--ink-line);padding:22px 0 40px;
-    font-size:0.78rem;color:var(--ink-muted);
-  }
-  .foot-word{font-family:var(--mono);font-size:1.6rem;letter-spacing:0.04em;color:var(--ink-text);}
-
-  @media (max-width:640px){
-    .foot-top{flex-direction:column;gap:26px;}
-  }
-
-  .foot-reply{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--pop);margin-top:16px;}
-
-  /* ---------- contact secondary (email) link ---------- */
-  .cf-secondary{background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:0.84rem;color:var(--ink-muted);padding:12px 0;min-height:44px;transition:color .15s ease;}
-  .cf-secondary .lk{color:var(--ink-text);border-bottom:1px solid var(--ink-line);padding-bottom:1px;}
-  .cf-secondary:hover .lk{border-bottom-color:var(--ink-muted);}
-
-  /* ---------- sticky mobile WhatsApp bar ---------- */
-  .wa-bar{
-    position:fixed;inset-inline:0;inset-block-end:0;z-index:90;display:none;
-    padding:10px var(--side);padding-bottom:calc(10px + env(safe-area-inset-bottom));
-    background:var(--ink);border-top:1px solid var(--ink-line);
-    transform:translateY(115%);transition:transform .28s cubic-bezier(.2,.7,.2,1);
-  }
-  .wa-bar .btn{width:100%;justify-content:center;}
-  body.wa-visible .wa-bar{transform:translateY(0);}
-  body.nav-open .wa-bar{transform:translateY(115%);}
-  @media (max-width:860px){
-    .wa-bar{display:block;}
-    body{padding-bottom:calc(66px + env(safe-area-inset-bottom));}
-  }
-
-  /* ---------- Agent C: skip link + motion hooks ---------- */
-  .skip-link{
-    position:fixed;top:10px;inset-inline-start:10px;z-index:9999;
-    transform:translateY(-150%);
-    background:var(--ink);color:var(--ink-text);
-    font-family:var(--mono);font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;
-    padding:12px 18px;border:1px solid var(--pop);border-radius:100vh;
-    transition:transform .18s ease;
-  }
-  .skip-link:focus{transform:translateY(0);outline:2px solid var(--pop);outline-offset:3px;}
-  /* when GSAP owns the reveals, drop the CSS transition so it can't fight the tween */
-  body.gsap-active .reveal{transition:none;}
-  /* scoped to the parallax photo layers only (JS adds/removes it, desktop only) */
-  .gsap-parallax{will-change:transform;}
-
-  @media (prefers-reduced-motion:reduce){
-    *{transition:none!important;animation:none!important;scroll-behavior:auto!important;}
-    body.reveal-on .reveal{opacity:1!important;transform:none!important;}
-    .ticker-track{animation:none!important;}
-  }
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
-<template id="__bundler_thumbnail" data-bg-color="#1c1c17">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#1c1c17"/>
-    <text x="600" y="440" font-family="Georgia, serif" font-size="180" fill="#f0432a" text-anchor="middle">K</text>
-  </svg>
-</template>
 <body>
 
-<a class="skip-link" href="#studio">Skip to content</a>
+<div class="page-intro" id="page-intro" aria-hidden="true"><div class="pi-lockup"><svg viewBox="0 0 24 24" fill="none"><g class="pi-arc" stroke="currentColor" stroke-width="1.1" fill="none"><path d="M2.4 12Q12 4.6 21.6 12"/><path d="M2.4 12Q12 19.4 21.6 12"/></g><circle class="pi-iris" cx="12" cy="12" r="3" fill="#f0432a"/><circle class="pi-iris" cx="12" cy="12" r="1.2" fill="#1c1c17"/><path class="pi-glint" d="M10.44 9.42L10.83 10.53L11.94 10.92L10.83 11.31L10.44 12.42L10.05 11.31L8.94 10.92L10.05 10.53Z" fill="#f2efe6"/></svg></div></div>
 
-<canvas id="smoke-bg" aria-hidden="true"></canvas>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-nav">
   <div class="nav-row">
-    <a class="wordmark" href="#top">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L13.8 10.2L22 12L13.8 13.8L12 22L10.2 13.8L2 12L10.2 10.2L12 2Z" fill="currentColor"/></svg>
+    <a class="wordmark" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.1" fill="none"><path d="M2.4 12Q12 4.6 21.6 12"/><path d="M2.4 12Q12 19.4 21.6 12"/></g><circle cx="12" cy="12" r="3" fill="#f0432a"/><circle cx="12" cy="12" r="1.2" fill="var(--ink)"/><path d="M10.44 9.42L10.83 10.53L11.94 10.92L10.83 11.31L10.44 12.42L10.05 11.31L8.94 10.92L10.05 10.53Z" fill="#f2efe6"/></svg>
       KIRA
     </a>
     <nav class="nav-links">
-      <a href="#studio">Studio</a>
-      <a href="#services">Services</a>
-      <a href="#process">Process</a>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="index.html" class="active" aria-current="page">Home</a>
+      <a href="work.html">Portfolio</a>
+      <a href="film.html">Film</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <div class="nav-right">
-      <a href="kira-ar.html" class="lang-toggle" data-label="العربية" onclick="try{localStorage.setItem('kira-lang','ar')}catch(e){}" style="font-family:var(--mono);font-size:0.76rem;padding:13px 10px;margin:-13px -10px;color:var(--ink-muted);transition:color .15s ease;" onmouseover="this.style.color='var(--ink-text)'" onmouseout="this.style.color='var(--ink-muted)'">ع</a>
+      <a href="index-ar.html" class="lang-toggle" data-label="العربية" onclick="try{localStorage.setItem('kira-lang','ar')}catch(e){}" style="font-family:var(--mono);font-size:0.76rem;padding:13px 10px;margin:-13px -10px;color:var(--ink-muted);transition:color .15s ease;" onmouseover="this.style.color='var(--ink-text)'" onmouseout="this.style.color='var(--ink-muted)'">ع</a>
       <a class="btn btn-pop" href="https://wa.me/97470196996" target="_blank" rel="noopener">Start on WhatsApp</a>
       <button class="nav-burger" aria-label="Open menu" aria-expanded="false" onclick="document.body.classList.toggle('nav-open'); this.setAttribute('aria-expanded', document.body.classList.contains('nav-open'))">
         <span></span>
@@ -746,77 +70,73 @@
     </div>
   </div>
   <div class="mobile-panel">
-    <a href="#studio">Studio</a>
-    <a href="#services">Services</a>
-    <a href="#process">Process</a>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="work.html">Portfolio</a>
+    <a href="film.html">Film</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
     <a class="btn btn-pop" href="https://wa.me/97470196996" target="_blank" rel="noopener">Start on WhatsApp</a>
-    <a href="kira-ar.html" class="lang-toggle" data-label="العربية" onclick="try{localStorage.setItem('kira-lang','ar')}catch(e){}" style="margin-top:14px;display:block;font-family:var(--mono);font-size:0.85rem;letter-spacing:0.06em;color:var(--ink-muted);">العربية — ع</a>
+    <a href="index-ar.html" class="lang-toggle" data-label="العربية" onclick="try{localStorage.setItem('kira-lang','ar')}catch(e){}" style="margin-top:14px;display:block;font-family:var(--mono);font-size:0.85rem;letter-spacing:0.06em;color:var(--ink-muted);">العربية</a>
   </div>
   <div class="scroll-progress" id="scrollProgress"></div>
 </header>
 
-<div id="top"></div>
-
+<main id="main">
 <section class="hero" id="studio">
   <div class="hero-media">
     <!-- PHOTO SLOT [TAREQ]: hero — a signature Kira-shot dessert or café hero frame, dark and moody with negative space bottom-left for the headline, landscape 16:9 (portrait 4:5 on mobile). Sits behind the hero headline. -->
-    <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1551024506-0bccd828d307?q=75&w=1600&auto=format&fit=crop 1600w" sizes="100vw" width="1600" height="900" fetchpriority="high" decoding="async" alt="Caramel poured over a plated dessert against a dark background">
+    <img src="assets/img/u-1521017432531-fbd92d768814-1600.jpg" srcset="assets/img/u-1521017432531-fbd92d768814-800.jpg 480w, assets/img/u-1521017432531-fbd92d768814-800.jpg 800w, assets/img/u-1521017432531-fbd92d768814-1600.jpg 1200w, assets/img/u-1521017432531-fbd92d768814-1600.jpg 1600w" sizes="100vw" width="1600" height="900" fetchpriority="high" decoding="async" alt="Warm, plant-filled café interior with wooden tables">
     <div class="hero-copy">
-      <span class="label hero-eyebrow">Web Design Studio — Doha, Qatar</span>
+      <span class="label hero-eyebrow">Web Design · Photography · Film — Doha, Qatar</span>
       <h1>Beyond the Instagram page.</h1>
     </div>
     <div class="hero-card crop">
       <span class="cm-tr"></span><span class="cm-bl"></span>
-      <p>Kira designs, builds, and photographs websites for Qatar's cafés, dessert makers, and home bakeries — built to turn a scroll into an order.</p>
+      <p>Kira designs and builds websites — and shoots the photography and film that fill them — for Doha's cafés, restaurants, interior studios, and ambitious local brands.</p>
       <div class="btn-row">
         <a class="btn btn-ink" href="https://wa.me/97470196996" target="_blank" rel="noopener">Start on WhatsApp</a>
-        <a class="btn btn-line" href="#work">See the work</a>
+        <a class="btn btn-line" href="work.html">See the portfolio</a>
       </div>
     </div>
   </div>
 </section>
-
 <section class="ticker" aria-hidden="true">
   <div class="ticker-track">
-    <span><b>One team — design, build, photography</b><span class="dot">✦</span>Bilingual EN / AR<span class="dot">✦</span>Built phone-first<span class="dot">✦</span>Real photography, every project<span class="dot">✦</span>Doha, Qatar<span class="dot">✦</span>Live in weeks, not months<span class="dot">✦</span></span>
-    <span><b>One team — design, build, photography</b><span class="dot">✦</span>Bilingual EN / AR<span class="dot">✦</span>Built phone-first<span class="dot">✦</span>Real photography, every project<span class="dot">✦</span>Doha, Qatar<span class="dot">✦</span>Live in weeks, not months<span class="dot">✦</span></span>
+    <span><b>One studio — design, build, photo, film</b><span class="dot">✦</span>Bilingual EN / AR<span class="dot">✦</span>Built phone-first<span class="dot">✦</span>Real photography &amp; film, every project<span class="dot">✦</span>Doha, Qatar<span class="dot">✦</span>Live in weeks, not months<span class="dot">✦</span></span>
+    <span><b>One studio — design, build, photo, film</b><span class="dot">✦</span>Bilingual EN / AR<span class="dot">✦</span>Built phone-first<span class="dot">✦</span>Real photography &amp; film, every project<span class="dot">✦</span>Doha, Qatar<span class="dot">✦</span>Live in weeks, not months<span class="dot">✦</span></span>
   </div>
 </section>
-
 <section class="statement">
   <div class="wrap statement-inner">
     <span class="label kicker">The Studio</span>
-    <p class="big">Kira designs, builds, and photographs the site that makes a stranger trust you before they've ever walked in.</p>
+    <p class="big">Kira designs, builds, and films the site that makes a stranger trust you before they've ever walked in.</p>
     <div class="btn-row">
       <a class="btn btn-ink" href="https://wa.me/97470196996" target="_blank" rel="noopener">Start a Project</a>
-      <a class="btn btn-line" href="#work">See the Work</a>
+      <a class="btn btn-line" href="work.html">See the Portfolio</a>
     </div>
   </div>
 </section>
-
 <section class="mosaic">
   <div class="wrap">
     <span class="label kicker">Every Project, Three Parts</span>
-    <h2 class="head">Design. Build. Story.</h2>
+    <h2 class="head">Design. Build. Film.</h2>
     <div class="mosaic-grid">
       <div class="mosaic-tile">
         <div class="mosaic-media">
           <!-- PHOTO SLOT [TAREQ]: DESIGN — a Kira design artefact in progress (a layout sketched on paper, or a screen mid-design), warm-lit, portrait 3:4. Wide left tile of the mosaic. -->
-          <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 33vw" width="1200" height="1600" loading="lazy" decoding="async" alt="Hands typing on a laptop at a wooden desk">
+          <img src="assets/img/u-1515378791036-0648a3ef77b2-1600.jpg" srcset="assets/img/u-1515378791036-0648a3ef77b2-800.jpg 480w, assets/img/u-1515378791036-0648a3ef77b2-800.jpg 800w, assets/img/u-1515378791036-0648a3ef77b2-1600.jpg 1200w, assets/img/u-1515378791036-0648a3ef77b2-1600.jpg 1600w" sizes="(max-width: 860px) 100vw, 33vw" width="1200" height="1600" loading="lazy" decoding="async" alt="Hands typing on a laptop at a wooden desk">
         </div>
         <div class="mosaic-cap">
           <span class="tag">Design^</span>
           <h3>Brand &amp; interface</h3>
-          <p>A concept built around your menu and your customers — not a template with your logo dropped in.</p>
+          <p>A concept built around your business and your customers — not a template with your logo dropped in.</p>
         </div>
       </div>
       <div class="mosaic-tile">
         <div class="mosaic-media">
           <!-- PHOTO SLOT [TAREQ]: BUILD — a finished Kira site open on a phone held in-hand inside a café, portrait 3:4. Middle mosaic tile. -->
-          <img src="https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1523206489230-c012c64b2b48?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 33vw" width="1200" height="1600" loading="lazy" decoding="async" alt="A phone held out against a blurred waterside background">
+          <img src="assets/img/u-1523206489230-c012c64b2b48-1600.jpg" srcset="assets/img/u-1523206489230-c012c64b2b48-800.jpg 480w, assets/img/u-1523206489230-c012c64b2b48-800.jpg 800w, assets/img/u-1523206489230-c012c64b2b48-1600.jpg 1200w, assets/img/u-1523206489230-c012c64b2b48-1600.jpg 1600w" sizes="(max-width: 860px) 100vw, 33vw" width="1200" height="1600" loading="lazy" decoding="async" alt="A phone held out against a blurred waterside background">
         </div>
         <div class="mosaic-cap">
           <span class="tag">Build^</span>
@@ -827,594 +147,48 @@
       <div class="mosaic-tile">
         <div class="mosaic-media">
           <!-- PHOTO SLOT [TAREQ]: STORY — Tareq's camera or a shoot in progress on a food set, portrait 3:4. Right mosaic tile. -->
-          <img src="https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1512790182412-b19e6d62bc39?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 33vw" width="1200" height="1600" loading="lazy" decoding="async" alt="Close-up of a cinema camera lens">
+          <img src="assets/img/u-1512790182412-b19e6d62bc39-1600.jpg" srcset="assets/img/u-1512790182412-b19e6d62bc39-800.jpg 480w, assets/img/u-1512790182412-b19e6d62bc39-800.jpg 800w, assets/img/u-1512790182412-b19e6d62bc39-1600.jpg 1200w, assets/img/u-1512790182412-b19e6d62bc39-1600.jpg 1600w" sizes="(max-width: 860px) 100vw, 33vw" width="1200" height="1600" loading="lazy" decoding="async" alt="Close-up of a cinema camera lens">
         </div>
         <div class="mosaic-cap">
-          <span class="tag">Story^</span>
-          <h3>Real photography</h3>
-          <p>Our photography &amp; videography partner shoots your food and space — every project, not an upsell.</p>
+          <span class="tag">Film^</span>
+          <h3>Photography &amp; film</h3>
+          <p>Tareq, our photographer &amp; videographer, shoots your space, your product, and your people — stills and reels, every project.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<section class="opportunity">
+<section class="work-preview">
   <div class="wrap">
-    <span class="label kicker">The Opportunity in Plain Sight</span>
-    <h2 class="head">The menu is ready.<br>The website isn't.</h2>
-    <div class="opp-grid">
-      <div class="opp-copy">
-        <p>Doha's food and dessert scene is one of the fastest-moving in the Gulf — new dessert makers, home bakers, and cafés launch every month, almost all of them starting and staying on Instagram.</p>
-        <p>That works until it doesn't: DMs get missed, delivery apps take a cut of every order, and the page that represents your brand looks exactly like everyone else's grid.</p>
-        <p>Kira builds the site that sits underneath the Instagram page — the place a customer lands when they're actually ready to trust you and order.</p>
-        <a class="btn btn-ink" href="https://wa.me/97470196996" target="_blank" rel="noopener">Talk About Your Business</a>
-      </div>
-      <div class="shift-list">
-        <div class="shift-row">
-          <span class="num">01</span>
-          <div class="shift-pair">
-            <span class="shift-before">"DM us to order"</span>
-            <span class="shift-after"><span class="shift-arrow" aria-hidden="true">→</span>A menu people can tap through in seconds</span>
-          </div>
-        </div>
-        <div class="shift-row">
-          <span class="num">02</span>
-          <div class="shift-pair">
-            <span class="shift-before">Bio link to five different apps</span>
-            <span class="shift-after"><span class="shift-arrow" aria-hidden="true">→</span>One address that's actually yours</span>
-          </div>
-        </div>
-        <div class="shift-row">
-          <span class="num">03</span>
-          <div class="shift-pair">
-            <span class="shift-before">Best photos buried in old posts</span>
-            <span class="shift-after"><span class="shift-arrow" aria-hidden="true">→</span>A gallery built to sell the place</span>
-          </div>
-        </div>
-        <div class="shift-row">
-          <span class="num">04</span>
-          <div class="shift-pair">
-            <span class="shift-before">Looks like every other food page</span>
-            <span class="shift-after"><span class="shift-arrow" aria-hidden="true">→</span>Designed to look like nobody else</span>
-          </div>
-        </div>
-      </div>
+    <span class="label kicker">Portfolio</span>
+    <h2 class="head">Recent builds.</h2>
+    <div class="wp-grid">
+      <a class="wp-card" href="work.html">
+        <span class="wp-media"><img src="assets/portfolio/ptd.jpg" srcset="assets/portfolio/ptd-800.jpg 800w, assets/portfolio/ptd.jpg 1600w" sizes="(max-width:860px) 100vw, 380px" width="1600" height="1200" loading="lazy" decoding="async" alt="The Pearl Touch Design site"></span>
+        <span class="wp-name">Pearl Touch Design</span>
+        <span class="wp-tag">Interior fit-out</span>
+      </a>
+      <a class="wp-card" href="work.html">
+        <span class="wp-media"><img src="assets/portfolio/the-pour.jpg" srcset="assets/portfolio/the-pour-800.jpg 800w, assets/portfolio/the-pour.jpg 1600w" sizes="(max-width:860px) 100vw, 380px" width="1600" height="1200" loading="lazy" decoding="async" alt="The Pour site"></span>
+        <span class="wp-name">The Pour</span>
+        <span class="wp-tag">Specialty café</span>
+      </a>
+      <a class="wp-card" href="work.html">
+        <span class="wp-media"><img src="assets/portfolio/the-detail.jpg" srcset="assets/portfolio/the-detail-800.jpg 800w, assets/portfolio/the-detail.jpg 1600w" sizes="(max-width:860px) 100vw, 380px" width="1600" height="1200" loading="lazy" decoding="async" alt="The Detail site"></span>
+        <span class="wp-name">The Detail</span>
+        <span class="wp-tag">Automotive</span>
+      </a>
     </div>
+    <a class="btn btn-ink" href="work.html">See the full portfolio</a>
   </div>
 </section>
-
-<section class="big-panel">
-  <div class="big-panel-media">
-    <!-- PHOTO SLOT [TAREQ]: ONE TEAM panel — a wide café or workspace interior, landscape, dark enough for white copy over it; full-bleed background. -->
-    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=75&w=1600&auto=format&fit=crop 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="Warm, plant-filled café interior with wooden tables">
-  </div>
-  <div class="wrap">
-    <div class="big-panel-head">
-      <span class="label kicker">One Studio. One Site.</span>
-      <h2 class="head">One team, start to finish.</h2>
-      <p>No hand-offs between a designer, a developer, and a photographer who've never spoken. Kira runs every part of the build, so the three actually fit together.</p>
-    </div>
-    <div class="trio">
-      <div class="trio-item">
-        <span class="tag">Design^</span>
-        <p>Interface &amp; identity, made to fit your menu and your customers, not a stock layout.</p>
-      </div>
-      <div class="trio-item">
-        <span class="tag">Build^</span>
-        <p>A phone-first site, live on your own address, connected to WhatsApp or ordering.</p>
-      </div>
-      <div class="trio-item">
-        <span class="tag">Story^</span>
-        <p>A shoot with our photography &amp; video partner — included in the build, not upsold after.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="split">
-  <div class="wrap">
-    <span class="label kicker">What It Changes</span>
-    <h2 class="head">Built to work while you're not looking.</h2>
-  </div>
-  <div class="split-grid">
-    <div class="split-panel">
-      <div class="split-media">
-        <!-- PHOTO SLOT [TAREQ]: FOR CUSTOMERS — a bright, inviting café interior a customer would want to find, landscape 16/10. Left split panel. -->
-        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 50vw" width="1400" height="875" loading="lazy" decoding="async" alt="Bright café interior with plants and rattan chairs">
-      </div>
-      <span class="tag">For Customers</span>
-      <h3>Found, not just followed</h3>
-      <p>A site that shows up in a search, opens fast on mobile data, and gets someone from "looks nice" to "let me order" in one scroll.</p>
-      <a class="btn btn-line" href="#services">See Services</a>
-    </div>
-    <div class="split-panel">
-      <div class="split-media">
-        <!-- PHOTO SLOT [TAREQ]: FOR YOU — an order moment: a phone payment, a counter handoff, landscape 16/10. Right split panel. -->
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 50vw" width="1400" height="875" loading="lazy" decoding="async" alt="A customer paying by phone at a shop counter">
-      </div>
-      <span class="tag">For You</span>
-      <h3>Orders that don't live in your DMs</h3>
-      <p>Connect WhatsApp, a booking link, or your ordering platform of choice — one clear way in, not five scattered links.</p>
-      <a class="btn btn-line" href="#process">See the Process</a>
-    </div>
-  </div>
-</section>
-
-<section class="services" id="services">
-  <div class="wrap">
-    <!--
-      PRICES REMOVED (2026-07-15) at Marwan's request — pricing is negotiated in person
-      for now. To restore visible prices, the previous provisional figures were:
-        01 Starter One-Pager ......... from QAR 2,500
-        02 Full Site + Ordering ...... from QAR 6,500   (most requested)
-        03 Photo & Video Add-on ...... from QAR 1,800
-      Re-add in the three .pkg-price divs below, the pkg-foot line, and the FAQ "How much"
-      answer — here AND in kira-ar.html — and note the change in CHANGELOG.md.
-    -->
-    <span class="label kicker">Packages</span>
-    <h2 class="head">Two builds and an add-on.</h2>
-    <div class="pkg-grid">
-      <div class="pkg-card">
-        <span class="pkg-num">01</span>
-        <div class="pkg-name">Starter One-Pager</div>
-        <div class="pkg-price"><span class="from">Pricing</span>Let&#8217;s talk</div>
-        <p class="pkg-who">For a new spot that needs a real address online now.</p>
-        <ul class="pkg-list">
-          <li>Menu, story, hours, and location on one page</li>
-          <li>WhatsApp or ordering-link button</li>
-          <li>Live in about two weeks</li>
-          <li>Half-day photography session included</li>
-        </ul>
-        <div class="pkg-cta">
-          <a class="btn btn-line" href="https://wa.me/97470196996?text=Hi%20Kira%20%E2%80%94%20I%27m%20interested%20in%20the%20Starter%20One-Pager%20for%20my%20business." target="_blank" rel="noopener">Start the one-pager</a>
-        </div>
-      </div>
-      <div class="pkg-card featured crop">
-        <span class="cm-tr"></span><span class="cm-bl"></span>
-        <span class="pkg-num">02</span>
-        <div class="pkg-name">Full Site + Ordering</div>
-        <span class="pkg-flag">Most requested</span>
-        <div class="pkg-price"><span class="from">Pricing</span>Let&#8217;s talk</div>
-        <p class="pkg-who">For a growing brand that needs room to move.</p>
-        <ul class="pkg-list">
-          <li>Multi-page site with a full menu</li>
-          <li>Ordering or booking flow built in</li>
-          <li>Bilingual English &amp; Arabic included</li>
-          <li>Full photo session with Tareq</li>
-        </ul>
-        <div class="pkg-cta">
-          <a class="btn btn-pop" href="https://wa.me/97470196996?text=Hi%20Kira%20%E2%80%94%20I%27m%20interested%20in%20the%20Full%20Site%20%2B%20Ordering%20build%20for%20my%20business." target="_blank" rel="noopener">Start the full build</a>
-        </div>
-      </div>
-      <div class="pkg-card">
-        <span class="pkg-num">03</span>
-        <div class="pkg-name">Photo &amp; Video Add-on</div>
-        <div class="pkg-price"><span class="from">Pricing</span>Let&#8217;s talk</div>
-        <p class="pkg-who">Add it to either build, or book it on its own.</p>
-        <ul class="pkg-list">
-          <li>Half- or full-day shoot with Tareq</li>
-          <li>Your dishes, your space, your people</li>
-          <li>Edited photo set</li>
-          <li>Short-form video cuts for reels</li>
-        </ul>
-        <div class="pkg-cta">
-          <a class="btn btn-line" href="https://wa.me/97470196996?text=Hi%20Kira%20%E2%80%94%20I%27d%20like%20to%20add%20the%20Photo%20%26%20Video%20shoot%20to%20my%20project." target="_blank" rel="noopener">Add the shoot</a>
-        </div>
-      </div>
-    </div>
-    <p class="pkg-foot">Every project is scoped — and priced — in one conversation. We agree the number together before anything starts.</p>
-  </div>
-</section>
-
-<section class="process" id="process">
-  <div class="wrap">
-    <span class="label kicker">How It Works</span>
-    <h2 class="head">Five moves, one launch.</h2>
-    <div class="proc-grid">
-      <div class="proc-media">
-        <!-- PHOTO SLOT [TAREQ]: PROCESS — a behind-the-scenes frame from a real build or shoot day, portrait-leaning; sits beside the five steps with the FIG. 01 tag. -->
-        <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 40vw" width="1400" height="1050" loading="lazy" decoding="async" alt="A warm, wood-lined bakery display case stocked with fresh bread and pastries">
-        <span class="fig">FIG. 01</span>
-        <span class="rot">THE PROCESS</span>
-      </div>
-      <div class="proc-copy">
-        <p class="lead">Every Kira project — one-pager or full build — runs through the same five steps, whether or not the photo &amp; video add-on is included.</p>
-        <div class="proc-steps">
-          <div class="proc-step">
-            <span class="num">01</span>
-            <div><h3>Discover</h3><p>A WhatsApp or in-person chat about your menu, your customers, and what's actually slowing orders down today.</p></div>
-          </div>
-          <div class="proc-step">
-            <span class="num">02</span>
-            <div><h3>Design</h3><p>A concept built around your brand — not a template — reviewed with you before a single line of code is written.</p></div>
-          </div>
-          <div class="proc-step">
-            <span class="num">03</span>
-            <div><h3>Build</h3><p>The site is built for phones first, since that's how nearly every customer will actually find you.</p></div>
-          </div>
-          <div class="proc-step">
-            <span class="num">04</span>
-            <div><h3>Shoot</h3><p>If included, our photographer &amp; videographer partner shoots your food and space — no stock photos.</p></div>
-          </div>
-          <div class="proc-step">
-            <span class="num">05</span>
-            <div><h3>Launch</h3><p>Live on your own domain, connected to WhatsApp or your ordering platform of choice.</p></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <span class="label promise-title">The promise</span>
-    <div class="promise">
-      <div class="promise-item">
-        <span class="pk">Fast</span>
-        <p>Replies within 24 hours — usually sooner.</p>
-      </div>
-      <div class="promise-item">
-        <span class="pk">Clear</span>
-        <p>You see the design before you pay for the build.</p>
-      </div>
-      <div class="promise-item">
-        <span class="pk">Yours</span>
-        <p>You own everything — domain, site, and photos.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="meet">
-  <div class="meet-media">
-    <!-- PHOTO SLOT [TAREQ]: full-bleed dark food frame with action (a pour, a dusting, a flame) — this is Tareq's own showcase panel; landscape, dark enough for white copy bottom-left. -->
-    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=75&w=1600&auto=format&fit=crop 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="Powdered sugar falling over a fresh croissant on a dark surface">
-    <div class="meet-copy">
-      <span class="label">The Differentiator</span>
-      <h2>Meet your shoot.</h2>
-      <p>Every Kira project — one-pager or full build — includes an on-site shoot with our photography &amp; videography partner. No stock photos, ever.</p>
-      <a class="btn btn-line-dark" href="#services">See What's Included</a>
-    </div>
-  </div>
-</section>
-
-<section class="partners">
-  <div class="wrap">
-    <span class="label kicker">In Practice</span>
-    <h2 class="head">What the shoot actually gets you.</h2>
-    <div class="partner-grid">
-      <div class="partner-tile">
-        <!-- PHOTO SLOT [TAREQ]: ON LOCATION — a real client (or friend's kitchen) at work: hands, counter, environment; portrait 4/5, warm. Left partner tile. -->
-        <img src="https://images.unsplash.com/photo-1587241321921-91a834d6d191?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1587241321921-91a834d6d191?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1587241321921-91a834d6d191?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1587241321921-91a834d6d191?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1587241321921-91a834d6d191?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 50vw" width="1200" height="1500" loading="lazy" decoding="async" alt="A baker arranging fresh bread inside a warm, wood-lined bakery">
-        <div class="partner-cap">
-          <span class="tag">On Location</span>
-          <h3>Shot where you actually work</h3>
-          <p>Your kitchen, your counter, your space — not a generic set.</p>
-        </div>
-      </div>
-      <div class="partner-tile">
-        <!-- PHOTO SLOT [TAREQ]: EVERY ANGLE — one hero dish, plated, styled, close; portrait 4/5. Right partner tile. -->
-        <img src="https://images.unsplash.com/photo-1517244683847-7456b63c5969?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1517244683847-7456b63c5969?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1517244683847-7456b63c5969?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1517244683847-7456b63c5969?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1517244683847-7456b63c5969?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 860px) 100vw, 50vw" width="1200" height="1500" loading="lazy" decoding="async" alt="A traditional dessert served in a metal bowl on a rustic wooden table">
-        <div class="partner-cap">
-          <span class="tag">Every Angle</span>
-          <h3>The dish, the plating, the pour</h3>
-          <p>Photos built to make someone stop scrolling and order.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="cases" id="work">
-  <div class="wrap">
-    <span class="label kicker">Concept builds — our standard before the first client</span>
-    <h2 class="head">We built the proof first.</h2>
-    <p class="case-intro">Kira hasn't launched its first client site yet, so we built full concept sites for the three kinds of businesses we serve. This is the exact standard every paying project starts from.</p>
-    <div class="case-list">
-
-      <article class="case-row">
-        <figure class="case-figure">
-          <!-- PHOTO SLOT [TAREQ]: VELVET & VINE — replace with a real frame from the concept build's shoot: café counter or signature drink, landscape 4/3, dark and warm. Case-study row 01. -->
-          <button class="case-media" type="button" data-lightbox="lb-velvet" aria-haspopup="dialog" aria-label="View the Velvet &amp; Vine concept image full screen">
-            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1200" height="900" loading="lazy" decoding="async" alt="Barista pouring milk into a latte">
-            <span class="zoom" aria-hidden="true">View</span>
-          </button>
-        </figure>
-        <div class="case-copy">
-          <span class="case-idx">01 — Concept</span>
-          <h3 class="case-name">Velvet &amp; Vine</h3>
-          <p class="case-formula">Café · a menu buried in photo captions → a one-page site with a tappable menu</p>
-          <div class="case-meta">
-            <div class="m"><span class="mk">Problem</span><span class="mv">The full menu lived in Instagram captions and answered DMs, one question at a time.</span></div>
-            <div class="m"><span class="mk">Built</span><span class="mv">A one-page concept site: menu, gallery, hours, location, and a WhatsApp order button.</span></div>
-            <div class="m"><span class="mk">Designed to</span><span class="mv">Designed to take a customer from a saved post to a placed order in one scroll.</span></div>
-          </div>
-          <div class="ba" aria-hidden="true">
-            <div class="ba-side">
-              <div class="ba-phone">
-                <span class="ba-ava"></span>
-                <span class="ba-grid"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="ba-dm">DM to order</span>
-              </div>
-              <span class="ba-label">Instagram only</span>
-            </div>
-            <span class="ba-arrow">→</span>
-            <div class="ba-side ba-side-after">
-              <div class="ba-browser">
-                <span class="ba-bar"><i></i><i></i><i></i></span>
-                <span class="ba-heroblock"></span>
-                <span class="ba-rows"><i></i><i></i><i></i></span>
-                <span class="ba-wa">WhatsApp</span>
-              </div>
-              <span class="ba-label">The concept site</span>
-            </div>
-          </div>
-          <!-- TESTIMONIAL SLOT — uncomment and fill when a real quote exists:
-          <figure class="quote-slot">
-            <blockquote><p>Quote goes here.</p></blockquote>
-            <figcaption>Name — role, business</figcaption>
-          </figure>
-          -->
-        </div>
-      </article>
-
-      <article class="case-row">
-        <figure class="case-figure">
-          <!-- PHOTO SLOT [TAREQ]: LATE BLOOM — replace with a plated dessert frame from the concept shoot, landscape 4/3, soft light. Case-study row 02. -->
-          <button class="case-media" type="button" data-lightbox="lb-latebloom" aria-haspopup="dialog" aria-label="View the Late Bloom concept image full screen">
-            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1200" height="900" loading="lazy" decoding="async" alt="Panna cotta desserts with strawberries in glass jars">
-            <span class="zoom" aria-hidden="true">View</span>
-          </button>
-        </figure>
-        <div class="case-copy">
-          <span class="case-idx">02 — Concept</span>
-          <h3 class="case-name">Late Bloom</h3>
-          <p class="case-formula">Dessert studio · orders scattered across five bio links → one address with an ordering flow</p>
-          <div class="case-meta">
-            <div class="m"><span class="mk">Problem</span><span class="mv">A bio link pointing to five different apps, each taking a cut of every order.</span></div>
-            <div class="m"><span class="mk">Built</span><span class="mv">A multi-page concept in English and Arabic: full menu, gallery, and a direct ordering flow.</span></div>
-            <div class="m"><span class="mk">Designed to</span><span class="mv">Designed to bring orders back to an address the studio actually owns.</span></div>
-          </div>
-          <a class="btn btn-line-dark" style="margin-top:22px;" href="demos/late-bloom.html" target="_blank" rel="noopener">Visit the live concept →</a>
-          <div class="ba" aria-hidden="true">
-            <div class="ba-side">
-              <div class="ba-phone">
-                <span class="ba-ava"></span>
-                <span class="ba-grid"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="ba-dm">DM to order</span>
-              </div>
-              <span class="ba-label">Instagram only</span>
-            </div>
-            <span class="ba-arrow">→</span>
-            <div class="ba-side ba-side-after">
-              <div class="ba-browser">
-                <span class="ba-bar"><i></i><i></i><i></i></span>
-                <span class="ba-heroblock"></span>
-                <span class="ba-rows"><i></i><i></i><i></i></span>
-                <span class="ba-wa">WhatsApp</span>
-              </div>
-              <span class="ba-label">The concept site</span>
-            </div>
-          </div>
-          <!-- TESTIMONIAL SLOT — uncomment and fill when a real quote exists:
-          <figure class="quote-slot">
-            <blockquote><p>Quote goes here.</p></blockquote>
-            <figcaption>Name — role, business</figcaption>
-          </figure>
-          -->
-        </div>
-      </article>
-
-      <article class="case-row">
-        <figure class="case-figure">
-          <!-- PHOTO SLOT [TAREQ]: BAYT SUKKAR — replace with a home-baking frame: hands shaping dough or loaves on a home counter, landscape 4/3, warm morning light. Case-study row 03. -->
-          <button class="case-media" type="button" data-lightbox="lb-baytsukkar" aria-haspopup="dialog" aria-label="View the Bayt Sukkar concept image full screen">
-            <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=1200&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1200" height="900" loading="lazy" decoding="async" alt="Rustic sourdough loaves dusted with flour on a bakery shelf">
-            <span class="zoom" aria-hidden="true">View</span>
-          </button>
-        </figure>
-        <div class="case-copy">
-          <span class="case-idx">03 — Concept</span>
-          <h3 class="case-name">Bayt Sukkar</h3>
-          <p class="case-formula">Home bakery · a bake list that vanished with every story → a standing menu that takes orders</p>
-          <div class="case-meta">
-            <div class="m"><span class="mk">Problem</span><span class="mv">The week's bakes were posted to stories and gone in 24 hours, along with the orders.</span></div>
-            <div class="m"><span class="mk">Built</span><span class="mv">A bilingual one-page concept: standing menu, order-by-WhatsApp, and pickup details.</span></div>
-            <div class="m"><span class="mk">Designed to</span><span class="mv">Designed to let regulars order without waiting for the next story.</span></div>
-          </div>
-          <div class="ba" aria-hidden="true">
-            <div class="ba-side">
-              <div class="ba-phone">
-                <span class="ba-ava"></span>
-                <span class="ba-grid"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-                <span class="ba-dm">DM to order</span>
-              </div>
-              <span class="ba-label">Instagram only</span>
-            </div>
-            <span class="ba-arrow">→</span>
-            <div class="ba-side ba-side-after">
-              <div class="ba-browser">
-                <span class="ba-bar"><i></i><i></i><i></i></span>
-                <span class="ba-heroblock"></span>
-                <span class="ba-rows"><i></i><i></i><i></i></span>
-                <span class="ba-wa">WhatsApp</span>
-              </div>
-              <span class="ba-label">The concept site</span>
-            </div>
-          </div>
-          <!-- TESTIMONIAL SLOT — uncomment and fill when a real quote exists:
-          <figure class="quote-slot">
-            <blockquote><p>Quote goes here.</p></blockquote>
-            <figcaption>Name — role, business</figcaption>
-          </figure>
-          -->
-        </div>
-      </article>
-
-    </div>
-
-    <div class="next-slot crop">
-      <span class="cm-tr"></span><span class="cm-bl"></span>
-      <span class="label">Next Slot</span>
-      <h3>Your business, built next.</h3>
-      <p>This slot is reserved for the first real Kira client — swapped in with the actual site once it launches.</p>
-      <a class="btn btn-line-dark" href="https://wa.me/97470196996?text=Hi%20Kira%20%E2%80%94%20I%20want%20the%20next%20portfolio%20slot%20for%20my%20business." target="_blank" rel="noopener">Claim this slot</a>
-    </div>
-  </div>
-
-  <!-- PHOTO SLOT [TAREQ]: the three lightbox images below mirror the case-study row slots above — swap them together, at w=1600. -->
-  <dialog class="lightbox" id="lb-velvet" aria-label="Velvet &amp; Vine — concept image, full view">
-    <button class="lb-close" type="button" data-close>Close</button>
-    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1541167760496-1628856ab772?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1067" loading="lazy" decoding="async" alt="Barista pouring milk into a latte">
-  </dialog>
-  <dialog class="lightbox" id="lb-latebloom" aria-label="Late Bloom — concept image, full view">
-    <button class="lb-close" type="button" data-close>Close</button>
-    <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1488477181946-6428a0291777?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1067" loading="lazy" decoding="async" alt="Panna cotta desserts with strawberries in glass jars">
-  </dialog>
-  <dialog class="lightbox" id="lb-baytsukkar" aria-label="Bayt Sukkar — concept image, full view">
-    <button class="lb-close" type="button" data-close>Close</button>
-    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1509440159596-0249088772ff?q=75&w=1600&auto=format&fit=crop 1600w" sizes="(max-width: 1180px) 92vw, 1080px" width="1600" height="1067" loading="lazy" decoding="async" alt="Rustic sourdough loaves dusted with flour on a bakery shelf">
-  </dialog>
-</section>
-
-<section class="about" id="about">
-  <div class="wrap">
-    <span class="label kicker">About Kira</span>
-    <div class="about-split">
-      <div class="about-lead-col">
-        <h2 class="head">Why Kira exists.</h2>
-        <div class="about-portrait crop">
-          <span class="cm-tr"></span><span class="cm-bl"></span>
-          <div class="about-media">
-            <picture>
-              <source srcset="assets/founder-marwan.webp" type="image/webp">
-              <img src="assets/founder-marwan.jpg" width="1000" height="1333" loading="lazy" decoding="async" alt="Marwan Ayman, founder of Kira, in a Doha café">
-            </picture>
-          </div>
-          <div class="about-meta">
-            <span class="nm">Marwan Ayman</span>
-            <span class="rl">Founder &amp; Lead Designer — Doha</span>
-          </div>
-        </div>
-      </div>
-      <div class="about-note">
-        <p class="lead">I kept watching great food in Doha live and die inside an Instagram grid.</p>
-        <p>Kira started from one observation: the city's best new cafés, bakers, and dessert makers pour everything into their food — and almost nothing into the one place a customer actually decides to trust them.</p>
-        <p>So Kira builds the part most studios treat as an afterthought: the site underneath the page. One team designs it, builds it, and shoots it — nothing gets lost between three people who've never met.</p>
-        <p>Kira launched without waiting for permission. We built full sites for the kinds of businesses we serve — so the first thing a real client sees is finished work, not promises.</p>
-        <div class="about-sign">Marwan — Founder, Kira</div>
-        <div class="about-facts">
-          <span>Based in Doha</span>
-          <span>Founder-led</span>
-          <span>One team, start to finish</span>
-          <span>Arabic &amp; English</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="faq" id="faq">
-  <div class="wrap">
-    <span class="label kicker">Before you ask</span>
-    <h2 class="head">Fair questions.</h2>
-    <div class="faq-list">
-      <details class="faq-item">
-        <summary><span class="faq-q">How much does a site cost?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>Pricing is flexible right now — we agree the number together, in person or on WhatsApp, before anything starts. Tell us what you need, we scope it in one conversation, and the number you agree to is the number you pay.</p>
-        </div></div>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">How long until it's live?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>A Starter One-Pager takes about two weeks, a Full Site four to five. The clock starts once we have your content — menu, prices, and the shoot booked.</p>
-        </div></div>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">Do I need to buy a domain or hosting?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>No — we handle the setup as part of the build. Both the domain and the hosting are registered in your name, so you own them from day one.</p>
-        </div></div>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">Can it be in Arabic too?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>Bilingual is core to how we build — this very site runs in English and Arabic. The full build includes both languages; the one-pager can add Arabic when you need it.</p>
-        </div></div>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">Who takes the photos?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>Tareq, our photography and video partner, shoots on-site at your place — it's included in every build, not an upsell. No stock photos, ever.</p>
-        </div></div>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">I only have Instagram. Is that enough to start?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>Yes — that's the point. Your menu and your Instagram page are all we need on day one; <a href="https://wa.me/97470196996" target="_blank" rel="noopener">send them over on WhatsApp</a> and we take it from there.</p>
-        </div></div>
-      </details>
-      <details class="faq-item">
-        <summary><span class="faq-q">What happens after launch?</span><span class="faq-mk" aria-hidden="true"></span></summary>
-        <div class="faq-ans"><div class="faq-ans-inner">
-          <p>The first month of tweaks is included. After that you choose: a simple care arrangement, or a full handoff — you're never locked in.</p>
-        </div></div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<section class="contact-form" id="contact">
-  <div class="wrap">
-    <div class="cf-grid">
-      <div class="cf-intro">
-        <span class="label kicker">Start a Project</span>
-        <h2 class="head">Tell us about your spot.</h2>
-        <p>Fill this in and it opens as a ready-to-send WhatsApp message — or reach us directly below.</p>
-        <div class="cf-direct">
-          <a href="https://wa.me/97470196996" target="_blank" rel="noopener"><span class="lb">WhatsApp</span>+974 7019 6996</a>
-          <a href="mailto:marwanayman14@gmail.com"><span class="lb">Email</span>marwanayman14@gmail.com</a>
-        </div>
-      </div>
-      <form class="cf-form" id="cf-form" novalidate>
-        <div class="cf-row">
-          <div class="cf-field">
-            <label for="cf-name">Name <span class="req">*</span></label>
-            <input id="cf-name" name="name" type="text" placeholder="Your name" required aria-required="true">
-          </div>
-          <div class="cf-field">
-            <label for="cf-business">Business name</label>
-            <input id="cf-business" name="business" type="text" placeholder="Your café, bakery, or brand">
-          </div>
-        </div>
-        <div class="cf-field">
-          <label for="cf-need">What do you need</label>
-          <select id="cf-need" name="need">
-            <option>Starter One-Pager</option>
-            <option>Full Site + Ordering</option>
-            <option>Photo &amp; Video Add-on</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="cf-field">
-          <label for="cf-message">Message <span style="text-transform:none;letter-spacing:0.02em;">(optional)</span></label>
-          <textarea id="cf-message" name="message" placeholder="What are you hoping to build?"></textarea>
-        </div>
-        <div class="cf-actions">
-          <button type="submit" class="btn btn-pop">Send on WhatsApp
-            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2"/></svg>
-          </button>
-          <button type="button" class="cf-secondary" id="cf-email">Prefer email? <span class="lk">Send the same message</span></button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
 <section class="closing">
   <div class="closing-media">
     <!-- PHOTO SLOT [TAREQ]: CLOSING — a wide, dark table-spread or night-service frame, landscape, moody; sits behind the final CTA. -->
-    <img src="https://images.unsplash.com/photo-1521305916504-4a1121188589?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1521305916504-4a1121188589?q=75&w=480&auto=format&fit=crop 480w, https://images.unsplash.com/photo-1521305916504-4a1121188589?q=75&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1521305916504-4a1121188589?q=75&w=1200&auto=format&fit=crop 1200w, https://images.unsplash.com/photo-1521305916504-4a1121188589?q=75&w=1600&auto=format&fit=crop 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="Sliders plated on a table against a dark brick background">
+    <img src="assets/img/u-1521305916504-4a1121188589-1600.jpg" srcset="assets/img/u-1521305916504-4a1121188589-800.jpg 480w, assets/img/u-1521305916504-4a1121188589-800.jpg 800w, assets/img/u-1521305916504-4a1121188589-1600.jpg 1200w, assets/img/u-1521305916504-4a1121188589-1600.jpg 1600w" sizes="100vw" width="1600" height="900" loading="lazy" decoding="async" alt="Sliders plated on a table against a dark brick background">
     <div class="closing-inner crop">
       <span class="cm-tr"></span><span class="cm-bl"></span>
+      <svg class="closing-mark" aria-hidden="true" viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.1" fill="none"><path d="M2.4 12Q12 4.6 21.6 12"/><path d="M2.4 12Q12 19.4 21.6 12"/></g><circle cx="12" cy="12" r="3" fill="#f0432a"/><circle cx="12" cy="12" r="1.2" fill="var(--ink)"/><path d="M10.44 9.42L10.83 10.53L11.94 10.92L10.83 11.31L10.44 12.42L10.05 11.31L8.94 10.92L10.05 10.53Z" fill="#f2efe6"/></svg>
       <span class="label kicker">Get Started</span>
       <h2>Your next customer is already looking.</h2>
       <p>They're on Instagram, on a delivery app, searching for somewhere new to try. Give them a website that convinces them before they even walk in.</p>
@@ -1425,30 +199,31 @@
     </div>
   </div>
 </section>
+</main>
 
 <footer>
   <div class="wrap">
-    <div class="foot-top">
+    <div class="foot-lockup" aria-hidden="true"><span class="fw">KIRA</span><svg viewBox="0 0 24 24" fill="none"><g stroke="currentColor" stroke-width="1.1" fill="none"><path d="M2.4 12Q12 4.6 21.6 12"/><path d="M2.4 12Q12 19.4 21.6 12"/></g><circle cx="12" cy="12" r="3" fill="#f0432a"/><circle cx="12" cy="12" r="1.2" fill="var(--ink)"/><path d="M10.44 9.42L10.83 10.53L11.94 10.92L10.83 11.31L10.44 12.42L10.05 11.31L8.94 10.92L10.05 10.53Z" fill="#f2efe6"/></svg></div>
+    <div class="foot-grid">
       <div>
-        <div class="foot-word">KIRA</div>
-        <div class="foot-contact" style="margin-top:18px;">
+        <div class="foot-contact">
           <div><a href="https://wa.me/97470196996" target="_blank" rel="noopener">+974 7019 6996</a></div>
           <div><a href="mailto:marwanayman14@gmail.com">marwanayman14@gmail.com</a></div>
         </div>
         <div class="foot-reply">Replies within 24 hours.</div>
       </div>
-      <nav class="foot-links">
-        <a href="#studio">Studio</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="index.html">Home</a>
+        <a href="work.html">Portfolio</a>
+        <a href="film.html">Film</a>
+        <a href="services.html">Services</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Kira. Doha, Qatar.</span>
-      <span>Site &amp; code by Kira.</span>
+      <span>Site, photography &amp; film by Kira.</span>
     </div>
   </div>
 </footer>
@@ -1459,365 +234,12 @@
 
 <div id="lang-transition" aria-hidden="true">
   <div class="lt-inner">
-    <svg viewBox="0 0 24 24" fill="none" class="lt-star"><path d="M12 2L13.8 10.2L22 12L13.8 13.8L12 22L10.2 13.8L2 12L10.2 10.2L12 2Z" fill="currentColor"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" class="lt-star"><g stroke="currentColor" stroke-width="1.1" fill="none"><path d="M2.4 12Q12 4.6 21.6 12"/><path d="M2.4 12Q12 19.4 21.6 12"/></g><circle cx="12" cy="12" r="3" fill="#f0432a"/><circle cx="12" cy="12" r="1.2" fill="var(--ink)"/><path d="M10.44 9.42L10.83 10.53L11.94 10.92L10.83 11.31L10.44 12.42L10.05 11.31L8.94 10.92L10.05 10.53Z" fill="#f2efe6"/></svg>
     <span class="lt-word">KIRA</span>
     <span class="lt-label" id="lt-label"></span>
   </div>
 </div>
 
-<!-- GSAP 3.13.0 (pinned, jsDelivr) — deferred, ahead of the behavior script; progressive enhancement only -->
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
-
-<script>
-(function(){
-  var reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  /* language toggle curtain — duration read from the CSS (--lt-dur), one source of truth */
-  var PAGE_LABEL = 'English';
-  var overlay = document.getElementById('lang-transition');
-  var ltLabel = document.getElementById('lt-label');
-  var ltDur = 520;
-  if (overlay) {
-    var d = parseFloat(getComputedStyle(overlay).getPropertyValue('--lt-dur'));
-    if (d) ltDur = d * 1000;
-  }
-  if (sessionStorage.getItem('kira-transition') === '1') {
-    try{ sessionStorage.removeItem('kira-transition'); }catch(e){}
-    if (overlay && !reduce) {
-      if (ltLabel) ltLabel.textContent = PAGE_LABEL;
-      overlay.classList.add('cover');
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){ overlay.classList.add('out'); }); });
-      overlay.addEventListener('transitionend', function(){ overlay.className = ''; }, {once:true});
-    }
-  }
-  document.querySelectorAll('a.lang-toggle').forEach(function(a){
-    a.addEventListener('click', function(e){
-      var href = a.getAttribute('href');
-      if (reduce || !overlay) return;
-      e.preventDefault();
-      if (ltLabel) ltLabel.textContent = a.getAttribute('data-label') || '';
-      try{ sessionStorage.setItem('kira-transition','1'); }catch(err){}
-      overlay.classList.add('show');
-      requestAnimationFrame(function(){ requestAnimationFrame(function(){ overlay.classList.add('in'); }); });
-      setTimeout(function(){ window.location.href = href; }, ltDur);
-    });
-  });
-
-  /* scroll progress */
-  var bar = document.getElementById('scrollProgress');
-  function onScroll(){
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    var pct = max > 0 ? (h.scrollTop || document.body.scrollTop) / max : 0;
-    bar.style.width = (pct * 100).toFixed(2) + '%';
-  }
-  document.addEventListener('scroll', onScroll, {passive:true});
-  onScroll();
-
-  /* scroll reveal */
-  document.body.classList.add('reveal-on');
-  var targets = document.querySelectorAll(
-    '.statement-inner, .mosaic .kicker, .mosaic .head, .mosaic-tile, .opportunity .kicker, .opportunity .head, .opp-copy, .shift-row, .big-panel-head, .trio-item, .split .kicker, .split .head, .split-panel, .services .kicker, .services .head, .pkg-card, .pkg-foot, .process .kicker, .process .head, .proc-media, .proc-step, .promise-title, .promise-item, .meet-copy, .partners .kicker, .partners .head, .partner-tile, .cases .kicker, .cases .head, .case-intro, .case-row, .next-slot, .about .kicker, .about .head, .about-portrait, .about-note, .faq .kicker, .faq .head, .faq-item, .cf-intro, .cf-direct, .cf-form, .closing-inner'
-  );
-  targets.forEach(function(el){ el.classList.add('reveal'); });
-  if (reduce || !('IntersectionObserver' in window)) {
-    targets.forEach(function(el){ el.classList.add('in'); });
-  } else {
-    /* defer the decision: if GSAP loaded (deferred), it owns .reveal instead — see the Motion block */
-    var startIO = function(){
-      if (window.gsap) return;
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){
-          if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-        });
-      }, {rootMargin:'0px 0px -8% 0px', threshold:0.12});
-      targets.forEach(function(el){ io.observe(el); });
-    };
-    if (document.readyState === 'loading') { window.addEventListener('DOMContentLoaded', startIO); }
-    else { startIO(); }
-  }
-
-  /* contact form → prefilled WhatsApp (primary) or email (secondary) */
-  var cf = document.getElementById('cf-form');
-  if (cf) {
-    var cfLines = function(){
-      var g = function(n){ var el = cf.querySelector('[name="'+n+'"]'); return el ? el.value.trim() : ''; };
-      var lines = ["Hi Kira, I'd like to start a project.", ''];
-      if (g('name')) lines.push('Name: ' + g('name'));
-      if (g('business')) lines.push('Business: ' + g('business'));
-      if (g('need')) lines.push('Interested in: ' + g('need'));
-      if (g('message')) { lines.push(''); lines.push(g('message')); }
-      return lines;
-    };
-    var cfValid = function(){
-      var nameEl = cf.querySelector('#cf-name');
-      if (nameEl && !nameEl.value.trim()) { nameEl.focus(); nameEl.style.borderBottomColor = 'var(--pop)'; return false; }
-      return true;
-    };
-    cf.addEventListener('submit', function(e){
-      e.preventDefault();
-      if (!cfValid()) return;
-      window.open('https://wa.me/97470196996?text=' + encodeURIComponent(cfLines().join('\n')), '_blank', 'noopener');
-    });
-    var cfEmail = document.getElementById('cf-email');
-    if (cfEmail) {
-      cfEmail.addEventListener('click', function(){
-        if (!cfValid()) return;
-        var nameEl = cf.querySelector('#cf-name');
-        var subject = 'New project enquiry' + (nameEl && nameEl.value.trim() ? ' — ' + nameEl.value.trim() : '');
-        window.location.href = 'mailto:marwanayman14@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(cfLines().join('\r\n'));
-      });
-    }
-  }
-
-  /* nav scrollspy */
-  var navMap = {};
-  document.querySelectorAll('.nav-links a[href^="#"]').forEach(function(a){
-    var id = a.getAttribute('href').slice(1);
-    if (id) navMap[id] = a;
-  });
-  var sections = Object.keys(navMap)
-    .map(function(id){ return document.getElementById(id); })
-    .filter(Boolean);
-  if (sections.length) {
-    var spy = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting){
-          Object.values(navMap).forEach(function(a){ a.classList.remove('active'); a.removeAttribute('aria-current'); });
-          var a = navMap[e.target.id];
-          if (a){ a.classList.add('active'); a.setAttribute('aria-current','true'); }
-        }
-      });
-    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
-    sections.forEach(function(s){ spy.observe(s); });
-  }
-
-  /* case-study lightboxes (native dialog) */
-  document.querySelectorAll('.case-media[data-lightbox]').forEach(function(btn){
-    var dlg = document.getElementById(btn.getAttribute('data-lightbox'));
-    if (!dlg || typeof dlg.showModal !== 'function') return;
-    btn.addEventListener('click', function(){ dlg.showModal(); });
-    dlg.addEventListener('click', function(e){
-      if (e.target === dlg || e.target.hasAttribute('data-close')) dlg.close();
-    });
-  });
-
-  /* sticky mobile WhatsApp bar — shows once the hero scrolls out */
-  var hero = document.querySelector('.hero');
-  if (hero && 'IntersectionObserver' in window) {
-    var waSpy = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        document.body.classList.toggle('wa-visible', !e.isIntersecting);
-      });
-    }, {threshold:0});
-    waSpy.observe(hero);
-  }
-})();
-</script>
-
-<!-- ============================================================
-     Motion (GSAP) — progressive enhancement.
-     Runs only if the pinned GSAP CDN loaded; if it is blocked, the IO
-     reveal fallback in the behavior script above stays in charge and the
-     page behaves exactly as it does with no GSAP. Base states are legible
-     without any of this. One gsap.matchMedia() block gates everything:
-     reduceMotion / isMobile (<=859) / isDesktop (>=860). Transforms +
-     opacity only, no layout properties, no markers, triggers in DOM order.
-     ============================================================ -->
-<script>
-(function(){
-  const init = () => {
-    if (!window.gsap) return;                       // CDN blocked -> IO fallback owns reveals
-    const gsap = window.gsap;
-    const ST = window.ScrollTrigger;
-    const Split = window.SplitText;
-    if (window.gsap && ST && Split) gsap.registerPlugin(ST, Split);
-    else if (window.gsap && ST) gsap.registerPlugin(ST);
-
-    document.body.classList.add('gsap-active');     // drops the CSS reveal transition
-
-    const PARALLAX = '.big-panel-media img, .meet-media img, .closing-media img';
-    const heroH1 = document.querySelector('.hero h1');
-    const heroImg = document.querySelector('.hero-media img');
-    const statement = document.querySelector('.statement p.big');
-
-    gsap.matchMedia().add({
-      reduceMotion: '(prefers-reduced-motion: reduce)',
-      isMobile: '(max-width: 859px)',
-      isDesktop: '(min-width: 860px)'
-    }, (ctx) => {
-      const { reduceMotion, isMobile, isDesktop } = ctx.conditions;
-
-      // ---- reduced motion: end states only, nothing animates ----
-      if (reduceMotion) { gsap.set('.reveal', { opacity: 1, y: 0 }); return; }
-
-      const desktopMotion = isDesktop && !!ST;       // pin + parallax need ScrollTrigger
-      const splits = [];
-      const cleanups = [];
-
-      // ---- reveals (both modes) — take over .reveal via ScrollTrigger.batch ----
-      let revealEls = gsap.utils.toArray('.reveal');
-      if (desktopMotion) revealEls = revealEls.filter((el) => !el.classList.contains('shift-row'));
-      if (revealEls.length && ST) {
-        gsap.set(revealEls, { opacity: 0, y: isMobile ? 12 : 24 });
-        ST.batch(revealEls, {
-          start: 'top 85%',
-          once: true,
-          onEnter: (batch) => gsap.to(batch, {
-            opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.08, overwrite: true
-          })
-        });
-      } else if (revealEls.length) {
-        gsap.set(revealEls, { opacity: 1, y: 0 });   // gsap but no ScrollTrigger -> just show
-      }
-
-      // ---- hero (both modes): photo settle + SplitText word reveal on load ----
-      if (heroImg) gsap.fromTo(heroImg, { scale: 1.04 }, { scale: 1, duration: 1.2, ease: 'power2.out' });
-      if (heroH1 && Split && typeof Split.create === 'function') {
-        document.fonts.ready.then(() => {
-          splits.push(Split.create(heroH1, {
-            type: 'words',
-            autoSplit: true,
-            onSplit(self) {
-              return gsap.from(self.words, {
-                opacity: 0, yPercent: 40, duration: 0.6, ease: 'expo.out', stagger: 0.05
-              });
-            }
-          }));
-        });
-      }
-
-      // ---- statement (both modes): words dim 0.25 -> 1 on scrub ----
-      if (statement && Split && typeof Split.create === 'function' && ST) {
-        document.fonts.ready.then(() => {
-          splits.push(Split.create(statement, {
-            type: 'words',
-            autoSplit: true,
-            onSplit(self) {
-              gsap.set(self.words, { opacity: 0.25 });
-              return gsap.to(self.words, {
-                opacity: 1, ease: 'none', stagger: 0.4,
-                scrollTrigger: { trigger: statement, start: 'top 70%', end: 'bottom 45%', scrub: true }
-              });
-            }
-          }));
-        });
-      }
-
-      // ---- desktop only: opportunity pin + photo parallax ----
-      if (desktopMotion) {
-        const opp = document.querySelector('.opportunity');
-        const grid = opp && opp.querySelector('.opp-grid');
-        const rows = gsap.utils.toArray('.opportunity .shift-row');
-        if (opp && grid && rows.length) {
-          // keep all four rows on-screen: pin the whole section when it fits the
-          // viewport, otherwise pin the shorter grid (centered) on short screens
-          const fits = opp.getBoundingClientRect().height <= window.innerHeight + 40;
-          const pinTarget = fits ? opp : grid;
-          rows.forEach((r) => { r.classList.remove('reveal', 'in'); r.classList.add('is-dim'); });
-          const setActive = (idx) => rows.forEach((r, i) => {
-            r.classList.toggle('is-active', i === idx);
-            r.classList.toggle('is-dim', i !== idx);
-          });
-          setActive(0);
-          const pinST = ST.create({
-            trigger: pinTarget,
-            start: fits ? 'top top' : 'center center',
-            end: '+=120%',
-            pin: pinTarget,
-            pinSpacing: true,
-            onUpdate: (self) => setActive(Math.min(rows.length - 1, Math.floor(self.progress * rows.length))),
-            onLeaveBack: () => setActive(0)
-          });
-          cleanups.push(() => {
-            pinST.kill();
-            rows.forEach((r) => { r.classList.remove('is-dim', 'is-active'); r.classList.add('reveal'); });
-          });
-        }
-
-        const players = gsap.utils.toArray(PARALLAX);
-        players.forEach((img) => {
-          img.classList.add('gsap-parallax');
-          gsap.fromTo(img,
-            { yPercent: -8, scale: 1.16 },
-            { yPercent: 8, scale: 1.16, ease: 'none',
-              scrollTrigger: { trigger: img.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } });
-        });
-        cleanups.push(() => players.forEach((img) => img.classList.remove('gsap-parallax')));
-      }
-
-      return () => {
-        cleanups.forEach((fn) => fn());
-        splits.forEach((s) => { try { s.revert(); } catch (e) {} });
-      };
-    });
-
-    if (ST) document.fonts.ready.then(() => ST.refresh());
-  };
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
-})();
-</script>
-
-<script>
-/* Warm smoke WebGL backdrop (fixed, behind everything) */
-(function(){
-  var canvas=document.getElementById('smoke-bg');
-  if(!canvas) return;
-  var gl=canvas.getContext('webgl2');
-  if(!gl){ canvas.style.display='none'; return; }
-  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  var vsSrc='#version 300 es\nprecision highp float;\nin vec4 position;\nvoid main(){gl_Position=position;}';
-  var fsSrc=`#version 300 es
-precision highp float;
-out vec4 O;
-uniform float time;
-uniform vec2 resolution;
-uniform vec3 u_color;
-#define FC gl_FragCoord.xy
-#define R resolution
-#define T (time+660.)
-float rnd(vec2 p){p=fract(p*vec2(12.9898,78.233));p+=dot(p,p+34.56);return fract(p.x*p.y);}
-float noise(vec2 p){vec2 i=floor(p),f=fract(p),u=f*f*(3.-2.*f);return mix(mix(rnd(i),rnd(i+vec2(1,0)),u.x),mix(rnd(i+vec2(0,1)),rnd(i+1.),u.x),u.y);}
-float fbm(vec2 p){float t=.0,a=1.;for(int i=0;i<5;i++){t+=a*noise(p);p*=mat2(1,-1.2,.2,1.2)*2.;a*=.5;}return t;}
-void main(){
-  vec2 uv=(FC-.5*R)/R.y;
-  vec3 col=vec3(1);
-  uv.x+=.25;
-  uv*=vec2(2,1);
-  float n=fbm(uv*.28-vec2(T*.01,0));
-  n=noise(uv*3.+n*2.);
-  col.r-=fbm(uv+vec2(0,T*.015)+n);
-  col.g-=fbm(uv*1.003+vec2(0,T*.015)+n+.003);
-  col.b-=fbm(uv*1.006+vec2(0,T*.015)+n+.006);
-  col=mix(col, u_color, dot(col,vec3(.21,.71,.07)));
-  col=mix(vec3(.06),col,min(time*.1,1.));
-  col=clamp(col,.06,1.);
-  O=vec4(col,1);
-}`;
-  function compile(type,src){var s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))console.error(gl.getShaderInfoLog(s));return s;}
-  var prog=gl.createProgram();
-  gl.attachShader(prog,compile(gl.VERTEX_SHADER,vsSrc));
-  gl.attachShader(prog,compile(gl.FRAGMENT_SHADER,fsSrc));
-  gl.linkProgram(prog);
-  if(!gl.getProgramParameter(prog,gl.LINK_STATUS)){ console.error(gl.getProgramInfoLog(prog)); return; }
-  var buf=gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,1,-1,-1,1,1,1,-1]),gl.STATIC_DRAW);
-  var apos=gl.getAttribLocation(prog,'position');
-  gl.enableVertexAttribArray(apos);
-  gl.vertexAttribPointer(apos,2,gl.FLOAT,false,0,0);
-  var uRes=gl.getUniformLocation(prog,'resolution'),uTime=gl.getUniformLocation(prog,'time'),uCol=gl.getUniformLocation(prog,'u_color');
-  var color=[0.451,0.318,0.247]; /* warm ember, matches Kira's ink/pop */
-  function resize(){var dpr=Math.min(2,Math.max(1,window.devicePixelRatio||1));canvas.width=Math.floor(window.innerWidth*dpr);canvas.height=Math.floor(window.innerHeight*dpr);gl.viewport(0,0,canvas.width,canvas.height);}
-  window.addEventListener('resize',resize); resize();
-  function render(now){ gl.useProgram(prog); gl.uniform2f(uRes,canvas.width,canvas.height); gl.uniform1f(uTime,now*1e-3); gl.uniform3fv(uCol,color); gl.drawArrays(gl.TRIANGLE_STRIP,0,4); }
-  if(reduce){ render(4000); } else { (function loop(t){ render(t); requestAnimationFrame(loop); })(0); }
-})();
-</script>
-
+<script src="assets/site.js" defer></script>
 </body>
 </html>

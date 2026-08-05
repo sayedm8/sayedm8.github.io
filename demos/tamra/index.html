@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tamra — rare dates &amp; fine gifting, Doha</title>
+<meta name="description" content="Tamra — a Doha boutique for rare dates and considered gifting. Khidri, Safawi, Ajwa. Boxes made to be handed over with both hands. Concept build by Kira.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f4ee'/%3E%3Cellipse cx='16' cy='16' rx='6.5' ry='9.5' fill='%239a6b2f'/%3E%3Cellipse cx='14.2' cy='12.5' rx='2' ry='3.4' fill='%23c1955c' opacity='.55'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bone:#f7f4ee; --bone-2:#efeae0; --ink:#1e1b14; --ink-soft:#4a443a;
+  --amber:#9a6b2f; --amber-soft:#c1955c; --hair:#ddd5c6;
+  --serif:'Marcellus',Georgia,serif; --sans:'Figtree',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-width:thin;scrollbar-color:var(--amber) var(--bone)}
+body{background:var(--bone);color:var(--ink);font-family:var(--sans);font-weight:300;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+::selection{background:var(--amber);color:var(--bone)}
+img{display:block;max-width:100%}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;
+  justify-content:space-between;padding:22px clamp(18px,4vw,52px);
+  transition:background .3s ease,border-color .3s ease;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(247,244,238,.92);backdrop-filter:blur(8px);
+  border-bottom-color:var(--hair)}
+.nav-logo{font-family:var(--serif);font-size:1.3rem;letter-spacing:.34em;text-decoration:none;
+  display:flex;align-items:baseline;gap:14px}
+.nav-logo .ar{font-size:1rem;letter-spacing:0;color:var(--amber)}
+.nav-links{display:flex;gap:30px;align-items:center}
+.nav-links a{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;font-weight:400;
+  text-decoration:none;color:var(--ink-soft)}
+.nav-links a:hover{color:var(--amber)}
+.nav-links .order{color:var(--ink);border-bottom:1px solid var(--amber)}
+@media (max-width:720px){.nav-links a:not(.order){display:none}}
+
+/* ---------- hero ---------- */
+.hero{min-height:92svh;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:140px clamp(18px,4vw,52px) 60px;
+  position:relative}
+.hero .eyebrow{font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:34px}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(4rem,15vw,12.5rem);
+  line-height:.95;letter-spacing:.12em;text-indent:.12em}
+.hero .ar-line{font-family:var(--serif);font-size:clamp(1.2rem,2.6vw,1.9rem);
+  color:var(--amber);margin-top:22px;letter-spacing:.05em}
+.hero .lede{margin-top:34px;max-width:52ch;font-size:clamp(.98rem,1.4vw,1.15rem);
+  line-height:1.8;color:var(--ink-soft)}
+.hero .rule{width:1px;height:70px;background:var(--amber);margin-top:48px;
+  transform-origin:top}
+
+/* ---------- plate (gallery artwork) ---------- */
+.plate-wrap{display:flex;flex-direction:column;align-items:center;
+  padding:clamp(60px,9vh,110px) clamp(18px,4vw,52px)}
+.plate{background:#fff;padding:clamp(14px,2vw,26px) clamp(14px,2vw,26px) clamp(50px,5vw,70px);
+  box-shadow:0 24px 70px rgba(30,27,20,.14);max-width:760px;will-change:transform}
+.plate img{width:100%;aspect-ratio:16/10;object-fit:cover;
+  filter:sepia(.18) saturate(1.05) contrast(1.02)}
+.plate figcaption{margin-top:26px;text-align:center;font-family:var(--serif);
+  font-size:.95rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.plate figcaption em{font-style:normal;color:var(--amber)}
+
+/* ---------- sections ---------- */
+.sec{max-width:1180px;margin:0 auto;padding:clamp(90px,13vh,160px) clamp(18px,4vw,52px)}
+.kicker{font-size:.7rem;letter-spacing:.4em;text-transform:uppercase;color:var(--amber);
+  display:block;margin-bottom:28px}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(2rem,4.6vw,3.6rem);
+  line-height:1.18;letter-spacing:.02em;max-width:24ch}
+.center{text-align:center}
+.center h2{margin:0 auto}
+
+/* collection */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);
+  border:1px solid var(--hair);margin-top:70px}
+.card{background:var(--bone);padding:clamp(30px,3.4vw,50px);display:flex;
+  flex-direction:column;min-height:420px;transition:background .3s ease}
+.card:hover{background:#fff}
+.card .no{font-family:var(--serif);font-size:.85rem;letter-spacing:.3em;color:var(--amber)}
+.card .im{margin:26px 0;aspect-ratio:4/3;overflow:hidden}
+.card .im img{width:100%;height:100%;object-fit:cover;filter:sepia(.2) saturate(1.02);
+  transition:transform .6s ease}
+.card:hover .im img{transform:scale(1.05)}
+.card h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;letter-spacing:.04em}
+.card p{margin-top:12px;font-size:.92rem;line-height:1.7;color:var(--ink-soft);flex:1}
+.card .pr{margin-top:26px;display:flex;align-items:baseline;justify-content:space-between;
+  border-top:1px solid var(--hair);padding-top:20px}
+.card .pr b{font-family:var(--serif);font-weight:400;font-size:1.25rem}
+.card .pr a{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+  text-decoration:none;color:var(--amber)}
+.card .pr a:hover{color:var(--ink)}
+@media (max-width:900px){.grid{grid-template-columns:1fr}.card{min-height:0}}
+
+/* provenance */
+.prov{position:relative;min-height:78svh;display:flex;align-items:flex-end;overflow:hidden;
+  margin:0}
+.prov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:sepia(.22) saturate(1.04) brightness(.92)}
+.prov::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(30,27,20,0) 30%,rgba(30,27,20,.62) 100%)}
+.prov-inner{position:relative;z-index:2;color:var(--bone);max-width:1180px;margin:0 auto;
+  width:100%;padding:clamp(60px,9vh,110px) clamp(18px,4vw,52px)}
+.prov-inner .kicker{color:var(--amber-soft)}
+.prov-inner blockquote{font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.6rem);
+  line-height:1.35;max-width:26ch}
+.prov-inner cite{display:block;margin-top:24px;font-style:normal;font-size:.74rem;
+  letter-spacing:.3em;text-transform:uppercase;color:rgba(247,244,238,.7)}
+
+/* gifting */
+.gift{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center}
+.gift .im{aspect-ratio:4/5;overflow:hidden}
+.gift .im img{width:100%;height:100%;object-fit:cover;filter:sepia(.2) saturate(1.02)}
+.gift p{margin-top:26px;font-size:1rem;line-height:1.85;color:var(--ink-soft);max-width:48ch}
+.gift .note{margin-top:30px;padding:22px 26px;border-left:1px solid var(--amber);
+  font-family:var(--serif);font-size:1.05rem;line-height:1.6}
+@media (max-width:860px){.gift{grid-template-columns:1fr}}
+
+/* visit / cta */
+.visit{background:var(--ink);color:var(--bone)}
+.visit .kicker{color:var(--amber-soft)}
+.visit h2{color:var(--bone)}
+.vrow{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(30px,4vw,60px);margin-top:60px}
+.vcell .lbl{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(247,244,238,.55)}
+.vcell .val{font-family:var(--serif);font-size:1.3rem;margin-top:12px;line-height:1.5}
+.visit .btns{margin-top:60px;display:flex;gap:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:12px;text-decoration:none;
+  font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;padding:20px 38px;
+  transition:background .2s ease,color .2s ease,border-color .2s ease}
+.btn-amber{background:var(--amber);color:var(--bone)}
+.btn-amber:hover{background:var(--amber-soft);color:var(--ink)}
+.btn-line{border:1px solid rgba(247,244,238,.35);color:var(--bone)}
+.btn-line:hover{border-color:var(--amber-soft);color:var(--amber-soft)}
+@media (max-width:820px){.vrow{grid-template-columns:1fr}}
+
+/* footer */
+footer{background:var(--ink);color:rgba(247,244,238,.6);text-align:center;
+  padding:0 clamp(18px,4vw,52px) 54px}
+footer .hairline{max-width:1180px;margin:0 auto 44px;border-top:1px solid rgba(247,244,238,.14)}
+footer .built{font-family:var(--serif);font-size:1rem;color:var(--bone);letter-spacing:.06em}
+footer .built a{color:var(--amber-soft);text-decoration:none}
+footer .fm{margin-top:14px;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  line-height:2.1}
+footer .credits{font-size:.66rem;letter-spacing:.06em;text-transform:none;
+  color:rgba(247,244,238,.45)}
+
+[data-reveal]{will-change:transform,opacity}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="nav-logo" href="#top">TAMRA <span class="ar">تمرة</span></a>
+  <div class="nav-links">
+    <a href="#collection">Collection</a>
+    <a href="#provenance">Provenance</a>
+    <a href="#gifting">Gifting</a>
+    <a class="order" href="https://wa.me/97470196996" target="_blank" rel="noopener">Order</a>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <div class="eyebrow" data-reveal>Rare dates &amp; fine gifting — Doha</div>
+    <h1 data-reveal>TAMRA</h1>
+    <div class="ar-line" data-reveal>تمرة — واحدة تكفي</div>
+    <p class="lede" data-reveal>One date, offered with coffee, has carried hospitality across this
+    peninsula for a thousand years. We select the finest of a single harvest — Khidri, Safawi,
+    Ajwa — and box them the way they deserve to be given.</p>
+    <div class="rule" data-reveal aria-hidden="true"></div>
+  </header>
+
+  <div class="plate-wrap">
+    <figure class="plate" id="plate" data-reveal>
+      <img src="assets/dates-macro.jpg" alt="Two dates, photographed closely">
+      <figcaption>Harvest study &nbsp;<em>№ 01</em>&nbsp; — Medjool &amp; Khidri</figcaption>
+    </figure>
+  </div>
+
+  <!-- collection -->
+  <section class="sec" id="collection">
+    <span class="kicker" data-reveal>The collection</span>
+    <h2 data-reveal>Three boxes. Chosen slowly, given warmly.</h2>
+    <div class="grid">
+      <div class="card" data-reveal>
+        <span class="no">№ 01</span>
+        <div class="im"><img src="assets/dates-macro.jpg" alt="Khidri dates"></div>
+        <h3>The Khidri Box</h3>
+        <p>Deep mahogany, gently chewy, the everyday aristocrat. Twenty-four pieces, lined by hand.</p>
+        <div class="pr"><b>120 QR</b><a href="https://wa.me/97470196996" target="_blank" rel="noopener">Order →</a></div>
+      </div>
+      <div class="card" data-reveal>
+        <span class="no">№ 02</span>
+        <div class="im"><img src="assets/ajwa.jpg" alt="Ajwa dates"></div>
+        <h3>The Ajwa Box</h3>
+        <p>The famed black date of Madinah — soft, storied, and never far from a good gathering.</p>
+        <div class="pr"><b>145 QR</b><a href="https://wa.me/97470196996" target="_blank" rel="noopener">Order →</a></div>
+      </div>
+      <div class="card" data-reveal>
+        <span class="no">№ 03</span>
+        <div class="im"><img src="assets/palm.jpg" alt="Date palms"></div>
+        <h3>The Majlis Trio</h3>
+        <p>All three varieties in one long box, with roasted nuts between the rows. Made for guests.</p>
+        <div class="pr"><b>210 QR</b><a href="https://wa.me/97470196996" target="_blank" rel="noopener">Order →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- provenance -->
+  <section class="prov" id="provenance">
+    <img src="assets/palm.jpg" alt="Date palm plantation in southern Qatar">
+    <div class="prov-inner">
+      <span class="kicker" data-reveal>Provenance</span>
+      <blockquote data-reveal>Grown an hour from the shop, in groves that were here long before
+      the skyline was.</blockquote>
+      <cite data-reveal>Date palms — southern Qatar</cite>
+    </div>
+  </section>
+
+  <!-- gifting -->
+  <section class="sec" id="gifting">
+    <div class="gift">
+      <div class="im" data-reveal><img src="assets/ajwa.jpg" alt="A bowl of Ajwa dates"></div>
+      <div>
+        <span class="kicker" data-reveal>Bespoke gifting</span>
+        <h2 data-reveal>Handed over with both hands.</h2>
+        <p data-reveal>Weddings, Eid, a new office, a difficult thank-you — tell us the occasion
+        and the number of guests, and we compose the boxes, the ribbon, and the card. Delivery
+        across Doha within a day.</p>
+        <div class="note" data-reveal>Corporate orders from 20 boxes — ask for the majlis rate.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- visit -->
+  <section class="visit" id="visit">
+    <div class="sec">
+      <span class="kicker" data-reveal>Visit &amp; order</span>
+      <h2 data-reveal>The shop is small. The welcome isn't.</h2>
+      <div class="vrow">
+        <div class="vcell" data-reveal><div class="lbl">Where</div><div class="val">Medina Centrale,<br>The Pearl — Doha</div></div>
+        <div class="vcell" data-reveal><div class="lbl">Hours</div><div class="val">Sat–Thu, 10am–10pm<br>Friday, after asr</div></div>
+        <div class="vcell" data-reveal><div class="lbl">Tasting</div><div class="val">Every box opens<br>with a tasting. Always.</div></div>
+      </div>
+      <div class="btns" data-reveal>
+        <a class="btn btn-amber" href="https://wa.me/97470196996" target="_blank" rel="noopener">Order on WhatsApp</a>
+        <a class="btn btn-line" href="mailto:marwanayman14@gmail.com">Write to us</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="hairline"></div>
+    <div class="built">Concept build by <a href="mailto:marwanayman14@gmail.com">Kira</a> — web design for Qatar's food scene, Doha</div>
+    <div class="fm">Tamra is a demonstration brand, not a real shop<br>
+      <span class="credits">Photography: J.P.Lon, Miansari66, Alex Sergeev — Wikimedia Commons, CC BY-SA / public domain</span>
+    </div>
+  </footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+'use strict';
+window.__ready=false;
+gsap.registerPlugin(ScrollTrigger);
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const JUMP=new URLSearchParams(location.search).get('jump');
+if(JUMP!==null) history.scrollRestoration='manual';
+
+let lenis=null;
+if(!reduced && JUMP===null && typeof Lenis!=='undefined'){
+  lenis=new Lenis({lerp:.085,smoothWheel:true});
+  lenis.on('scroll',ScrollTrigger.update);
+}
+gsap.ticker.add(t=>{
+  if(lenis) lenis.raf(t*1000);
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>40);
+});
+gsap.ticker.lagSmoothing(0);
+
+/* gentle reveals — slower, quieter than usual */
+document.querySelectorAll('[data-reveal]').forEach(el=>{
+  if(reduced) return;
+  gsap.from(el,{y:30,opacity:0,duration:1.1,ease:'power2.out',
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+
+/* hero rule grows in */
+if(!reduced){
+  gsap.from('.hero .rule',{scaleY:0,duration:1.2,ease:'power2.inOut',delay:.9});
+  /* plate: subtle parallax lift */
+  gsap.to('#plate',{y:-40,ease:'none',
+    scrollTrigger:{trigger:'.plate-wrap',start:'top bottom',end:'bottom top',scrub:true}});
+}
+
+/* smooth anchors */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const el=document.querySelector(a.getAttribute('href'));
+    if(!el) return;
+    e.preventDefault();
+    if(lenis) lenis.scrollTo(el,{offset:-70}); else el.scrollIntoView({behavior:reduced?'auto':'smooth'});
+  });
+});
+
+/* dev contract */
+const boot=async()=>{
+  try{await document.fonts.ready;}catch(e){}
+  if(JUMP!==null){scrollTo(0,+JUMP||0);ScrollTrigger.refresh();}
+  requestAnimationFrame(()=>{window.__ready=true;});
+};
+if(document.readyState==='complete') boot(); else addEventListener('load',boot);
+setTimeout(()=>{window.__ready=true;},6000);
+})();
+</script>
+</body>
+</html>

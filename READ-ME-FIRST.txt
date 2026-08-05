@@ -1,0 +1,24 @@
+KIRA — upload-ready site
+========================
+Built from /Users/marwan/Desktop/Kira. Domain in canonical/OG tags: https://sayedm8.github.io
+
+WHAT'S HERE
+  index.html + 5 more EN pages, and the -ar.html Arabic twin of each (12 total)
+  kira.html / kira-ar.html   old links -> redirect to index.html / index-ar.html
+  assets/                    css, js, images, favicons, OG images, film reels
+  demos/                     the 9 portfolio demos linked from work.html
+  robots.txt, sitemap.xml, .nojekyll
+
+UPLOAD IT
+  GitHub Pages  copy these files into the repo root, commit, push.
+  Cloudflare / Netlify  drag this whole folder onto the deploy box.
+  Any host  upload the contents (not the folder itself) to the web root.
+  Homepage must end up at the web root as index.html.
+
+CHANGE THE DOMAIN LATER
+  python3 deploy/build-zip.py yourdomain.com
+  Rewrites every canonical/OG/hreflang URL and rebuilds the zip.
+
+NOTE
+  robots.txt hides /demos/ and /assets/reels/ from search engines on purpose —
+  the demos stay reachable by direct link, they just don't get indexed.

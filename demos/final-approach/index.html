@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Approach — Flight 001 · Doha → Cairo</title>
+<meta name="description" content="A window seat from Doha to the Giza plateau in one continuous scroll — real photographs, one camera move, everything else drawn live in your browser. Built by Kira, Doha.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23191009'/%3E%3Cpath d='M16 7 L27 25 H5 Z' fill='%23c9973f'/%3E%3Cpath d='M16 7 L16 25 H27 Z' fill='%23a2782f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,500;1,9..144,600&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/cruise.jpg">
+<link rel="preload" as="image" href="assets/sahara.jpg">
+<link rel="preload" as="image" href="assets/giza-air.jpg">
+<link rel="preload" as="image" href="assets/giza.jpg">
+<style>
+:root{
+  --night:#191009; --night-2:#120b06; --cream:#f5ecdb; --sand:#e6d3ae;
+  --gold:#c9973f; --gold-soft:#e0b566; --muted:#a6906d; --paper:#f2e8d4;
+  --line:rgba(201,151,63,.30); --line-dark:rgba(25,16,9,.18);
+  --serif:'Fraunces',Georgia,serif; --sans:'Archivo',Helvetica,Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-width:thin;scrollbar-color:var(--gold) var(--night)}
+body{background:var(--night-2);color:var(--cream);font-family:var(--sans);overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:inherit}
+::selection{background:var(--gold);color:var(--night)}
+
+/* ---------- progress + header ---------- */
+#prog{position:fixed;top:0;left:0;height:2px;width:100%;z-index:60;transform-origin:0 50%;
+  transform:scaleX(0);background:linear-gradient(90deg,var(--gold),var(--gold-soft))}
+#hdr{position:fixed;top:2px;left:0;right:0;z-index:55;display:flex;align-items:center;
+  justify-content:space-between;padding:18px clamp(16px,3vw,40px);color:var(--cream);
+  transition:color .45s ease;pointer-events:none}
+#hdr.on-light{color:var(--night)}
+.hdr-brand{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:600;
+  font-size:.78rem;letter-spacing:.22em}
+.hdr-brand svg{display:block;flex:none}
+.hdr-route{font-family:var(--serif);font-style:italic;font-weight:500;font-size:.98rem;
+  letter-spacing:.02em;opacity:.9}
+.hdr-alt{text-align:right;line-height:1.35}
+.hdr-alt b{font-family:var(--serif);font-weight:600;font-size:1.02rem;letter-spacing:.04em;
+  color:var(--gold-soft)}
+#hdr.on-light .hdr-alt b{color:#8a6420}
+.hdr-alt span{display:block;font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;opacity:.75}
+@media (max-width:760px){.hdr-route{display:none}}
+
+/* ---------- film ---------- */
+#film{height:840vh;position:relative}
+#stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--night-2)}
+#cam{position:absolute;inset:0}
+.layer{position:absolute;inset:0;pointer-events:none}
+
+/* base skies (behind photos) */
+.sky-warm{background:linear-gradient(180deg,#e8b06a 0%,#dd9757 45%,#c67947 75%,#a95f3c 100%)}
+.sky-cool{background:linear-gradient(180deg,#28304e 0%,#4b4a66 34%,#8d7183 55%,#d99f6b 72%,#e2b184 100%)}
+
+/* photo layers */
+.ph{position:absolute;inset:0;overflow:hidden;opacity:0;will-change:transform,opacity}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+#phCruise img{object-position:62% 30%;filter:saturate(1.08) contrast(1.04) brightness(.98)}
+#phSahara img{object-position:50% 45%;filter:saturate(1.15) contrast(1.02) sepia(.12) brightness(.96)}
+#phGizaAir img{object-position:40% 62%;filter:saturate(1.1) sepia(.22) contrast(1.03) brightness(1.0)}
+#phGiza img{object-position:50% 68%;filter:saturate(1.12) sepia(.30) contrast(1.04) brightness(.97)}
+
+/* warm grade over photos */
+.grade{background:linear-gradient(180deg,rgba(255,190,110,.16) 0%,rgba(160,90,40,.10) 55%,
+  rgba(40,20,8,.26) 100%);mix-blend-mode:soft-light}
+.glow{position:absolute;left:18%;top:8%;width:60vmin;height:60vmin;margin:-30vmin 0 0 -30vmin;
+  border-radius:50%;mix-blend-mode:screen;opacity:0;will-change:transform,opacity;
+  background:radial-gradient(circle,rgba(255,230,180,.9) 0%,rgba(255,200,120,.4) 34%,
+  rgba(255,180,100,.16) 55%,rgba(255,170,90,0) 74%)}
+.haze{background:radial-gradient(ellipse at 50% 55%,#f3e2c2 0%,#eed7ae 55%,#e3c493 100%);
+  opacity:0;will-change:opacity}
+
+/* clouds */
+.clouds{will-change:transform,opacity}
+.puff{position:absolute;border-radius:50%;filter:blur(14px);will-change:transform}
+.cl-far .puff{background:radial-gradient(ellipse at center,rgba(244,228,205,.75),rgba(244,228,205,0) 68%)}
+.cl-mid .puff{background:radial-gradient(ellipse at center,rgba(248,235,214,.85),rgba(248,235,214,0) 66%)}
+.cl-near .puff{background:radial-gradient(ellipse at center,rgba(250,240,224,.95),rgba(250,240,224,0) 64%)}
+.whiteout{background:radial-gradient(ellipse at 50% 55%,#f6ead2 0%,#f0dfc0 55%,#e6cda4 100%);
+  opacity:0;will-change:opacity}
+
+/* aircraft shadow over the dunes */
+#planeShadow{position:absolute;left:50%;top:50%;width:15vmin;aspect-ratio:1/1;opacity:0;
+  filter:blur(4px);will-change:transform,opacity}
+#planeShadow svg{display:block;width:100%;height:100%}
+
+/* cabin */
+#cabin{position:absolute;inset:0;transform-origin:50% 51%;will-change:transform,opacity}
+#cabin svg{position:absolute;inset:0;width:100%;height:100%}
+
+#motes{position:absolute;inset:0;pointer-events:none}
+
+/* film chrome */
+.grain{opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:220px 220px;animation:grainShift .9s steps(4) infinite}
+@keyframes grainShift{0%{background-position:0 0}25%{background-position:-60px 40px}
+  50%{background-position:40px -70px}75%{background-position:-30px -30px}100%{background-position:0 0}}
+.vignette{opacity:.5;background:radial-gradient(ellipse at 50% 50%,transparent 54%,rgba(12,7,3,.6) 100%)}
+.handoff{opacity:0;background:linear-gradient(180deg,transparent 30%,rgba(25,16,9,.66) 68%,var(--night) 96%)}
+
+/* ---------- beats ---------- */
+.beats{position:absolute;inset:0;pointer-events:none}
+.beat{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;opacity:0;padding:0 6vw;will-change:transform,opacity}
+.beat .kick{font-family:var(--sans);font-weight:600;font-size:clamp(.58rem,1vw,.72rem);
+  letter-spacing:.34em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:22px;
+  text-shadow:0 1px 5px rgba(20,10,4,.85),0 0 22px rgba(20,10,4,.55);
+  display:flex;align-items:center;gap:16px}
+.beat .kick::before,.beat .kick::after{content:"";width:30px;height:1px;background:var(--gold-soft);
+  opacity:.7}
+.beat h2{font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:clamp(2.4rem,6.4vw,5.4rem);line-height:1.08;letter-spacing:0;
+  color:var(--cream);text-shadow:0 2px 18px rgba(15,8,3,.55),0 2px 60px rgba(15,8,3,.45)}
+.beat.dark h2{color:#241a10;text-shadow:none}
+.beat.dark .kick{color:#8a6420;text-shadow:none}
+.beat.dark .kick::before,.beat.dark .kick::after{background:#8a6420}
+.beat .sub{font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(.92rem,1.5vw,1.15rem);color:var(--cream);opacity:.92;margin-top:18px;
+  text-shadow:0 1px 6px rgba(20,10,4,.8),0 0 24px rgba(20,10,4,.5)}
+.beat-min h2{font-size:clamp(1.9rem,4.4vw,3.6rem)}
+
+/* hero beat */
+#heroBeat .fl{font-family:var(--sans);font-weight:600;font-size:clamp(.6rem,1.1vw,.75rem);
+  letter-spacing:.4em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:30px;
+  text-shadow:0 1px 14px rgba(20,10,4,.6)}
+.wordmark{display:flex;flex-direction:column;align-items:center;color:var(--cream);
+  text-shadow:0 2px 50px rgba(15,8,3,.55)}
+.wordmark .row{display:flex;overflow:hidden;font-family:var(--serif)}
+.wordmark .row.r1{font-weight:300;font-style:normal;font-size:clamp(2.6rem,8vw,6.4rem);
+  line-height:1.04;letter-spacing:.14em}
+.wordmark .row.r2{font-weight:600;font-style:italic;font-size:clamp(3.6rem,11.5vw,9.6rem);
+  line-height:1;margin-top:-.06em}
+.wordmark .row span{display:inline-block;will-change:transform}
+#heroBeat .tagline{font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:clamp(.95rem,1.6vw,1.2rem);color:var(--cream);opacity:.9;margin-top:26px;
+  text-shadow:0 1px 16px rgba(20,10,4,.6)}
+
+/* finale */
+#finale{align-items:flex-start;justify-content:flex-end;text-align:left;
+  padding:0 clamp(22px,6vw,96px) clamp(90px,15vh,170px)}
+#finale .kick{margin-bottom:16px}
+#finale .kick::after{display:none}
+#finale h2{font-style:italic;font-weight:600;font-size:clamp(4.6rem,14vw,12rem);line-height:.95}
+#finale .rule{width:70px;height:2px;background:var(--gold-soft);margin:28px 0 22px;opacity:.9}
+#finale p{font-family:var(--serif);font-weight:300;font-style:normal;
+  font-size:clamp(1.05rem,2vw,1.45rem);line-height:1.55;color:var(--cream);max-width:36ch;
+  text-shadow:0 1px 26px rgba(15,8,3,.55)}
+#finale p em{font-style:italic;color:var(--gold-soft)}
+
+/* scroll hint */
+#hint{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:5;
+  display:flex;flex-direction:column;align-items:center;gap:12px;will-change:opacity}
+#hint span{font-family:var(--sans);font-weight:500;font-size:.62rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--muted)}
+#hint .strand{width:1px;height:44px;background:linear-gradient(180deg,var(--gold-soft),transparent);
+  animation:strand 2s ease-in-out infinite;transform-origin:top}
+@keyframes strand{0%,100%{transform:scaleY(.35);opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* ---------- content ---------- */
+.content{position:relative;background:var(--night);z-index:4}
+.sec{padding:clamp(96px,15vh,170px) clamp(22px,6vw,96px);max-width:1180px;margin:0 auto}
+.kick-line{font-family:var(--sans);font-weight:600;font-size:.66rem;letter-spacing:.34em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:30px;display:flex;align-items:center;gap:16px}
+.kick-line::before{content:"";width:36px;height:1px;background:var(--gold)}
+.content h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,5vw,4.1rem);
+  line-height:1.12;max-width:22ch}
+.content h2 em{font-style:italic;color:var(--gold-soft)}
+.content .lede{margin-top:30px;font-size:clamp(.98rem,1.4vw,1.14rem);line-height:1.75;
+  color:var(--muted);max-width:64ch;font-weight:400}
+.content .lede b{color:var(--cream);font-weight:500}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);margin-top:70px}
+.stat{padding:38px 26px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:none}
+.stat .num{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,4.6vw,4rem);
+  line-height:1;color:var(--gold-soft)}
+.stat .lbl{font-family:var(--sans);font-weight:500;font-size:.64rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--muted);margin-top:16px;line-height:1.7}
+@media (max-width:860px){.stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:none}.stat:nth-child(n+3){border-top:1px solid var(--line)}}
+
+/* marquee */
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:26px 0;background:var(--night)}
+.mq-track{display:flex;width:max-content;white-space:nowrap;font-family:var(--serif);
+  font-style:italic;font-weight:300;font-size:1.05rem;letter-spacing:.04em;color:var(--muted);
+  will-change:transform}
+.mq-track b{color:var(--gold-soft);font-weight:500}
+.mq-track span{padding-right:10px}
+
+/* credit plate */
+.credit-wrap{background:var(--paper);color:var(--night)}
+.credit{display:flex;flex-direction:column;align-items:center;text-align:center}
+.credit .kick-line{color:#8a6420}
+.credit .kick-line::before{background:#8a6420}
+.credit .kick-line::after{content:"";width:36px;height:1px;background:#8a6420}
+.credit h2{max-width:none;font-weight:300}
+.credit h2 em{font-weight:600;color:#8a6420}
+.credit .lede{max-width:none;margin-top:16px;color:#6e5b3d;font-family:var(--serif);
+  font-style:italic;font-size:1.05rem}
+.btns{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-weight:600;
+  font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;
+  padding:18px 34px;border-radius:100vh;transition:transform .18s ease,background .18s ease,
+  color .18s ease,border-color .18s ease}
+.btn svg{display:block}
+.btn-solid{background:var(--night);color:var(--paper)}
+.btn-solid:hover{transform:translateY(-2px);background:#8a6420;color:var(--paper)}
+.btn-ghost{border:1px solid rgba(25,16,9,.4);color:var(--night)}
+.btn-ghost:hover{transform:translateY(-2px);border-color:var(--night);background:var(--night);
+  color:var(--paper)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:46px clamp(22px,6vw,96px);text-align:center}
+footer .fm{font-family:var(--sans);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);line-height:2.2}
+footer .fm a{color:var(--cream);text-decoration:none}
+footer .fm a:hover{color:var(--gold-soft)}
+footer .ph-credit{font-family:var(--serif);font-style:italic;font-size:.8rem;letter-spacing:.02em;
+  text-transform:none;color:#6e5b3d;margin-top:10px}
+
+[data-reveal]{will-change:transform,opacity}
+
+@media (prefers-reduced-motion:reduce){
+  .grain,#hint .strand{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div id="prog" aria-hidden="true"></div>
+
+<header id="hdr">
+  <div class="hdr-brand">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M21.5 15.2v-1.6l-8.2-5V3.1c0-.9-.5-1.6-1.3-1.6S10.7 2.2 10.7 3.1v5.5l-8.2 5v1.6l8.2-2.6v5.6l-2.3 1.7v1.3l3.6-1.1 3.6 1.1v-1.3l-2.3-1.7v-5.6l8.2 2.6z"/>
+    </svg>
+    FLIGHT&nbsp;001
+  </div>
+  <div class="hdr-route">Doha &rarr; Cairo, one continuous descent</div>
+  <div class="hdr-alt"><b id="altV">38,000 ft</b><span id="chapV">Cruise</span></div>
+</header>
+
+<main>
+<!-- ============ THE FILM ============ -->
+<section id="film" aria-label="Scroll film: a window seat from Doha to Giza">
+  <div id="stage">
+    <div id="cam">
+      <div class="layer sky-warm" aria-hidden="true"></div>
+      <div class="layer sky-cool" id="skyCool" aria-hidden="true"></div>
+
+      <!-- photographs -->
+      <div class="ph" id="phCruise" aria-hidden="true"><img src="assets/cruise.jpg" alt=""></div>
+      <div class="ph" id="phSahara" aria-hidden="true"><img src="assets/sahara.jpg" alt=""></div>
+      <div class="ph" id="phGizaAir" aria-hidden="true"><img src="assets/giza-air.jpg" alt=""></div>
+      <div class="ph" id="phGiza" aria-hidden="true"><img src="assets/giza.jpg" alt=""></div>
+
+      <div id="planeShadow" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <path fill="rgba(30,15,6,.5)" d="M58 8c3 0 5 9 5 22l1 12 44 26v9L64 66l-1 26 14 10v7l-19-5-19 5v-7l14-10-1-26-46 11v-9l44-26 1-12C51 17 55 8 58 8Z"/>
+        </svg>
+      </div>
+
+      <div class="layer glow" id="glow" aria-hidden="true"></div>
+      <div class="layer grade" aria-hidden="true"></div>
+
+      <div class="layer clouds cl-far" id="clFar" aria-hidden="true"></div>
+      <div class="layer clouds cl-mid" id="clMid" aria-hidden="true"></div>
+      <div class="layer clouds cl-near" id="clNear" aria-hidden="true"></div>
+      <div class="layer whiteout" id="whiteout" aria-hidden="true"></div>
+      <div class="layer haze" id="haze" aria-hidden="true"></div>
+
+      <div id="cabin" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="cab" cx="50%" cy="51%" r="75%">
+              <stop offset="0" stop-color="#3a2c1c"/><stop offset=".22" stop-color="#241b11"/>
+              <stop offset=".5" stop-color="#17110a"/><stop offset="1" stop-color="#0b0805"/>
+            </radialGradient>
+            <clipPath id="holeClip">
+              <path d="M705,230 h30 a150,170 0 0 1 150,170 v120 a150,170 0 0 1 -150,170 h-30 a150,170 0 0 1 -150,-170 v-120 a150,170 0 0 1 150,-170 Z"/>
+            </clipPath>
+          </defs>
+          <path fill-rule="evenodd" fill="url(#cab)"
+            d="M0,0 H1440 V900 H0 Z
+               M705,230 h30 a150,170 0 0 1 150,170 v120 a150,170 0 0 1 -150,170 h-30 a150,170 0 0 1 -150,-170 v-120 a150,170 0 0 1 150,-170 Z"/>
+          <path d="M705,230 h30 a150,170 0 0 1 150,170 v120 a150,170 0 0 1 -150,170 h-30 a150,170 0 0 1 -150,-170 v-120 a150,170 0 0 1 150,-170 Z"
+            fill="none" stroke="#080604" stroke-width="30"/>
+          <path d="M705,230 h30 a150,170 0 0 1 150,170 v120 a150,170 0 0 1 -150,170 h-30 a150,170 0 0 1 -150,-170 v-120 a150,170 0 0 1 150,-170 Z"
+            fill="none" stroke="#4a3a24" stroke-width="3"/>
+          <path d="M708,252 h24 a132,152 0 0 1 132,152 v112 a132,152 0 0 1 -132,152 h-24 a132,152 0 0 1 -132,-152 v-112 a132,152 0 0 1 132,-152 Z"
+            fill="none" stroke="rgba(245,236,219,.12)" stroke-width="2"/>
+          <g id="glassRefl" clip-path="url(#holeClip)">
+            <polygon points="540,700 660,180 700,180 580,700" fill="rgba(255,246,225,.10)"/>
+            <polygon points="620,720 780,160 800,160 640,720" fill="rgba(255,246,225,.055)"/>
+          </g>
+          <ellipse cx="150" cy="880" rx="330" ry="230" fill="#080604" opacity=".92"/>
+          <ellipse cx="1310" cy="900" rx="360" ry="250" fill="#080604" opacity=".92"/>
+        </svg>
+      </div>
+
+      <canvas id="motes" aria-hidden="true"></canvas>
+    </div><!-- /cam -->
+
+    <div class="layer grain" id="grain" aria-hidden="true"></div>
+    <div class="layer vignette" id="vig" aria-hidden="true"></div>
+    <div class="layer handoff" id="handoff" aria-hidden="true"></div>
+
+    <div class="beats">
+      <div class="beat" id="heroBeat" data-in="-0.1" data-peak="0" data-out="0.105">
+        <div class="fl">Flight 001 &nbsp;·&nbsp; Doha &rarr; Cairo</div>
+        <div class="wordmark" id="wordmark"><span class="row r1">FINAL</span><span class="row r2">Approach</span></div>
+        <div class="tagline">One scroll. One continuous descent.</div>
+      </div>
+      <div class="beat" data-in="0.15" data-peak="0.225" data-out="0.30">
+        <div class="kick">Alt 31,000 ft — beginning descent</div>
+        <h2>Most websites<br>sit still.</h2>
+      </div>
+      <div class="beat dark" data-in="0.41" data-peak="0.475" data-out="0.55">
+        <div class="kick">Alt 18,500 ft — cloud layer</div>
+        <h2>This one takes<br>you places.</h2>
+      </div>
+      <div class="beat" data-in="0.565" data-peak="0.63" data-out="0.70">
+        <div class="kick">Alt 6,200 ft — the Sahara</div>
+        <h2>No renders.<br>Real photographs.</h2>
+        <div class="sub">the desert floor, from seat 14A</div>
+      </div>
+      <div class="beat beat-min" data-in="0.74" data-peak="0.79" data-out="0.85">
+        <div class="kick">Alt 3,000 ft — Cairo off the nose</div>
+        <h2>There — just off the wing.</h2>
+      </div>
+      <div class="beat" id="finale" data-in="0.87" data-peak="0.94" data-out="9">
+        <div class="kick">Alt 1,450 ft — Giza plateau</div>
+        <h2>Giza</h2>
+        <div class="rule"></div>
+        <p>Built 4,500 years ago. <em>Still impossible to ignore.</em></p>
+      </div>
+    </div>
+
+    <div id="hint"><span>Scroll to begin the descent</span><div class="strand"></div></div>
+  </div>
+</section>
+
+<!-- ============ CONTENT ============ -->
+<div class="content">
+  <section class="sec">
+    <div class="kick-line" data-reveal>Debrief</div>
+    <h2 data-reveal>You just flew from Doha to Giza <em>in a single scroll.</em></h2>
+    <p class="lede" data-reveal>Four real photographs — a dusk wing over the Gulf, the Sahara from
+    above, Cairo off the nose, and the plateau itself — stitched into <b>one continuous camera
+    move</b>, with the cabin, the clouds and the light drawn live in your browser. No video file.
+    No player. Just a page that behaves like a <b>place</b>.</p>
+    <div class="stats" data-reveal>
+      <div class="stat"><div class="num"><span data-count="4">0</span></div><div class="lbl">real photographs</div></div>
+      <div class="stat"><div class="num"><span data-count="1">0</span></div><div class="lbl">continuous shot</div></div>
+      <div class="stat"><div class="num"><span data-count="60">0</span></div><div class="lbl">frames per second</div></div>
+      <div class="stat"><div class="num"><span data-count="4500">0</span></div><div class="lbl">years Giza has held attention</div></div>
+    </div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-track" id="mqTrack"></div>
+  </div>
+
+  <div class="credit-wrap">
+    <section class="sec credit">
+      <div class="kick-line" data-reveal>End of Flight 001</div>
+      <h2 data-reveal>Built by <em>Kira</em></h2>
+      <p class="lede" data-reveal>Web design for Qatar's food scene &nbsp;·&nbsp; Doha</p>
+      <div class="btns" data-reveal>
+        <a class="btn btn-solid" href="https://wa.me/97470196996" target="_blank" rel="noopener">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>
+        <a class="btn btn-ghost" href="mailto:marwanayman14@gmail.com">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"/><path d="m3 6 9 7 9-7"/></svg>
+          Email
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="fm">
+      &copy; 2026 Kira · Doha, Qatar — one continuous shot, no templates<br>
+      <span class="ph-credit">Photography: Ricardo Liberato, Raimond Spekking, Alexander Gerst,
+      Captain Raju — Wikimedia Commons, CC BY-SA</span>
+    </div>
+  </footer>
+</div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+'use strict';
+window.__ready = false;
+gsap.registerPlugin(ScrollTrigger);
+
+/* ---------- utils ---------- */
+const $ = s => document.querySelector(s);
+const clamp = (v,a,b) => Math.min(b, Math.max(a,v));
+const lerp  = (a,b,t) => a + (b-a)*t;
+const eIO = t => t<.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+const eO  = t => 1 - Math.pow(1-t,3);
+const eI  = t => t*t*t;
+const seg = (p,a,b,e) => (e||(x=>x))(clamp((p-a)/(b-a),0,1));
+
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const JUMP = new URLSearchParams(location.search).get('jump');
+if (JUMP !== null) history.scrollRestoration = 'manual';
+
+/* ---------- els ---------- */
+const film=$('#film'), cabin=$('#cabin'), skyCool=$('#skyCool'),
+  phCruise=$('#phCruise'), phSahara=$('#phSahara'), phGizaAir=$('#phGizaAir'), phGiza=$('#phGiza'),
+  clFar=$('#clFar'), clMid=$('#clMid'), clNear=$('#clNear'),
+  whiteout=$('#whiteout'), haze=$('#haze'), glow=$('#glow'),
+  planeShadow=$('#planeShadow'), grain=$('#grain'), vig=$('#vig'), handoff=$('#handoff'),
+  hint=$('#hint'), prog=$('#prog'), hdr=$('#hdr'), altV=$('#altV'), chapV=$('#chapV'),
+  glassRefl=$('#glassRefl');
+
+/* ---------- clouds ---------- */
+function seedClouds(el, n, yMin, yMax, sMin, sMax){
+  let html='';
+  for(let i=0;i<n;i++){
+    const x=Math.random()*120-10, y=yMin+Math.random()*(yMax-yMin);
+    const w=sMin+Math.random()*(sMax-sMin), h=w*(0.28+Math.random()*0.18);
+    html+=`<div class="puff" style="left:${x}vw;top:${y}vh;width:${w}vw;height:${h}vw"></div>`;
+  }
+  el.innerHTML=html;
+}
+seedClouds(clFar, 9, 58, 78, 18, 34);
+seedClouds(clMid, 8, 62, 92, 26, 46);
+seedClouds(clNear,7, 70,108, 38, 64);
+
+/* ---------- marquee ---------- */
+const mqSeg='<span>Doha &rarr; Cairo &nbsp;·&nbsp; <b>one continuous shot</b> &nbsp;·&nbsp; four real photographs &nbsp;·&nbsp; <b>no video files</b> &nbsp;·&nbsp; scrubbed by your scroll &nbsp;·&nbsp; </span>';
+$('#mqTrack').innerHTML = mqSeg.repeat(6);
+
+/* ---------- hero wordmark chars ---------- */
+document.querySelectorAll('#wordmark .row').forEach(r=>{
+  r.innerHTML=[...r.textContent].map(c=>`<span>${c}</span>`).join('');
+});
+
+/* ---------- beats ---------- */
+const beats=[...document.querySelectorAll('.beat')].map(el=>({
+  el, in:+el.dataset.in, peak:+el.dataset.peak, out:+el.dataset.out
+}));
+function beatAlpha(b,p){
+  if(p<b.in||p>b.out) return 0;
+  if(p<b.peak) return (p-b.in)/Math.max(1e-4,b.peak-b.in);
+  if(b.out>1.5) return 1;
+  return 1-(p-b.peak)/Math.max(1e-4,b.out-b.peak);
+}
+
+/* ---------- motes ---------- */
+const mc=$('#motes'), mctx=mc.getContext('2d');
+let motes=[], sprite=null, mDPR=1;
+function moteInit(){
+  mDPR=Math.min(devicePixelRatio||1,1.5);
+  mc.width=innerWidth*mDPR; mc.height=innerHeight*mDPR;
+  sprite=document.createElement('canvas'); sprite.width=sprite.height=32;
+  const g=sprite.getContext('2d').createRadialGradient(16,16,0,16,16,16);
+  g.addColorStop(0,'rgba(255,228,170,.9)'); g.addColorStop(.4,'rgba(255,214,150,.28)');
+  g.addColorStop(1,'rgba(255,204,130,0)');
+  const sc=sprite.getContext('2d'); sc.fillStyle=g; sc.fillRect(0,0,32,32);
+  motes=Array.from({length:44},()=>({
+    x:Math.random(), y:Math.random(), z:.3+Math.random()*.7,
+    vx:.006+Math.random()*.012, vy:.002+Math.random()*.007, ph:Math.random()*6.28
+  }));
+}
+function moteDraw(t, fade){
+  if(fade<=0 || reduced){ if(mc.__on){mctx.clearRect(0,0,mc.width,mc.height);mc.__on=false;} return; }
+  mc.__on=true;
+  mctx.clearRect(0,0,mc.width,mc.height);
+  const W=mc.width,H=mc.height;
+  for(const m of motes){
+    m.x+=m.vx*m.z*0.016; m.y+=m.vy*m.z*0.016;
+    if(m.x>1.05)m.x=-.05; if(m.y>1.05)m.y=-.05;
+    const tw=.5+.5*Math.sin(t*1.4+m.ph);
+    const s=(6+m.z*16)*mDPR;
+    mctx.globalAlpha=fade*m.z*(.25+.55*tw);
+    mctx.drawImage(sprite, m.x*W-s/2, m.y*H-s/2, s, s);
+  }
+  mctx.globalAlpha=1;
+}
+moteInit();
+
+/* ---------- lenis ---------- */
+let lenis=null;
+if(!reduced && JUMP===null && typeof Lenis!=='undefined'){
+  lenis=new Lenis({lerp:.09, smoothWheel:true});
+  lenis.on('scroll', ScrollTrigger.update);
+}
+
+/* ---------- the film tick ---------- */
+let ps=0, lastY=scrollY, vel=0, displayedChap='';
+const CHAPTERS=[[.16,'Cruise'],[.41,'Descent'],[.58,'Cloud layer'],[.74,'The Sahara'],
+  [.87,'Final approach'],[9,'Giza']];
+const fmt=n=>n.toLocaleString('en-US');
+
+function tick(time){
+  const t=time;
+  if(lenis) lenis.raf(t*1000);
+
+  const r=film.getBoundingClientRect();
+  const denom=r.height-innerHeight;
+  const raw=denom>0?clamp(-r.top/denom,0,1):0;
+  ps += (raw-ps)*(JUMP!==null?1:.14);
+  if(Math.abs(raw-ps)<.0004) ps=raw;
+  const p=ps;
+
+  const y=scrollY; vel=lerp(vel,(y-lastY),.2); lastY=y;
+
+  /* ---- camera micro-sway ---- */
+  const sway=(reduced?0:1)*(1-seg(p,0,.18));
+
+  /* ---- base sky crossfade ---- */
+  skyCool.style.opacity=1-seg(p,.44,.62);
+
+  /* ---- cruise photo (through the window) ---- */
+  const czoom=lerp(1.04,1.3,seg(p,0,.46,eIO));
+  phCruise.style.opacity=1-seg(p,.44,.53);
+  phCruise.style.transform=`scale(${czoom}) translateY(${Math.sin(t*.7)*.25*sway}vh)`;
+
+  /* ---- cabin push-through ---- */
+  const cScale=lerp(1,5.4,seg(p,.05,.44,eI));
+  cabin.style.transform=`scale(${cScale}) translateY(${Math.sin(t*.7)*.2*sway}vh)`;
+  cabin.style.opacity=1-seg(p,.37,.46);
+  glassRefl.style.opacity=1-seg(p,.1,.34);
+
+  /* ---- clouds + whiteout ---- */
+  const cdF=seg(p,.10,.55,eI), cdM=seg(p,.12,.55,eI), cdN=seg(p,.14,.56,eI);
+  const clFade=1-seg(p,.52,.62);
+  clFar.style.transform =`translateY(${lerp(4,-52,cdF)}vh) scale(${lerp(1,2.6,cdF)})`;
+  clMid.style.transform =`translateY(${lerp(8,-80,cdM)}vh) scale(${lerp(1,3.6,cdM)})`;
+  clNear.style.transform=`translateY(${lerp(14,-120,cdN)}vh) scale(${lerp(1,5,cdN)})`;
+  clFar.style.opacity=clMid.style.opacity=clNear.style.opacity=clFade;
+  const wIn=seg(p,.40,.475), wOut=seg(p,.505,.60);
+  whiteout.style.opacity=Math.min(.96,wIn*1.05)*(1-wOut);
+
+  /* ---- Sahara photo ---- */
+  const sIn=seg(p,.50,.575), sZoom=seg(p,.50,.73,eIO);
+  phSahara.style.opacity=sIn*(1-seg(p,.665,.73));
+  phSahara.style.transform=`scale(${lerp(1.14,1.34,sZoom)}) translateY(${lerp(-2,2.5,sZoom)}%)`;
+
+  /* ---- plane shadow over the dunes ---- */
+  const shP=seg(p,.53,.68,eIO);
+  planeShadow.style.opacity=seg(p,.53,.585)*(1-seg(p,.64,.68));
+  planeShadow.style.transform=`translate(${lerp(20,-32,shP)}vw,${lerp(-6,12,shP)}vh) scale(${lerp(.7,1.5,shP)}) rotate(8deg)`;
+
+  /* ---- haze pulses (photo junctions) ---- */
+  const h1=seg(p,.655,.70)*(1-seg(p,.715,.775));
+  const h2=seg(p,.835,.875)*(1-seg(p,.895,.95));
+  haze.style.opacity=Math.max(h1,h2)*.7;
+
+  /* ---- Giza from the air ---- */
+  const aIn=seg(p,.665,.73), aZoom=seg(p,.665,.905,eIO);
+  phGizaAir.style.opacity=aIn*(1-seg(p,.845,.905));
+  phGizaAir.style.transform=`scale(${lerp(1.02,1.3,aZoom)}) translate(${lerp(2,-2,aZoom)}%,${lerp(1,-2,aZoom)}%)`;
+
+  /* ---- Giza, the plateau ---- */
+  const gIn=seg(p,.845,.905), gSettle=seg(p,.845,1,eO);
+  phGiza.style.opacity=gIn;
+  phGiza.style.transform=`scale(${lerp(1.16,1,gSettle)})`;
+
+  /* ---- golden glow ---- */
+  const glowIn=seg(p,.52,.62);
+  glow.style.opacity=glowIn*lerp(.28,.45,seg(p,.62,1));
+  glow.style.transform=`translate(${lerp(30,0,seg(p,.52,1))}vw,${lerp(20,0,seg(p,.52,1))}vh)`;
+
+  /* ---- handoff + grade ---- */
+  const er=seg(p,.92,1);
+  handoff.style.opacity=er;
+  grain.style.opacity=.06*(1-er);
+  vig.style.opacity=.5*(1-er);
+  hint.style.opacity=1-seg(p,.005,.04);
+
+  /* ---- beats ---- */
+  for(const b of beats){
+    const a=beatAlpha(b,p);
+    const dir=p<b.peak?1:-1;
+    b.el.style.opacity=a;
+    let tr=`translateY(${(1-a)*18*dir}px)`;
+    if(b.el.id==='heroBeat') tr+=` scale(${1+seg(p,0,.14)*.4})`;
+    b.el.style.transform=tr;
+  }
+
+  /* ---- motes ---- */
+  moteDraw(t, 1-seg(p,0,.07));
+
+  /* ---- chrome ---- */
+  prog.style.transform=`scaleX(${p})`;
+  const alt=Math.round(lerp(38000,1450,eIO(p))/10)*10;
+  altV.textContent=`${fmt(alt)} ft`;
+  const chap=CHAPTERS.find(c=>p<c[0])[1];
+  if(chap!==displayedChap){chapV.textContent=chap;displayedChap=chap;}
+  const onLight = p>.42 && r.bottom>64;
+  hdr.classList.toggle('on-light', onLight);
+  const hFade=clamp((r.bottom+40)/180,0,1);
+  hdr.style.opacity=hFade; prog.style.opacity=hFade;
+
+  /* ---- marquee ---- */
+  mqX-=0.5; const half=mqTrackEl.scrollWidth/2||1; if(-mqX>=half) mqX+=half;
+  const skew=clamp(vel*.28,-8,8);
+  mqTrackEl.style.transform=`translateX(${mqX}px) skewX(${reduced?0:skew}deg)`;
+}
+let mqX=0; const mqTrackEl=$('#mqTrack');
+
+gsap.ticker.add(tick);
+gsap.ticker.lagSmoothing(0);
+
+/* ---------- hero entrance ---------- */
+if(!reduced && JUMP===null){
+  gsap.from('#wordmark .row span',{yPercent:120,duration:1.15,ease:'power4.out',stagger:.035,delay:.25});
+  gsap.from('#heroBeat .fl, #heroBeat .tagline',{opacity:0,y:14,duration:.8,ease:'power3.out',delay:1.0,stagger:.15});
+}
+
+/* ---------- content triggers ---------- */
+document.querySelectorAll('[data-reveal]').forEach(el=>{
+  if(reduced) return;
+  gsap.from(el,{y:44,opacity:0,duration:.95,ease:'power3.out',
+    scrollTrigger:{trigger:el,start:'top 88%',once:true}});
+});
+document.querySelectorAll('[data-count]').forEach(el=>{
+  const target=+el.dataset.count;
+  if(reduced){el.textContent=fmt(target);return;}
+  gsap.to(el,{textContent:target,duration:1.6,ease:'power2.out',
+    snap:{textContent:1},
+    onUpdate(){el.textContent=fmt(Math.round(+el.textContent.replace(/,/g,'')||0));},
+    scrollTrigger:{trigger:el,start:'top 90%',once:true}});
+});
+
+addEventListener('resize',()=>{moteInit();ScrollTrigger.refresh();},{passive:true});
+
+/* ---------- jank meter ---------- */
+(()=>{let last=performance.now(),max=0,t0=last;
+  const loop=()=>{const n=performance.now();max=Math.max(max,n-last);last=n;
+    if(n-t0>2000){console.log('[jank] max frame '+max.toFixed(1)+'ms');max=0;t0=n;}
+    requestAnimationFrame(loop);};
+  requestAnimationFrame(loop);})();
+
+/* ---------- dev contract ---------- */
+const boot=async()=>{
+  try{await document.fonts.ready;}catch(e){}
+  const imgs=[...document.querySelectorAll('.ph img')];
+  await Promise.all(imgs.map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r;})));
+  await Promise.all(imgs.map(i=>i.decode?i.decode().catch(()=>{}):1)); /* decode off first paint */
+  if(JUMP!==null){
+    scrollTo(0,+JUMP||0);
+    lastY=scrollY;
+    tick(0);
+    ScrollTrigger.refresh();
+    tick(0.001);
+  }
+  requestAnimationFrame(()=>{window.__ready=true;});
+};
+if(document.readyState==='complete') boot();
+else addEventListener('load',boot);
+setTimeout(()=>{window.__ready=true;},8000);
+})();
+</script>
+</body>
+</html>
