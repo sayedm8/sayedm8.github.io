@@ -742,12 +742,21 @@
   body{animation:pageFade .45s ease both;}
 
   /* first-visit load intro */
-  /* --intro-hold is the single source of truth: site.js reads it to time the wipe,
-     so the curtain can never lift while the eye is still opening. */
-  .page-intro{--intro-hold:1700ms;
+  /* The lift is a CSS animation, not a JS transition, on purpose: the curtain is in the
+     HTML, so if site.js is slow, blocked or 503s, a JS-driven dismiss would leave the
+     whole site behind a black screen. CSS guarantees it opens no matter what.
+     Timing: 2.48s total — holds through 68% (~1.69s, just past the glint at 1.52s),
+     then wipes upward over the remaining ~0.79s. */
+  .page-intro{
     position:fixed;inset:0;z-index:2000;display:grid;place-items:center;background:var(--ink);
-    clip-path:inset(0);transition:clip-path .78s var(--easing),visibility .78s;}
-  .page-intro.done{clip-path:inset(0 0 100% 0);visibility:hidden;}
+    animation:introLift 2.48s var(--easing) both;}
+  @keyframes introLift{
+    0%,68%{clip-path:inset(0);}
+    100%{clip-path:inset(0 0 100% 0);visibility:hidden;pointer-events:none;}
+  }
+  .page-intro.done{animation:none;clip-path:inset(0 0 100% 0);visibility:hidden;pointer-events:none;}
+  /* reduced motion: never paint the curtain at all, JS or no JS */
+  @media (prefers-reduced-motion:reduce){ .page-intro{display:none;} }
   .pi-lockup{display:flex;align-items:center;color:var(--ink-text);}
   .pi-lockup svg{width:clamp(96px,15vw,190px);height:auto;color:var(--ink-text);}
   /* the eye opens: lids bow apart, iris rises, glint catches last */

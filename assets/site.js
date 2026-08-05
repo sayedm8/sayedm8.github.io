@@ -200,17 +200,17 @@
   /* the language toggle brings its own curtain — never stack two */
   if (reduce || window.__kiraLangArrival || (internal && !reloaded)) { intro.remove(); return; }
 
-  /* hold long enough for the eye to finish opening; --intro-hold lives in the CSS
-     beside the keyframes so the two can't drift out of sync */
-  var hold = parseFloat(getComputedStyle(intro).getPropertyValue('--intro-hold')) || 1700;
-
+  /* The curtain lifts itself via the introLift keyframes in site.css — this script only
+     locks scrolling while it plays and tidies up afterwards. Deliberately no timing here:
+     owning the dismiss in JS is what left the page black when site.js failed to load. */
   document.body.classList.add('intro-active');
-  var dismiss = function(){
-    intro.classList.add('done');
+  var clear = function(){
     document.body.classList.remove('intro-active');
-    setTimeout(function(){ intro.remove(); }, 850);
+    if (intro.parentNode) intro.remove();
   };
-  var arm = function(){ setTimeout(dismiss, hold); };
-  if (document.readyState === 'complete') { arm(); }
-  else { window.addEventListener('load', arm); setTimeout(dismiss, hold + 1400); }
+  intro.addEventListener('animationend', function(e){
+    if (e.animationName === 'introLift') clear();
+  });
+  /* backstop: never let the scroll lock outlive the animation */
+  setTimeout(clear, 3400);
 })();
