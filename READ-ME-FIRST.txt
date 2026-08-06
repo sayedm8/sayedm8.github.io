@@ -1,6 +1,6 @@
 KIRA — upload-ready site
 ========================
-Built from /Users/marwan/Desktop/Kira. Domain in canonical/OG tags: https://sayedm8.github.io
+Built from /Users/marwan/Desktop/Kira. Domain in canonical/OG tags: https://kiradesign.studio
 
 WHAT'S HERE
   index.html + 5 more EN pages, and the -ar.html Arabic twin of each (12 total)

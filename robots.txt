@@ -1,2 +1,6 @@
 User-agent: *
-Disallow: /
+Disallow: /demos/
+Disallow: /backup/
+Disallow: /assets/reels/
+
+Sitemap: https://kiradesign.studio/sitemap.xml
